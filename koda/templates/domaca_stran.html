@@ -1,0 +1,32 @@
+{% extends 'shema.html' %}
+{% block podnaslov %}Sucks to be you, you have to solve this{% endblock %}
+{% block vsebina %}
+    <div class="center">
+    <p>
+        <h2>Poimenuj spojine!</h2>
+    </p>
+    <p>
+        <form method="POST">
+            {{spojine[0]}}
+            <br>
+            <input placeholder="Ime spojine" type="text" name="ime1"><br>
+            {{spojine[1]}}
+            <br>
+            <input placeholder="Ime spojine" type="text" name="ime2"><br>
+            {{spojine[2]}}
+            <br>
+            <input placeholder="Ime spojine" type="text" name="ime3"><br>
+            <input type="submit" value="Preveri">
+        </form>
+    </p>
+    <p>
+        {% if prou %}
+            <h3>Bravoooo!</h3>
+        {%elif prou == None %}
+        {%else%}
+            <h3>Narobe, probi se enkrat.</h3>
+        {%endif %}
+    </p>
+</div>
+{% endblock %}
+
