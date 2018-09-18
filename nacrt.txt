@@ -1,0 +1,31 @@
+NAČRT DELA:
+
+Strani:
+  - indeks:
+    - opis strani, navodila ...
+    > Tajda
+  - vprašanik
+    - vprašanja po kategorijah
+    > vsi
+  - vislice
+    - vprašanja, nekategorično, eno po eno, omejeno število
+    > vsi
+  - scoreboard
+    - seznam najboljših uporabnikov
+    > vsi
+
+  - backend
+    - Flask + json/sql
+    > Luka, Patrik
+
+  - predstavitev:
+    - LaTeX + planiranje ustnega
+    > vsi
+
+Razdelitev dela:
+- front-end:
+    > Tajda
+- back-end:
+    > Patrik, Luka
+- predstavitev:
+    > vsi
