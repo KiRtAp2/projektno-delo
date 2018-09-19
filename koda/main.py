@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request, send_from_directory
 
+import baza
 
 app = Flask(__name__)
 app.secret_key = "akshfdgas"
@@ -23,6 +24,14 @@ def index():
     # spojine je list spojin
     return render_template("domaca_stran.html", spojine=spojine, prou=prou)
 
+
+@app.route("/debug", methods=["GET"])
+def debug():
+    e = baza.get_elementi()
+    f = []
+    for l in e:
+        f.append(l[0])
+    return render_template("domaca_stran.html", spojine=f, prou=None)
 
 # TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
 @app.route("/static/<path:path>")

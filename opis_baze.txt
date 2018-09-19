@@ -1,0 +1,5 @@
+Tabele:
+
+elementi:
+  simbol: text
+  ime: text
