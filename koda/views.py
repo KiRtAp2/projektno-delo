@@ -28,6 +28,17 @@ def debug():
         f.append(l[0])
     return render_template("domaca_stran.html", spojine=f, prou=None)
 
+@app.route("/kviz", methods=["GET"])
+def kviz():
+    pass
+
+@app.route("/vislice", methods=["GET"])
+def vislice():
+    pass
+
+@app.route("/lestvica", methods=["GET"])
+def lestvica():
+    pass
 
 # TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
 @app.route("/static/<path:path>")
