@@ -1,3 +1,3 @@
 #!/bin/sh
-export YOURAPPLICATION_SETTINGS=~/Desktop/projektno-delo/config.cfg
+export YOURAPPLICATION_SETTINGS=../config.cfg
 python3 koda/main.py
