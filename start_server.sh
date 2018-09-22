@@ -1,2 +1,3 @@
 #!/bin/sh
-FLASK_APP=koda/main.py FLASK_DEBUG=1 python3 -m flask run
+export YOURAPPLICATION_SETTINGS=~/Desktop/projektno-delo/config.cfg
+python3 koda/main.py

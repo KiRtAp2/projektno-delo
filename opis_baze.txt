@@ -4,3 +4,15 @@ elementi:
   simbol: text
   ime: text
   naboj: integer
+
+User:
+	id,
+	username: string
+	email: string
+	password: string
+	admin: bool
+
+Scores:
+	id
+	score: int
+	user_id: link na user
