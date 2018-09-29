@@ -98,7 +98,6 @@ def register():
         db.session.commit()
         return redirect(url_for('index'))
 
-
     return render_template('register.html', form=form)
 
 @app.route("/logout", methods=["GET"])

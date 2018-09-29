@@ -2,7 +2,7 @@ u"""Datoteka se uporablja za urejanje baze podatkov, če strežnik ni vključen"
 
 import sqlite3
 
-conn = sqlite3.connect("baza.db")
+conn = sqlite3.connect("data.db")
 curs = conn.cursor()
 
 

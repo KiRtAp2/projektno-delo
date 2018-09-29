@@ -1,18 +1,18 @@
 Tabele:
 
-elementi:
+Element:
   simbol: text
   ime: text
   naboj: integer
 
 User:
-	id,
+	id integer primary key,
 	username: string
 	email: string
 	password: string
 	admin: bool
 
 Scores:
-	id
+	id integer primary key
 	score: int
 	user_id: link na user
