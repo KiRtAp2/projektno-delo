@@ -5,4 +5,5 @@ flask-wtf
 flask-admin
 flask-bootstrap
 flask-dance
+flask-nav
 
