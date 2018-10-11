@@ -27,7 +27,7 @@ def dobi_binarne(n: int = 3):
         n_el2 = lcm / el2.naboj
 
         seznam.append(
-            BinarnaSpojina(el1, n_el1, el2, n_el2),
+            BinarnaSpojina(el1, n_el1, el2, n_el2)
         )
         
     return seznam
