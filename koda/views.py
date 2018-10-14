@@ -1,4 +1,4 @@
-from main import app, db
+from main import app, db, User
 from flask import render_template, request, send_from_directory, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -7,7 +7,6 @@ from flask_admin.contrib.sqla import ModelView
 
 import baza
 import forms
-import models
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -16,6 +15,7 @@ login_manager.login_view = 'login'
 class MyAdminView(AdminIndexView):
     def is_accessible(self):
         if current_user.is_authenticated:
+            # zaenkrat je admins seznam, bo pa pogledal v bazo a je user admin, ampak admin accounte je treba dodat na roke
             if current_user.username in admins:
                 return True
         else:
@@ -25,11 +25,11 @@ class MyAdminView(AdminIndexView):
         return redirect(url_for('login'))
 
 admin = Admin(app, index_view=MyAdminView())
-admin.add_view(ModelView(models.User, db.session))
+admin.add_view(ModelView(User, db.session))
 
 @login_manager.user_loader
 def load_user(user_id):
-    return models.User.query.get(int(user_id))
+    return User.query.get(int(user_id))
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -47,7 +47,7 @@ def index():
 
     spojine=["a","bb","c"]
     # spojine je list spojin
-    return render_template("domaca_stran.html", spojine=spojine, prou=prou)
+    return render_template("domaca_stran.html", spojine=spojine, prou=prou, user=current_user)
 
 @app.route("/debug", methods=["GET"])
 def debug():
@@ -74,7 +74,7 @@ def login():
     form = forms.LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
-            user = models.User.query.filter_by(username=form.username.data).first()
+            user = User.query.filter_by(username=form.username.data).first()
             if user:
                 if check_password_hash(user.password, form.password.data):
                     login_user(user, remember=form.remember.data)
@@ -93,7 +93,7 @@ def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
-        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False)
+        new_user = User(username=form.username.data, password=hashpw, email=form.email.data, admin=False)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))

@@ -1,6 +1,10 @@
-import main
-db = main.db
 from flask_login import UserMixin
+from flask_dance.consumer.backend.sqla import OAuthConsumerMixin
+
+def main():
+    from main import db
+
+main()
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,3 +27,8 @@ class Element(db.Model):
 
     def __repr__(self):
         return "<Element {}>".format(self.simbol)
+
+class OAuth(OAuthConsumerMixin, db.Model):
+    provider_user_id = db.Column(db.String(256), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    user = db.relationship(User)
