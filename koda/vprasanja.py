@@ -31,3 +31,9 @@ def dobi_binarne(n: int = 3):
         )
         
     return seznam
+
+
+# napisi mi tukaj funkcije ki jih zelis videti
+# recimo:
+# def dobi_nekej(n: int=3):
+#     pass

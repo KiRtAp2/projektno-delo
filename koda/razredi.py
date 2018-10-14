@@ -40,3 +40,15 @@ class BinarnaSpojina(object):
         return "{}{}{}{}".format(
             stevnik1, ime1, stevnik2, ime2
         )
+
+    def __repr__(self):
+        s = ""
+        s += self.el1.simbol
+        if self.n1 > 1:
+            s += "<sub>{}</sub>".format(self.n1)
+
+        s += self.el2.simbol
+        if self.n2 > 1:
+            s += "<sub>{}</sub>".format(self.n2)
+
+        return s
