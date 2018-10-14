@@ -45,10 +45,10 @@ class BinarnaSpojina(object):
         s = ""
         s += self.el1.simbol
         if self.n1 > 1:
-            s += "<sub>{}</sub>".format(self.n1)
+            s += "<sub>{}</sub>".format(int(self.n1))
 
         s += self.el2.simbol
         if self.n2 > 1:
-            s += "<sub>{}</sub>".format(self.n2)
+            s += "<sub>{}</sub>".format(int(self.n2))
 
         return s

@@ -1,0 +1,17 @@
+{% extends "shema.html" %}
+
+{% block content %}
+    <div class="center">
+    <p>
+        <h2>Poimenuj spojine!</h2>
+    </p>
+    <p>
+        {%for formula in spojine %}
+        <p>{{formula|safe}}<br></p>
+        {% endfor %}
+
+
+
+    </p>
+</div>
+{% endblock %}

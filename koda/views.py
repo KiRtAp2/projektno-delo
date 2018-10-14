@@ -8,6 +8,7 @@ from flask_admin.contrib.sqla import ModelView
 import baza
 import forms
 import models
+import vprasanja
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -59,7 +60,8 @@ def debug():
 
 @app.route("/kviz", methods=["GET"])
 def kviz():
-    pass
+    print(vprasanja.dobi_binarne())
+    return render_template('vprasanja.html', spojine=vprasanja.dobi_binarne())
 
 @app.route("/vislice", methods=["GET"])
 def vislice():

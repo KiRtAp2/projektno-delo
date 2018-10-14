@@ -16,10 +16,10 @@ def dobi_binarne(n: int = 3):
 
         el1 = randchoice(BinarniElement.query.filter(
             BinarniElement.naboj > 0
-        ))
+        ).all())
         el2 = randchoice(BinarniElement.query.filter(
             BinarniElement.naboj < 0
-        ))
+        ).all())
 
         lcm = el1.naboj * el2.naboj / gcd(el1.naboj, el2.naboj)
 
@@ -31,6 +31,7 @@ def dobi_binarne(n: int = 3):
         )
         
     return seznam
+
 
 
 # napisi mi tukaj funkcije ki jih zelis videti

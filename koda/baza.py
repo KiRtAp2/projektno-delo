@@ -28,3 +28,4 @@ def _insert(table: str, values: iter =[]):
 def get_elementi():
     u"""Funkcija vrne seznam elementov iz baze"""
     return _select("elementi")
+
