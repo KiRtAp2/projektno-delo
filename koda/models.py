@@ -35,3 +35,36 @@ class BinarniElement(db.Model):
 
     def __repr__(self):
         return "<BinarniElement {}>".format(self.simbol)
+
+
+class BazniElement(db.Model):
+    """Element, ki lahko gradi baze"""
+    id = db.Column(db.Integer, primary_key=True)
+    simbol = db.Column(db.String(3), unique=True, nullable=False)
+    ime = db.Column(db.String(20), unique=True, nullable=False)
+    naboj = db.Column(db.Integer)
+
+    def __repr__(self):
+        return "<BazniElement {}>".format(self.simbol)
+
+    
+class KisliElement(db.Model):
+    """Element, ki lahko gradi kisline"""
+    id = db.Column(db.Integer, primary_key=True)
+    simbol = db.Column(db.String(3), unique=True, nullable=False)
+    ime = db.Column(db.String(20), unique=True, nullable=False)
+    naboj = db.Column(db.Integer)
+
+    def __repr__(self):
+        return "<KisliElement {}>".format(self.simbol)
+
+    
+class SolniElement(db.Model):
+    """Element, ki lahko gradi sol"""
+    id = db.Column(db.Integer, primary_key=True)
+    simbol = db.Column(db.String(3), unique=True, nullable=False)
+    ime = db.Column(db.String(20), unique=True, nullable=False)
+    naboj = db.Column(db.Integer)
+
+    def __repr__(self):
+        return "<BazniElement {}>".format(self.simbol)

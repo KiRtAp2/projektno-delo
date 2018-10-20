@@ -1,4 +1,21 @@
-class BinarnaSpojina(object):
+import json
+
+
+STEVNIKI = {
+    1: "",
+    2: "di",
+    3: "tri",
+    4: "tetra",
+    5: "penta",
+    6: "heksa",
+    7: "hepta",
+    8: "okta",
+    9: "nona",
+    10: "deka"
+}
+
+
+class NekaSpojina(object):
 
     def __init__(self, el1, n1, el2, n2):
         self.el1, self.n1, self.el2, self.n2 = el1, n1, el2, n2
@@ -8,21 +25,10 @@ class BinarnaSpojina(object):
         return self.el1, self.n1, self.el2, self.n2
 
     def get_ime(self):
-        stevnik = lambda x: {  # to je switch v pythonu
-            1: "",
-            2: "di",
-            3: "tri",
-            4: "tetra",
-            5: "penta",
-            6: "heksa",
-            7: "hepta",
-            8: "okta",
-            9: "nona",
-            10: "deka"
-        }[x]
+        stevnik = lambda x: STEVNIKI[x]
         
-        st1 = stevnik(abs(self.n1))
-        st2 = stevnik(abs(self.n2))
+        st1 = stevnik(self.n1)
+        st2 = stevnik(self.n2)
 
         ime1 = self.el1.ime
         ime2 = self.el2.ime
@@ -43,6 +49,43 @@ class BinarnaSpojina(object):
 
         return s
 
-    # tole prosim dodej
+    def get_sp_type(self):
+        return None
+    
+    def to_dict(self):
+        d = {
+            "type": self.get_sp_type(),
+            "1": {
+                "count": self.n1,
+                "simbol": self.el1.simbol,
+            },
+            "2": {
+                "count": self.n2,
+                "simbol": self.el2.simbol,
+            }
+        }
+        return d
+    
     def to_json(self):
-        pass
+        return json.dumps(self.to_dict())
+
+    
+class BinarnaSpojina(NekaSpojina):
+    def get_sp_type(self):
+        return "BinarnaSpojina"
+
+    
+class BaznaSpojina(NekaSpojina):
+    def get_sp_type(self):
+        return "Baza"
+
+    
+class KislaSpojina(NekaSpojina):
+    def get_sp_type(self):
+        return "Kislina"
+
+    
+class SolnaSpojina(NekaSpojina):
+    def get_sp_type(self):
+        return "Sol"
+

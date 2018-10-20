@@ -4,49 +4,51 @@ u"""Datoteka vsebuje osnovne funkcije za postavljanje in preverjanje vprašanj""
 from random import choice as randchoice
 from math import gcd
 
-from models import BinarniElement
-from razredi import BinarnaSpojina
+from models import BinarniElement, BazniElement, KislaSpojina, SolnaSpojina
+from razredi import BinarnaSpojina, BazniElement, KisliElement, SolniElement
 
 
-def dobi_binarne():
-
+def osnovni_seznam(tip_element, tip_spojina, n=5):
     seznam = []
 
-    while len(seznam) < 5:
+    while len(seznam) < n:
 
-        el1 = randchoice(BinarniElement.query.filter(
-            BinarniElement.naboj > 0
+        el1 = randchoice(tip_element.query.filter(
+            tip_element.naboj > 0
         ).all())
-        el2 = randchoice(BinarniElement.query.filter(
-            BinarniElement.naboj < 0
+        el2 = randchoice(tip_element.query.filter(
+            tip_element.naboj < 0
         ).all())
 
         lcm = el1.naboj * el2.naboj / gcd(el1.naboj, el2.naboj)
 
-        n_el1 = lcm / el1.naboj
-        n_el2 = lcm / el2.naboj
+        n_el1 = lcm // el1.naboj
+        n_el2 = lcm // el2.naboj
 
         seznam.append(
-            BinarnaSpojina(el1, n_el1, el2, n_el2)
+            tip_spojina(el1, abs(n_el1), el2, abs(n_el2))
         )
         
     return seznam
 
 
+def dobi_binarne(n=5):
+    return osnovni_seznam(BinarniElement, BinarnaSpojina, n)
 
-# napisi mi tukaj funkcije ki jih zelis videti
-# recimo:
-# def dobi_nekej(n: int=3):
-#     pass
 
-def dobi_bazo(): #n = 5 lahko das kr notr v funkcijo ker se n nebo spreminju
+def dobi_bazo(n=5):
+    return osnovni_seznam(BazniElement, BaznaSpojina, n)
+
+
+def dobi_kislino(n=5):
+    return osnovni_seznam(KisliElement, KislaSpojina, n)
+
+
+def dobi_sol(n=5):
+    return osnovni_seznam(SolniElement, SolnaSpojina, n)
+
+
+def dobi_kh(n=5):
     pass
 
-def dobi_kislino():
-    pass
 
-def dobi_kh():
-    pass
-
-def dobi_sol():
-    pass
