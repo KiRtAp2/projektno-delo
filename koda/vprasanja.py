@@ -8,11 +8,11 @@ from models import BinarniElement
 from razredi import BinarnaSpojina
 
 
-def dobi_binarne(n: int = 3):
+def dobi_binarne():
 
     seznam = []
 
-    while len(seznam) < n:
+    while len(seznam) < 5:
 
         el1 = randchoice(BinarniElement.query.filter(
             BinarniElement.naboj > 0
@@ -38,3 +38,15 @@ def dobi_binarne(n: int = 3):
 # recimo:
 # def dobi_nekej(n: int=3):
 #     pass
+
+def dobi_bazo(): #n = 5 lahko das kr notr v funkcijo ker se n nebo spreminju
+    pass
+
+def dobi_kislino():
+    pass
+
+def dobi_kh():
+    pass
+
+def dobi_sol():
+    pass

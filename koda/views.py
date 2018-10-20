@@ -1,5 +1,5 @@
 from main import app, db
-from flask import render_template, request, send_from_directory, redirect, url_for
+from flask import render_template, request, send_from_directory, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_admin import Admin, AdminIndexView
@@ -58,10 +58,28 @@ def debug():
         f.append(l[0])
     return render_template("domaca_stran.html", spojine=f, prou=None)
 
-@app.route("/kviz", methods=["GET"])
+@app.route("/kviz", methods=["GET", "POST"])
 def kviz():
-    print(vprasanja.dobi_binarne())
-    return render_template('vprasanja.html', spojine=vprasanja.dobi_binarne())
+    form = forms.Vprasanja()
+    user_odgovori = []
+    pravilni= []
+    score = 0
+    spojine = vprasanja.dobi_binarne()
+    print(spojine)
+    for i in spojine:
+        pravilni.append(i.get_ime())
+    print(pravilni)
+    user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
+    if form.validate_on_submit():    
+        for j in range(len(user_odgovori)):
+            o = user_odgovori[j].split()
+            p = pravilni[j].split()
+            for n in range(len(o)):
+                if o[n] == p[n]:
+                    score += 5
+    print(score)
+
+    return render_template('vprasanja.html', spojine=spojine, score=score, form=form)
 
 @app.route("/vislice", methods=["GET"])
 def vislice():
@@ -76,6 +94,7 @@ def login():
     form = forms.LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
+            print(form.username.data)
             user = models.User.query.filter_by(username=form.username.data).first()
             if user:
                 if check_password_hash(user.password, form.password.data):

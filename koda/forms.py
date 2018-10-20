@@ -11,3 +11,10 @@ class RegisterForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(),Length(min=4, max=20)])
     password = PasswordField('password', validators=[InputRequired(),Length(min=8, max=80)])
     email = StringField('email', validators=[Email(),Length(max=80),InputRequired()])
+
+class Vprasanja(FlaskForm):
+	o0 = StringField('ime spojine')
+	o1 = StringField('ime spojine')
+	o2 = StringField('ime spojine')
+	o3 = StringField('ime spojine')
+	o4 = StringField('ime spojine')

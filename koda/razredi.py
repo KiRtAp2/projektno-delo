@@ -8,7 +8,7 @@ class BinarnaSpojina(object):
         return self.el1, self.n1, self.el2, self.n2
 
     def get_ime(self):
-        stevnik1 = (lambda x: {  # to je switch v pythonu
+        stevnik = lambda x: {  # to je switch v pythonu
             1: "",
             2: "di",
             3: "tri",
@@ -19,26 +19,16 @@ class BinarnaSpojina(object):
             8: "okta",
             9: "nona",
             10: "deka"
-        }[x])(self.n1)
-
-        stevnik2 = (lambda x: {  # to je switch v pythonu
-            1: "",
-            2: "di",
-            3: "tri",
-            4: "tetra",
-            5: "penta",
-            6: "heksa",
-            7: "hepta",
-            8: "okta",
-            9: "nona",
-            10: "deka"
-        }[x])(self.n2)
+        }[x]
+        
+        st1 = stevnik(abs(self.n1))
+        st2 = stevnik(abs(self.n2))
 
         ime1 = self.el1.ime
         ime2 = self.el2.ime
 
-        return "{}{}{}{}".format(
-            stevnik1, ime1, stevnik2, ime2
+        return "{}{} {}{}".format(
+            st1, ime1, st2, ime2
         )
 
     def __repr__(self):
@@ -52,3 +42,7 @@ class BinarnaSpojina(object):
             s += "<sub>{}</sub>".format(int(self.n2))
 
         return s
+
+    # tole prosim dodej
+    def to_json(self):
+        pass
