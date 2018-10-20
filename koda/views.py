@@ -5,7 +5,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 
-import baza
+
 import forms
 import models
 import vprasanja
@@ -50,13 +50,6 @@ def index():
     # spojine je list spojin
     return render_template("domaca_stran.html", spojine=spojine, prou=prou)
 
-@app.route("/debug", methods=["GET"])
-def debug():
-    e = baza.get_elementi()
-    f = []
-    for l in e:
-        f.append(l[0])
-    return render_template("domaca_stran.html", spojine=f, prou=None)
 
 @app.route("/kviz", methods=["GET", "POST"])
 def kviz():
