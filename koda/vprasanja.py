@@ -4,8 +4,8 @@ u"""Datoteka vsebuje osnovne funkcije za postavljanje in preverjanje vprašanj""
 from random import choice as randchoice
 from math import gcd
 
-from models import BinarniElement, BazniElement, KislaSpojina, SolnaSpojina
-from razredi import BinarnaSpojina, BazniElement, KisliElement, SolniElement
+from models import BinarniElement, BazniElement, KisliElement, SolniElement
+from razredi import BinarnaSpojina, BaznaSpojina, KislaSpojina, SolnaSpojina
 
 
 def osnovni_seznam(tip_element, tip_spojina, n=5):
