@@ -58,21 +58,27 @@ def kviz(kategorija):
     user_odgovori = []
     pravilni = []
     score = 0
-    allowed = {
-        'vprasanja.dobi_binarne': vprasanja.dobi_binarne,
-        'vprasanja.dobi_soli': vprasanja.dobi_soli,
-        'vprasanja.dobi_kisline': vprasanja.dobi_kisline,
-        'vprasanja.dobi_baze': vprasanja.dobi_baze,
-        'vprasanja.dobi_kh': vprasanja.dobi_kh
-       }
+
     if request.method == 'GET':
         a = []
-        funkcija = eval('vprasanja.dobi_{}'.format(kategorija), {}, allowed)
-        spojine = funkcija()
+        
+        if kategorija == 'binarne':
+            spojine = vprasanja.dobi_binarne()
+        elif kategorija == 'soli':
+            spojine = vprasanja.dobi_soli()
+        elif kategorija == 'baze':
+            spojine = vprasanja.dobi_baze()
+        elif kategorija == 'kisline':
+            spojine = vprasanja.dobi_kisline()
+        elif kategorija == 'kh':
+            spojine = vprasanja.dobi_kh()
+
+        
         print(spojine)
         for i in spojine:
             a.append(i.to_dict())
         session['spojine'] = a
+
     else:
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
@@ -92,6 +98,17 @@ def kviz(kategorija):
                 for n in range(len(o)):
                     if o[n] == p[n]:
                         score += 5
+        if current_user.is_authenticated:
+            resp = models.Scores.query.filter_by(user_id=current_user.id).first()
+            if resp:
+                score += resp.score
+                resp.score = score
+                db.session.commit()
+            new_score = models.Scores(score=score, user_id=current_user.id)
+            db.session.add(new_score)
+            db.session.commit()
+    print(score)
+    print(user_odgovori)
 
     return render_template('vprasanja.html', spojine=spojine, score=score, form=form)
 
