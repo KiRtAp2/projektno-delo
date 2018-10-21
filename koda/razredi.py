@@ -14,6 +14,19 @@ STEVNIKI = {
     10: "deka"
 }
 
+def ime(el1, el2, n1, n2):
+    stevnik = lambda x: STEVNIKI[x]
+        
+    st1 = stevnik(n1)
+    st2 = stevnik(n2)
+
+    ime1 = el1
+    ime2 = el2
+
+    return "{}{} {}{}".format(
+        st1, ime1, st2, ime2
+    )
+
 
 class NekaSpojina(object):
 
@@ -55,13 +68,14 @@ class NekaSpojina(object):
     def to_dict(self):
         d = {
             "type": self.get_sp_type(),
+            "formula": self.__repr__(),
             "1": {
                 "count": self.n1,
-                "simbol": self.el1.simbol,
+                "simbol": self.el1.ime,
             },
             "2": {
                 "count": self.n2,
-                "simbol": self.el2.simbol,
+                "simbol": self.el2.ime,
             }
         }
         return d

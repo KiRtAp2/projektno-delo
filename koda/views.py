@@ -9,6 +9,7 @@ from flask_admin.contrib.sqla import ModelView
 import forms
 import models
 import vprasanja
+from razredi import ime
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -51,26 +52,46 @@ def index():
     return render_template("domaca_stran.html", spojine=spojine, prou=prou)
 
 
-@app.route("/kviz", methods=["GET", "POST"])
-def kviz():
+@app.route("/kviz/<string:kategorija>", methods=["GET", "POST"])
+def kviz(kategorija):
     form = forms.Vprasanja()
     user_odgovori = []
-    pravilni= []
+    pravilni = []
     score = 0
-    spojine = vprasanja.dobi_binarne()
-    print(spojine)
-    for i in spojine:
-        pravilni.append(i.get_ime())
-    print(pravilni)
-    user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
-    if form.validate_on_submit():    
-        for j in range(len(user_odgovori)):
-            o = user_odgovori[j].split()
-            p = pravilni[j].split()
-            for n in range(len(o)):
-                if o[n] == p[n]:
-                    score += 5
-    print(score)
+    allowed = {
+        'vprasanja.dobi_binarne': vprasanja.dobi_binarne,
+        'vprasanja.dobi_soli': vprasanja.dobi_soli,
+        'vprasanja.dobi_kisline': vprasanja.dobi_kisline,
+        'vprasanja.dobi_baze': vprasanja.dobi_baze,
+        'vprasanja.dobi_kh': vprasanja.dobi_kh
+       }
+    if request.method == 'GET':
+        a = []
+        funkcija = eval('vprasanja.dobi_{}'.format(kategorija), {}, allowed)
+        spojine = funkcija()
+        print(spojine)
+        for i in spojine:
+            a.append(i.to_dict())
+        session['spojine'] = a
+    else:
+        user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
+        spojine = []
+        for z in session['spojine']:
+            n1 = z['1']['count']
+            ime1 = z['1']['simbol']
+            n2 = z['2']['count']
+            ime2 = z['2']['simbol']
+            pravilni.append(ime(ime1, ime2, n1, n2))
+            print(ime(ime1, ime2, n1, n2))
+            spojine.append(z['formula'])
+
+        if form.validate_on_submit():    
+            for j in range(len(user_odgovori)):
+                o = user_odgovori[j].split()
+                p = pravilni[j].split()
+                for n in range(len(o)):
+                    if o[n] == p[n]:
+                        score += 5
 
     return render_template('vprasanja.html', spojine=spojine, score=score, form=form)
 

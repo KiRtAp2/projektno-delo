@@ -36,15 +36,15 @@ def dobi_binarne(n=5):
     return osnovni_seznam(BinarniElement, BinarnaSpojina, n)
 
 
-def dobi_bazo(n=5):
+def dobi_baze(n=5):
     return osnovni_seznam(BazniElement, BaznaSpojina, n)
 
 
-def dobi_kislino(n=5):
+def dobi_kisline(n=5):
     return osnovni_seznam(KisliElement, KislaSpojina, n)
 
 
-def dobi_sol(n=5):
+def dobi_soli(n=5):
     return osnovni_seznam(SolniElement, SolnaSpojina, n)
 
 
