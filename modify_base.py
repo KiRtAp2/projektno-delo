@@ -1,12 +1,49 @@
 u"""Datoteka se uporablja za urejanje baze podatkov, če strežnik ni vključen"""
 
 import sqlite3
+from sys import argv
 
 conn = sqlite3.connect("data.db")
 curs = conn.cursor()
 
 
+def process_array(arr):
+    vals = []
+    for el in arr:
+        try:
+            val = int(el)
+            val = el
+        except ValueError:
+            val = "'{}'".format(el)
+        vals.append(val)
+    return vals
+
+
 if __name__=="__main__":
+
+    file_open = False
+    for arg in argv:
+        if arg == "--file":
+            file_open = True
+        elif file_open and not arg.startswith("-"):
+            filename = arg
+
+    if file_open:
+        with open(filename) as f:
+            table = None
+            for i, ln in enumerate(f):
+                if ln.startswith("+"):
+                    table = ln[1:]
+                else:
+                    if table is None:
+                        print("Error on line {}: No table set for adding into".format(i+1))
+                        quit(-1)
+                    else:
+                        data = ",".join(process_array(ln.split(":")))
+                        curs.execute("INSERT INTO {} VALUES ({})".format(table, data))
+                        conn.commit()
+        quit(0)
+    
     cmd = input("> ")
     closed = False
 
