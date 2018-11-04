@@ -9,14 +9,12 @@
     	<table>
         <tr>
             <td>Uporabnik</td>
-            <td>Napake</td>
-            <td>Beseda</td>
+            <td>Točke</td>
         </tr>
-        {% for username, napake, beseda in najboljsi %}
+        {% for username, score in najboljsi %}
             <tr>
                 <td>{{username}}</td>
-                <td>{{napake}}</td>
-                <td>{{beseda}}</td>
+                <td>{{score}}</td>
             </tr>
         {% endfor %}
     </table>

@@ -14,6 +14,8 @@ class Scores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    user = db.relationship('User',
+        backref=db.backref('user', lazy=True))
 
 
     

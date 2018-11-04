@@ -114,9 +114,9 @@ def kviz(kategorija):
             if resp:
                 score += resp.score
                 resp.score = score
-                db.session.commit()
-            new_score = models.Scores(score=score, user_id=current_user.id)
-            db.session.add(new_score)
+            else:
+                new_score = models.Scores(score=score, user_id=current_user.id)
+                db.session.add(new_score)
             db.session.commit()
 
     return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake)
@@ -160,9 +160,9 @@ def vislice():
             if resp:
                 score += resp.score
                 resp.score = score
-                db.session.commit()
-            new_score = models.Scores(score=score, user_id=current_user.id)
-            db.session.add(new_score)
+            else:
+                new_score = models.Scores(score=score, user_id=current_user.id)
+                db.session.add(new_score)
             db.session.commit()
 
     moznosti = [vprasanja.dobi_binarne, 
@@ -181,7 +181,9 @@ def vislice():
 
 @app.route("/lestvica", methods=["GET"])
 def lestvica(): #lestvica se ne dela
-    najboljsi = models.Scores.query.order_by(desc(models.Scores.score)).limit(5) 
+    najboljsi = db.engine.execute(
+        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10')
+
     print(najboljsi)
     return render_template("scores.html", najboljsi=najboljsi)
 
