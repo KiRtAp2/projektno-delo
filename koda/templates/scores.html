@@ -6,7 +6,20 @@
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
-
+    	<table>
+        <tr>
+            <td>Uporabnik</td>
+            <td>Napake</td>
+            <td>Beseda</td>
+        </tr>
+        {% for username, napake, beseda in najboljsi %}
+            <tr>
+                <td>{{username}}</td>
+                <td>{{napake}}</td>
+                <td>{{beseda}}</td>
+            </tr>
+        {% endfor %}
+    </table>
     </p>
 </div>
 {% endblock %}

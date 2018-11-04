@@ -15,6 +15,7 @@ class Scores(db.Model):
     score = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
 
+
     
 class Element(db.Model):
     """Testno, nima namena biti v končni verziji"""

@@ -5,6 +5,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from random import choice
+from sqlalchemy import desc
 
 import forms
 import models
@@ -123,11 +124,14 @@ def kviz(kategorija):
 @app.route("/vislice", methods=["GET", "POST"])
 def vislice():
     form = forms.Vislice()
+    score = 0
+
+    if session['napake'] > 10:
+        return render_template('vislice.html', spojina='', score=session['score'], form=form, napake='')
 
     if request.method == 'GET':
         session['score'] = 0
         session['napake'] = 0
-
     else:
         user_odgovor = form.o0.data
         n1 = session['spojine']['1']['count']
@@ -142,13 +146,24 @@ def vislice():
             for n in range(len(o)):
                 try:
                     if o[n].casefold() == p[n].casefold():
-                        session['score'] += 5
+                        score += 5
                     else:
                         session['napake'] += 1
                         break
                 except IndexError:
                     session['napake'] += 1
                     break
+            session['score'] += score
+
+        if current_user.is_authenticated:
+            resp = models.Scores.query.filter_by(user_id=current_user.id).first()
+            if resp:
+                score += resp.score
+                resp.score = score
+                db.session.commit()
+            new_score = models.Scores(score=score, user_id=current_user.id)
+            db.session.add(new_score)
+            db.session.commit()
 
     moznosti = [vprasanja.dobi_binarne, 
             vprasanja.dobi_soli,
@@ -165,8 +180,10 @@ def vislice():
 
 
 @app.route("/lestvica", methods=["GET"])
-def lestvica():
-    pass
+def lestvica(): #lestvica se ne dela
+    najboljsi = models.Scores.query.order_by(desc(models.Scores.score)).limit(5) 
+    print(najboljsi)
+    return render_template("scores.html", najboljsi=najboljsi)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

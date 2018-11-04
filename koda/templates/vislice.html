@@ -2,6 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
+{% if spojina != '' %}
     <div class="center">
     <p>
         <h2>Poimenuj spojine!</h2>
@@ -15,4 +16,10 @@
         </form>
     </p>
 </div>
+{%else%}
+    <p>
+        <h2>KONEC IGRE!</h2>
+    </p>
+
+{%endif%}
 {% endblock %}
