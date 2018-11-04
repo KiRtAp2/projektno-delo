@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
-
+from random import choice
 
 import forms
 import models
@@ -58,6 +58,8 @@ def kviz(kategorija):
     user_odgovori = []
     pravilni = []
     score = 0
+    napake = []
+    ne = 0
 
     if request.method == 'GET':
         a = []
@@ -74,7 +76,6 @@ def kviz(kategorija):
             spojine = vprasanja.dobi_kh()
 
         
-        print(spojine)
         for i in spojine:
             a.append(i.to_dict())
         session['spojine'] = a
@@ -88,7 +89,6 @@ def kviz(kategorija):
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
             pravilni.append(ime(ime1, ime2, n1, n2))
-            print(ime(ime1, ime2, n1, n2))
             spojine.append(z['formula'])
 
         if form.validate_on_submit():    
@@ -96,8 +96,18 @@ def kviz(kategorija):
                 o = user_odgovori[j].split()
                 p = pravilni[j].split()
                 for n in range(len(o)):
-                    if o[n] == p[n]:
-                        score += 5
+                    try:
+                        if o[n].casefold() == p[n].casefold():
+                            score += 5
+                        else:
+                            ne += 1
+                    except IndexError:
+                        ne += 1
+                if ne > 0:
+                    napake.append('narobe')
+                else:
+                    napake.append('')
+
         if current_user.is_authenticated:
             resp = models.Scores.query.filter_by(user_id=current_user.id).first()
             if resp:
@@ -107,14 +117,52 @@ def kviz(kategorija):
             new_score = models.Scores(score=score, user_id=current_user.id)
             db.session.add(new_score)
             db.session.commit()
-    print(score)
-    print(user_odgovori)
 
-    return render_template('vprasanja.html', spojine=spojine, score=score, form=form)
+    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake)
 
-@app.route("/vislice", methods=["GET"])
+@app.route("/vislice", methods=["GET", "POST"])
 def vislice():
-    pass
+    form = forms.Vislice()
+
+    if request.method == 'GET':
+        session['score'] = 0
+        session['napake'] = 0
+
+    else:
+        user_odgovor = form.o0.data
+        n1 = session['spojine']['1']['count']
+        ime1 = session['spojine']['1']['simbol']
+        n2 = session['spojine']['2']['count']
+        ime2 = session['spojine']['2']['simbol']
+        pravilni = ime(ime1, ime2, n1, n2)
+
+        if form.validate_on_submit():
+            o = user_odgovor.split()
+            p = pravilni.split()    
+            for n in range(len(o)):
+                try:
+                    if o[n].casefold() == p[n].casefold():
+                        session['score'] += 5
+                    else:
+                        session['napake'] += 1
+                        break
+                except IndexError:
+                    session['napake'] += 1
+                    break
+
+    moznosti = [vprasanja.dobi_binarne, 
+            vprasanja.dobi_soli,
+            vprasanja.dobi_baze,
+            vprasanja.dobi_kisline,
+            vprasanja.dobi_kh
+            ]
+        
+    # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodam se ostale elemente v bazo
+    spojina = vprasanja.dobi_binarne(n=1)[0]
+    session['spojine'] = spojina.to_dict()
+
+    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'])
+
 
 @app.route("/lestvica", methods=["GET"])
 def lestvica():
@@ -125,7 +173,6 @@ def login():
     form = forms.LoginForm()
     if not current_user.is_authenticated:
         if form.validate_on_submit():
-            print(form.username.data)
             user = models.User.query.filter_by(username=form.username.data).first()
             if user:
                 if check_password_hash(user.password, form.password.data):

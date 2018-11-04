@@ -1,0 +1,18 @@
+{% extends "shema.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <div class="center">
+    <p>
+        <h2>Poimenuj spojine!</h2>
+    </p>
+    <p>
+    	<form class="form-answer" method="POST">
+    	{{ form.hidden_tag() }}
+        {{spojina|safe}}<br>
+        {{ wtf.form_field(form.o0) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </p>
+</div>
+{% endblock %}
