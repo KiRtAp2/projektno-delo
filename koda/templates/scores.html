@@ -6,7 +6,18 @@
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
-
+    	<table>
+        <tr>
+            <td>Uporabnik</td>
+            <td>Točke</td>
+        </tr>
+        {% for username, score in najboljsi %}
+            <tr>
+                <td>{{username}}</td>
+                <td>{{score}}</td>
+            </tr>
+        {% endfor %}
+    </table>
     </p>
 </div>
 {% endblock %}

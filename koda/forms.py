@@ -18,3 +18,6 @@ class Vprasanja(FlaskForm):
 	o2 = StringField('ime spojine')
 	o3 = StringField('ime spojine')
 	o4 = StringField('ime spojine')
+
+class Vislice(FlaskForm):
+    o0 = StringField('ime spojine')
