@@ -1,5 +1,5 @@
 from main import app, db
-from flask import render_template, request, send_from_directory, redirect, url_for, session
+from flask import render_template, request, send_from_directory, redirect, url_for, session, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_admin import Admin, AdminIndexView
@@ -10,7 +10,7 @@ from sqlalchemy import desc
 import forms
 import models
 import vprasanja
-from razredi import ime
+from razredi import imena
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -61,6 +61,7 @@ def kviz(kategorija):
     score = 0
     napake = []
     ne = 0
+    post = False
 
     if request.method == 'GET':
         a = []
@@ -75,13 +76,16 @@ def kviz(kategorija):
             spojine = vprasanja.dobi_kisline()
         elif kategorija == 'kh':
             spojine = vprasanja.dobi_kh()
-
+        else:
+            abort(404)
         
         for i in spojine:
             a.append(i.to_dict())
         session['spojine'] = a
 
     else:
+        post = True
+
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
         for z in session['spojine']:
@@ -89,7 +93,7 @@ def kviz(kategorija):
             ime1 = z['1']['simbol']
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
-            pravilni.append(ime(ime1, ime2, n1, n2))
+            pravilni.append(imena(ime1, ime2, n1, n2)[0])
             spojine.append(z['formula'])
 
         if form.validate_on_submit():    
@@ -119,13 +123,17 @@ def kviz(kategorija):
                 db.session.add(new_score)
             db.session.commit()
 
-    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake)
+    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, post=post)
 
 @app.route("/vislice", methods=["GET", "POST"])
 def vislice():
     form = forms.Vislice()
     score = 0
-
+    try:
+        session['napake']
+    except:
+        session['napake'] = 0
+        
     if session['napake'] > 10:
         return render_template('vislice.html', spojina='', score=session['score'], form=form, napake='')
 
@@ -138,7 +146,7 @@ def vislice():
         ime1 = session['spojine']['1']['simbol']
         n2 = session['spojine']['2']['count']
         ime2 = session['spojine']['2']['simbol']
-        pravilni = ime(ime1, ime2, n1, n2)
+        pravilni = imena(ime1, ime2, n1, n2)[0]
 
         if form.validate_on_submit():
             o = user_odgovor.split()
@@ -173,7 +181,7 @@ def vislice():
             ]
         
     # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodam se ostale elemente v bazo
-    spojina = vprasanja.dobi_binarne(n=1)[0]
+    spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
 
     return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'])

@@ -7,7 +7,10 @@
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
+        {% if post %}
         {{ score }}
+        {% endif %}
+        
     	<form class="form-answer" method="POST">
     	{{ form.hidden_tag() }}
         {{spojine[0]|safe}}<br>
@@ -20,8 +23,14 @@
         {{ wtf.form_field(form.o3) }}
         {{spojine[4]|safe}}<br>
         {{ wtf.form_field(form.o4) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        {% if not post %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Preveri!</button>
         </form>
+        {% else%}
+        </form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="window.location.reload()"> Nove spojine</button>
+        {% endif %}
+
     </p>
 </div>
 {% endblock %}

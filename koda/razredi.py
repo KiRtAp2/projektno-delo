@@ -38,10 +38,10 @@ def imena(el1, el2, n1, n2, brez_stevnikov=True):
     st2 = stevnik(n2)
 
     seznam = []
-    seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+    seznam.append("{}{} {}{}".format(st1, el1, st2, el2))
 
     if brez_stevnikov:
-        seznam.append("{} {}".format(ime1, ime2))
+        seznam.append("{} {}".format(el1, el2))
 
     return seznam
 
