@@ -1,0 +1,1 @@
+SETX %PATH%=C:\sqlite
