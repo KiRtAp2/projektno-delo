@@ -15,6 +15,7 @@ STEVNIKI = {
 }
 
 def ime(el1, el2, n1, n2):
+    """OBSOLETNA FUNKCIJA, NE JE UPORABLJATI. imena(el1, el2, n1, n2) da seznam vseh imen"""
     stevnik = lambda x: STEVNIKI[x]
         
     st1 = stevnik(n1)
@@ -23,9 +24,26 @@ def ime(el1, el2, n1, n2):
     ime1 = el1
     ime2 = el2
 
-    return "{}{} {}{}".format(
-        st1, ime1, st2, ime2
-    )
+    return None
+
+#    return "{}{} {}{}".format(
+#        st1, ime1, st2, ime2
+#    )
+
+
+def imena(el1, el2, n1, n2, brez_stevnikov=True):
+    stevnik = lambda x: STEVNIKI[x]
+
+    st1 = stevnik(n1)
+    st2 = stevnik(n2)
+
+    seznam = []
+    seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+
+    if brez_stevnikov:
+        seznam.append("{} {}".format(ime1, ime2))
+
+    return seznam
 
 
 class NekaSpojina(object):
@@ -38,6 +56,7 @@ class NekaSpojina(object):
         return self.el1, self.n1, self.el2, self.n2
 
     def get_ime(self):
+        """OBSOLETNA FUNKCIJA. UPORABI NekaSpojina.get_imena()"""
         stevnik = lambda x: STEVNIKI[x]
         
         st1 = stevnik(self.n1)
@@ -49,6 +68,23 @@ class NekaSpojina(object):
         return "{}{} {}{}".format(
             st1, ime1, st2, ime2
         )
+
+    def get_imena(self, brez_stevnikov=True):
+        stevnik = lambda x: STEVNIKI[x]
+
+        st1 = stevnik(self.n1)
+        st2 = stevnik(self.n2)
+
+        ime1 = self.el1.ime
+        ime2 = self.el2.ime
+
+        seznam = []
+        seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+
+        if brez_stevnikov:
+            seznam.append("{} {}".format(ime1, ime2))
+
+        return seznam
 
     def __repr__(self):
         s = ""
