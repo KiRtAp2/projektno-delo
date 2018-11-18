@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
+from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
 from navbar import nav
 from sys import argv
+import json
 
 
 app = Flask(__name__)
@@ -14,6 +16,14 @@ db = SQLAlchemy()
 db.init_app(app)
 
 nav.init_app(app)
+with open('keys.json') as f:
+    data = json.load(f)
+    fb = make_facebook_blueprint(
+        client_id=data['fb']['id'],
+        client_secret=data['fb']['key'],
+        scope="email",
+    )
+app.register_blueprint(fb, url_prefix="/login/facebook")
 
 from views import *
 

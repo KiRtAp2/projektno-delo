@@ -1,10 +1,15 @@
-from main import app, db
-from flask import render_template, request, send_from_directory, redirect, url_for, session, abort
+from main import app, db, fb
+from flask import render_template, request, send_from_directory, redirect, url_for, session, abort, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
+from flask_dance.consumer import oauth_authorized, oauth_error
+from sqlalchemy.orm.exc import NoResultFound
 from random import choice
+from os import urandom
+from base64 import b64encode
 from sqlalchemy import desc
 
 import forms
@@ -19,7 +24,7 @@ login_manager.login_view = 'login'
 class MyAdminView(AdminIndexView):
     def is_accessible(self):
         if current_user.is_authenticated:
-            if current_user.username in admins:
+            if current_user.admin:
                 return True
         else:
             return False
@@ -30,9 +35,86 @@ class MyAdminView(AdminIndexView):
 admin = Admin(app, index_view=MyAdminView())
 admin.add_view(ModelView(models.User, db.session))
 
+fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
+
 @login_manager.user_loader
 def load_user(user_id):
     return models.User.query.get(int(user_id))
+
+@oauth_authorized.connect_via(fb)
+def logged_in(blueprint, token):
+    if not token:
+            flash("Failed to log in with Facebook.", category="error")
+            return False
+
+    resp = blueprint.session.get("me")
+    if not resp.ok:
+        msg = "Failed to fetch user info from Facebook."
+        flash(msg, category="error")
+        return False
+    info = resp.json()
+    user_id = int(info["id"])
+
+    # Find this OAuth token in the database, or create it
+    query = models.OAuth.query.filter_by(
+        provider=blueprint.name,
+        provider_user_id=user_id,
+    )
+    try:
+        oauth = query.one()
+    except NoResultFound:
+        oauth = models.OAuth(
+            provider=blueprint.name,
+            provider_user_id=user_id,
+            token=token,
+        )
+
+    if oauth.user:
+        # If this OAuth token already has an associated local account,
+        # log in that local user account.
+        # Note that if we just created this OAuth token, then it can't
+        # have an associated local account yet.
+        login_user(oauth.user)
+        flash("Successfully signed in with Facebook.")
+
+    else:
+        # If this OAuth token doesn't have an associated local account,
+        # create a new local user account for this user. We can log
+        # in that account as well, while we're at it.
+        try:
+            email = info["email"]
+        except KeyError:
+            email = None
+
+        user = models.User(
+            email=email,
+            username=info["name"],
+            password= b64encode(urandom(190)).decode('utf-8'),
+            admin=False
+        )
+        # Associate the new local user account with the OAuth token
+        oauth.user = user
+        # Save and commit our database models
+        db.session.add_all([user, oauth])
+        db.session.commit()
+        # Log in the new local user account
+        login_user(user)
+        flash("Successfully signed in with Facebook.")
+
+    return False
+
+@oauth_error.connect_via(fb)
+def fb_error(blueprint, error, error_description=None, error_uri=None):
+    msg = (
+        "OAuth error from {name}! "
+        "error={error} description={description} uri={uri}"
+    ).format(
+        name=blueprint.name,
+        error=error,
+        description=error_description,
+        uri=error_uri,
+    )
+    flash(msg, category="error")
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -133,7 +215,7 @@ def vislice():
         session['napake']
     except:
         session['napake'] = 0
-        
+
     if session['napake'] > 10:
         return render_template('vislice.html', spojina='', score=session['score'], form=form, napake='')
 
@@ -217,6 +299,7 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = forms.RegisterForm()
+
     if form.validate_on_submit():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
         new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False)

@@ -20,5 +20,9 @@ Kemijske spojine
 {% endblock %}
 
 {% block navbar %}
-{{nav.meni.render()}}
+	{% if current_user.is_authenticated %}
+		{{nav.logout_bar.render()}}
+	{% else %}
+		{{nav.login_bar.render()}}
+	{% endif %}
 {% endblock %}

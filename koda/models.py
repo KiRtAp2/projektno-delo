@@ -1,6 +1,7 @@
 import main
 db = main.db
 from flask_login import UserMixin
+from flask_dance.consumer.backend.sqla import OAuthConsumerMixin
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,9 +17,14 @@ class Scores(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship('User',
         backref=db.backref('user', lazy=True))
-
-
     
+
+class OAuth(OAuthConsumerMixin, db.Model):
+    provider_user_id = db.Column(db.Integer, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    user = db.relationship(User)
+
+
 class Element(db.Model):
     """Testno, nima namena biti v končni verziji"""
     id = db.Column(db.Integer, primary_key=True)

@@ -2,6 +2,17 @@
 
 {% block content %}
     <div class="center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flash">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<br>
+
     <p>
         <h2>Poimenuj spojine!</h2>
     </p>
@@ -27,6 +38,7 @@
             <h3>Narobe, probi se enkrat.</h3>
         {%endif %}
     </p>
+
 </div>
 {% endblock %}
 
