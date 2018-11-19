@@ -40,3 +40,14 @@ p.error {
     border-radius: 10px;
     border: red 1px solid;
 }
+p.correct {
+    color: green;
+    background-color: #aceace;
+    padding: 0.2em;
+    border-radius: 10px;
+    border: green 1px solid;
+}
+
+i.resitev {
+    display: none;
+}

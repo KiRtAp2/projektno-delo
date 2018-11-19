@@ -26,3 +26,9 @@ Kemijske spojine
 		{{nav.login_bar.render()}}
 	{% endif %}
 {% endblock %}
+
+{% block scripts%}
+<script src="{{url_for('.static', filename='scripts.js')}}"> 
+</script>
+{{super()}}
+{% endblock %}

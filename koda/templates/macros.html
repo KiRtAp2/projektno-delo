@@ -1,0 +1,7 @@
+{% macro empty(string) %}
+{% if string != '' %}
+    <p class='error'>{{string}}</p>
+{% else %}
+	<p class="correct">Pravilno!</p>
+{% endif %}
+{% endmacro %}

@@ -182,14 +182,15 @@ def kviz(kategorija):
             for j in range(len(user_odgovori)):
                 o = user_odgovori[j].split()
                 p = pravilni[j].split()
-                for n in range(len(o)):
-                    try:
+                ne = 0
+                if len(o) != 0:
+                    for n in range(len(o)):
                         if o[n].casefold() == p[n].casefold():
                             score += 5
                         else:
                             ne += 1
-                    except IndexError:
-                        ne += 1
+                else:
+                    ne += 1
                 if ne > 0:
                     napake.append('narobe')
                 else:
@@ -205,7 +206,7 @@ def kviz(kategorija):
                 db.session.add(new_score)
             db.session.commit()
 
-    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, post=post)
+    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, post=post, odgovori=user_odgovori, pravilni=pravilni)
 
 @app.route("/vislice", methods=["GET", "POST"])
 def vislice():

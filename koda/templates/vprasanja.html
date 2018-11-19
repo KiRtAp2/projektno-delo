@@ -1,5 +1,6 @@
 {% extends "shema.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% from "macros.html" import empty with context %}
 
 {% block content %}
     <div class="center">
@@ -8,11 +9,28 @@
     </p>
     <p>
         {% if post %}
-        {{ score }}
-        {% endif %}
-        
-    	<form class="form-answer" method="POST">
-    	{{ form.hidden_tag() }}
+        {{ score }}{{napake}}<br>
+        {{spojine[0]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[0]}}</b><br>
+        <i class="resitev" style="display:none;"> {{pravilni[0]}} </i>
+        {{empty(napake[0])}}
+        {{spojine[1]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[1]}}</b><br>
+        <i class="resitev" style="display:none;"> {{pravilni[1]}} </i>
+        {{empty(napake[1])}}
+        {{spojine[2]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[2]}}</b><br>
+        <i class="resitev" style="display:none;"> {{pravilni[2]}} </i>
+        {{empty(napake[2])}}
+        {{spojine[3]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[3]}}</b><br>
+        <i class="resitev" style="display:none;"> {{pravilni[3]}} </i>
+        {{empty(napake[3])}}
+        {{spojine[4]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[4]}}</b><br>
+        <i class="resitev" style="display:none;"> {{pravilni[4]}} </i>
+        {{empty(napake[4])}}
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="window.location.reload()"> Nove spojine</button>
+        <button onclick="show_item()">Prikaži pravilne odgovore!</button>
+
+        {% else %}
+        <form class="form-answer" method="POST">
+        {{ form.hidden_tag() }}
         {{spojine[0]|safe}}<br>
         {{ wtf.form_field(form.o0) }}
         {{spojine[1]|safe}}<br>
@@ -23,12 +41,8 @@
         {{ wtf.form_field(form.o3) }}
         {{spojine[4]|safe}}<br>
         {{ wtf.form_field(form.o4) }}
-        {% if not post %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Preveri!</button>
         </form>
-        {% else%}
-        </form>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="window.location.reload()"> Nove spojine</button>
         {% endif %}
 
     </p>
