@@ -118,21 +118,7 @@ def fb_error(blueprint, error, error_description=None, error_uri=None):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    
-    prou = None
-    pravilni=[]
-    if request.method == 'POST':
-        odgovori = [request.form['ime1'],
-        request.form['ime2'],
-        request.form['ime3']]
-        if odgovori == pravilni:
-            prou=True
-        else:
-            prou = False
-
-    spojine=["a","bb","c"]
-    # spojine je list spojin
-    return render_template("domaca_stran.html", spojine=spojine, prou=prou)
+    return render_template("domaca_stran.html")
 
 
 @app.route("/kviz/<string:kategorija>", methods=["GET", "POST"])

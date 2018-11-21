@@ -4,5 +4,5 @@ flask-sqlalchemy
 flask-wtf
 flask-admin
 flask-bootstrap
-flask-nav
+
 

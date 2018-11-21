@@ -10,23 +10,7 @@ body {
     background-color: #eee;
     padding: 10px;
 }
-#navigation {
-    /*border-color: #2680d1;*/
-    border-style: solid none solid none;
-    /*border-width: 1px;*/
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-}
-#navigation a {
-    text-decoration: none;
-    color: black;
-    padding-right: 1em;
-    /*font-size: larger;*/
-    /*background-color: #2680d1;*/
-}
-#navigation a:hover {
-    color: #2680d1;
-}
+
 table, td, th {
     border: 1px solid grey;
     border-collapse: collapse;
@@ -50,4 +34,26 @@ p.correct {
 
 i.resitev {
     display: none;
+}
+div[class^="footer"] {
+    display: inline-block;
+}
+
+.footer-left {
+    float: left;
+}
+.footer-right {
+    float: right;
+}
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #2680d1;
+    color: white;
+}
+.btn {
+    border-radius: 0;
+    background-color: #2680d1;
 }

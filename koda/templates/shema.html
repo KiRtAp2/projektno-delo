@@ -16,19 +16,91 @@ Kemijske spojine
 {% block styles %}
 {{super()}}
 <link rel="stylesheet"
-      href="{{url_for('.static', filename='style.css')}}">
+href="{{url_for('.static', filename='style.css')}}">
 {% endblock %}
 
 {% block navbar %}
 	{% if current_user.is_authenticated %}
-		{{nav.logout_bar.render()}}
-	{% else %}
-		{{nav.login_bar.render()}}
-	{% endif %}
-{% endblock %}
+		<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Kemijske Spojine</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="#">Domov</a></li>
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="{{url_for('vislice')}}">Vislice/a></li>
+	          <li class="divider"></li>
+			  <li><a href="{{url_for('kviz', kategorija='binarne')}}">Binarne spojine</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='soli')}}">Soli</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='kisline')}}">Kisline</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='baze')}}">Baze</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='kh')}}">Kristalohidrati</a></li>
+	        </ul>
+	      </li>
+	      <li><a href="#">Lestvica</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><p class="navbar-text">{{current_user.username}}</p></li>
+	      <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-user"></span> Odjava</a></li>
+	    </ul>
+	  </div>
+	</nav>
 
-{% block scripts%}
-<script src="{{url_for('.static', filename='scripts.js')}}"> 
-</script>
-{{super()}}
+	{% else %}
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Kemijske Spojine</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="#">Domov</a></li>
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="{{url_for('vislice')}}">Vislice</li>
+	          <li class="divider"></li>
+			  <li><a href="{{url_for('kviz', kategorija='binarne')}}">Binarne spojine</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='soli')}}">Soli</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='kisline')}}">Kisline</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='baze')}}">Baze</a></li>
+			  <li><a href="{{url_for('kviz', kategorija='kh')}}">Kristalohidrati</a></li>
+	        </ul>
+	      </li>
+	      <li><a href="#">Lestvica</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
+	      <li><a href="{{url_for('register')}}"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	{% endif %}
+
+	{% endblock %}
+
+	{% block scripts%}
+	<script src="{{url_for('.static', filename='scripts.js')}}"> 
+	</script>
+	{{super()}}
+	{% endblock %}
+
+	{% block content%}
+
+	<footer style="float: bottom;">
+		{% block footer %}
+
+		<div class="footer-left">
+			&copy; Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič
+		</div>
+		<div class="footer-right">
+			Gimnazija Vič
+		</div>
+		{% endblock %}
+	</footer>
+
 {% endblock %}
