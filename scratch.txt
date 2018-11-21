@@ -18,7 +18,7 @@
 17:P:fosfid:-3
 18:O:oksid:-2
 19:S:sulfid:-2
-20:F:florid:-1
+20:F:fluorid:-1
 21:Cl:klorid:-1
 22:Br:bromid:-1
 23:I:jodid:-1
