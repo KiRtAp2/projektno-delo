@@ -24,6 +24,8 @@ def ime(el1, el2, n1, n2):
     ime1 = el1
     ime2 = el2
 
+    print("OBSOLETNA FUNKCIJA - klic na razredi.ime({}, {}, {}, {}). Uporabljaj razredi.imena()!!!!!".format(el1, el2, n1, n2))
+
     return None
 
 #    return "{}{} {}{}".format(
@@ -65,9 +67,9 @@ class NekaSpojina(object):
         ime1 = self.el1.ime
         ime2 = self.el2.ime
 
-        return "{}{} {}{}".format(
-            st1, ime1, st2, ime2
-        )
+        print("OBSOLETNA FUNKCIJA - klic na razredi.NekaSpojina.get_ime({}, {}, {}, {}). Uporabljaj razredi.NekaSpojina.get_imena()!!!!!".format(el1, el2, n1, n2))
+
+        return None
 
     def get_imena(self, brez_stevnikov=True):
         stevnik = lambda x: STEVNIKI[x]
