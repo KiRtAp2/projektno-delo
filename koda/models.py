@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(256), unique=True)
     password = db.Column(db.String(256), nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
+    razred = db.Column(db.String(2))
 
     
 class Scores(db.Model):

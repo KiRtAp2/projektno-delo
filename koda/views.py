@@ -90,7 +90,8 @@ def logged_in(blueprint, token):
             email=email,
             username=info["name"],
             password= b64encode(urandom(190)).decode('utf-8'),
-            admin=False
+            admin=False,
+            razred=None
         )
         # Associate the new local user account with the OAuth token
         oauth.user = user
@@ -99,7 +100,7 @@ def logged_in(blueprint, token):
         db.session.commit()
         # Log in the new local user account
         login_user(user)
-        flash("Successfully signed in with Facebook.")
+        flash("Successfully signed in with Facebook, Če želiš nastavi razred")
 
     return False
 
@@ -161,23 +162,25 @@ def kviz(kategorija):
             ime1 = z['1']['simbol']
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
-            pravilni.append(imena(ime1, ime2, n1, n2)[0])
+            pravilni.append(imena(ime1, ime2, n1, n2))
             spojine.append(z['formula'])
 
-        if form.validate_on_submit():    
+        if form.validate_on_submit():
             for j in range(len(user_odgovori)):
                 o = user_odgovori[j].split()
-                p = pravilni[j].split()
+                p = pravilni[j]
                 ne = 0
-                if len(o) != 0:
-                    for n in range(len(o)):
-                        if o[n].casefold() == p[n].casefold():
-                            score += 5
-                        else:
-                            ne += 1
-                else:
-                    ne += 1
-                if ne > 0:
+                for d in p:
+                    e = d.split()
+                    if len(o) != 0:
+                        for n in range(len(o)):
+                            if o[n].casefold() == e[n].casefold():
+                                score += 5
+                            else:
+                                ne += 1
+                    else:
+                        ne += 2
+                if ne-2 > 0:
                     napake.append('narobe')
                 else:
                     napake.append('')
@@ -259,10 +262,11 @@ def vislice():
 @app.route("/lestvica", methods=["GET"])
 def lestvica(): #lestvica se ne dela
     najboljsi = db.engine.execute(
-        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10')
+        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10'
+        )
+    form = forms.QuerryRazred()
 
-    print(najboljsi)
-    return render_template("scores.html", najboljsi=najboljsi)
+    return render_template("scores.html", najboljsi=najboljsi, form=form)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -289,7 +293,7 @@ def register():
 
     if form.validate_on_submit():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
-        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False)
+        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False, razred=form.razred.data)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('index'))
