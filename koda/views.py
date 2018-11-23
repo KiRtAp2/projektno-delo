@@ -75,8 +75,6 @@ def logged_in(blueprint, token):
         # Note that if we just created this OAuth token, then it can't
         # have an associated local account yet.
         login_user(oauth.user)
-        flash("Successfully signed in with Facebook.")
-
     else:
         # If this OAuth token doesn't have an associated local account,
         # create a new local user account for this user. We can log
@@ -100,7 +98,6 @@ def logged_in(blueprint, token):
         db.session.commit()
         # Log in the new local user account
         login_user(user)
-        flash("Successfully signed in with Facebook, Če želiš nastavi razred")
 
     return False
 
@@ -309,10 +306,25 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route("/logout", methods=["GET"])
+
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@login_required
+@app.route('/razred', methods=["GET", "POST"])
+def dodaj_razred():
+    form = forms.QuerryRazred()
+    print(current_user.razred)
+    if request.method == 'POST':
+        if current_user.razred == None:
+            print('tuki')
+            current_user.razred = form.razred.data
+            db.session.add(current_user)
+            db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('razred.html', form=form)
 
 # TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
 @app.route("/static/<path:path>")
