@@ -259,12 +259,19 @@ def vislice():
     return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'])
 
 
-@app.route("/lestvica", methods=["GET"])
+@app.route("/lestvica", methods=["GET", "POST"])
 def lestvica(): #lestvica se ne dela
     najboljsi = db.engine.execute(
         'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10'
         )
     form = forms.QuerryRazred()
+
+    if request.method == 'POST':
+        razred = form.razred.data
+        topclass = db.engine.execute(
+        'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
+        )
+        return render_template("scores.html", najboljsi=topclass, form=form, razred=razred)
 
     return render_template("scores.html", najboljsi=najboljsi, form=form)
 
@@ -296,6 +303,7 @@ def register():
         new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False, razred=form.razred.data)
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('index'))
 
     return render_template('register.html', form=form)

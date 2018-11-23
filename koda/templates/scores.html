@@ -69,7 +69,10 @@
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
-    	<table>
+      {%if razred%}
+      Najboljši v razredu {{razred}}
+      {%endif%}
+    	<table class="table table-bordered">
         <tr>
             <td>Uporabnik</td>
             <td>Točke</td>
