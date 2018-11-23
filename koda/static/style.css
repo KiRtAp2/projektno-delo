@@ -52,8 +52,19 @@ footer {
     width: 100%;
     background-color: #2680d1;
     color: white;
+    float: bottom;
 }
 .btn {
+    border: 0;
     border-radius: 0;
     background-color: #2680d1;
+}
+.btn-fb {
+    background-color: #3B5998;
+    color: white;
+    opacity: 0.85;
+}
+.btn-fb:hover{
+    opacity: 1;
+    color: white;
 }

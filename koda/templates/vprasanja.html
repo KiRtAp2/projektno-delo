@@ -89,7 +89,7 @@
         {{spojine[4]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[4]}}</b><br>
         {{pravilno(pravilni[4])}}
         {{empty(napake[4])}}
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="window.location.reload()"> Nove spojine</button>
+        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.reload()"> Nove spojine</button>
         <button onclick="show_item()">Prikaži pravilne odgovore!</button>
 
         {% else %}
@@ -105,7 +105,7 @@
         {{ wtf.form_field(form.o3) }}
         {{spojine[4]|safe}}<br>
         {{ wtf.form_field(form.o4) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Preveri!</button>
+        <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
         </form>
         {% endif %}
 

@@ -252,7 +252,7 @@ def vislice():
             vprasanja.dobi_kh
             ]
         
-    # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodam se ostale elemente v bazo
+    # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodamo se ostale elemente v bazo
     spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
 

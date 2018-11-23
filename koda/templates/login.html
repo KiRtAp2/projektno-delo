@@ -8,7 +8,7 @@
       <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{url_for('index')}}">Domov</a></li>
+      <li><a href="{{url_for('index')}}">Domov</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
         <span class="caret"></span></a>
@@ -52,10 +52,10 @@
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.remember) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
       </form>
-
-    <a href="{{ url_for("facebook.login") }}"><button type="submit">Login with Facebook!</button></a>
+      <br>
+    <a href="{{ url_for("facebook.login") }}"><button type="submit" class='btn btn-lg btn-fb'><i class="fa fa-facebook fa-fw"></i> Login with Facebook!</button></a>
 
     </div> <!-- /container -->
 {% endblock %}
