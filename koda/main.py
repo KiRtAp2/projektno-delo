@@ -21,6 +21,7 @@ try:
             client_id=data['fb']['id'],
             client_secret=data['fb']['key'],
             scope="email",
+            redirect_url="http://localhost:5000/razred"
         )
 except FileNotFoundError:
     print("Datoteka keys.json ni bilo mogoče najti. Si prepričan, da jo imaš?")
