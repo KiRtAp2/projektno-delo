@@ -198,13 +198,11 @@ def kviz(kategorija):
 def vislice():
     form = forms.Vislice()
     score = 0
+    prej_prov = False
     try:
         session['napake']
     except:
         session['napake'] = 0
-
-    if session['napake'] > 10:
-        return render_template('vislice.html', spojina='', score=session['score'], form=form, napake='')
 
     if request.method == 'GET':
         session['score'] = 0
@@ -215,21 +213,26 @@ def vislice():
         ime1 = session['spojine']['1']['simbol']
         n2 = session['spojine']['2']['count']
         ime2 = session['spojine']['2']['simbol']
-        pravilni = imena(ime1, ime2, n1, n2)[0]
+        pravilni = imena(ime1, ime2, n1, n2)
 
         if form.validate_on_submit():
-            o = user_odgovor.split()
-            p = pravilni.split()    
-            for n in range(len(o)):
-                try:
-                    if o[n].casefold() == p[n].casefold():
-                        score += 5
-                    else:
-                        session['napake'] += 1
-                        break
-                except IndexError:
+            print(pravilni)
+            for i, prav in enumerate(pravilni):
+                if len(user_odgovor) != 0:
+                    if not prej_prov:   
+                        if user_odgovor.casefold() == prav.casefold():
+                            print('prov')
+                            score += 10
+                            prej_prov = True
+                            if i > 0:
+                                session['napake'] -= 1
+                        else:
+                            print('tuki sm')
+                            session['napake'] += 1
+                else:
+                    print('tukile si')
                     session['napake'] += 1
-                    break
+
             session['score'] += score
 
         if current_user.is_authenticated:
@@ -244,16 +247,19 @@ def vislice():
 
     moznosti = [vprasanja.dobi_binarne, 
             vprasanja.dobi_soli,
-            vprasanja.dobi_baze,
-            vprasanja.dobi_kisline,
-            vprasanja.dobi_kh
+            vprasanja.dobi_baze
+            # vprasanja.dobi_kisline,
+            # vprasanja.dobi_kh
             ]
         
     # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodamo se ostale elemente v bazo
     spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
 
-    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'])
+    if session['napake']/2 >= 10:
+        return render_template('vislice.html', score=session['score'], form=form, konec=True)
+
+    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'], konec=False)
 
 
 @app.route("/lestvica", methods=["GET", "POST"])

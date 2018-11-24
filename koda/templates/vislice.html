@@ -64,12 +64,13 @@
 {% endblock %}
 
 {% block content %}
-{% if spojina != '' %}
+{% if not konec%}
     <div class="center">
     <p>
         <h2>Poimenuj spojine!</h2>
     </p>
-    {{score}}
+    {{score}}<br>
+    {{session['napake']}}
     <p>
     	<form class="form-answer" method="POST">
     	{{ form.hidden_tag() }}
@@ -82,6 +83,7 @@
 {%else%}
     <p>
         <h2>KONEC IGRE!</h2>
+        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
     </p>
 
 {%endif%}
