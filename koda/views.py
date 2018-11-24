@@ -323,14 +323,17 @@ def logout():
 def dodaj_razred():
     form = forms.QuerryRazred()
     print(current_user.razred)
-    if request.method == 'POST':
-        if current_user.razred == None:
+    if current_user.razred == None:
+        if request.method == 'POST':
             print('tuki')
             current_user.razred = form.razred.data
             db.session.add(current_user)
             db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('razred.html', form=form)
+    else:
         return redirect(url_for('index'))
-    return render_template('razred.html', form=form)
 
 # TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
 @app.route("/static/<path:path>")
