@@ -17,7 +17,7 @@ STEVNIKI = {
 }
 
 
-def imena(el1, el2, n1, n2, brez_stevnikov=True):
+def imena(el1, el2, n1, n2, brez_stevnikov=True, stock=True):
     return NekaSpojina(el1, n1, el2, n2).get_imena(brez_stevnikov)
 
 
@@ -26,11 +26,14 @@ class NekaSpojina(object):
     def __init__(self, el1, n1, el2, n2):
         self.el1, self.n1, self.el2, self.n2 = el1, n1, el2, n2
 
+    def __eq__(self, other):
+        return self.el1 == other.el1 and self.el2 == other.el2
+
     @property
     def formula(self):
         return self.el1, self.n1, self.el2, self.n2
 
-    def get_imena(self, brez_stevnikov=True):
+    def get_imena(self, brez_stevnikov=True, stock=True):
         stevnik = lambda x: STEVNIKI[x]
 
         st1 = stevnik(self.n1)
