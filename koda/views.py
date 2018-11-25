@@ -32,8 +32,12 @@ class MyAdminView(AdminIndexView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login'))
 
-admin = Admin(app, index_view=MyAdminView())
+admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
+admin.base_template = 'admin/base.html'
 admin.add_view(ModelView(models.User, db.session))
+admin.add_view(ModelView(models.Scores, db.session))
+admin.add_view(ModelView(models.BinarniElement, db.session))
+admin.add_view(ModelView(models.OAuth, db.session))
 
 fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
 
