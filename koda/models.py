@@ -29,8 +29,8 @@ class OAuth(OAuthConsumerMixin, db.Model):
 class Element(db.Model):
     """Testno, nima namena biti v končni verziji"""
     id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), unique=True, nullable=False)
-    ime = db.Column(db.String(20), unique=True, nullable=False)
+    simbol = db.Column(db.String(3), nullable=False)
+    ime = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return "<Element {}>".format(self.simbol)
@@ -46,35 +46,64 @@ class BinarniElement(db.Model):
     def __repr__(self):
         return "<BinarniElement {}>".format(self.simbol)
 
+    
+class BinarnaIzjema(db.Model):
+    """Binarna spojina, ki se je ne da zapisati z elemeneti"""
+    id = db.Column(db.Integer, primary_key=True)
+    ime = db.Column(db.String(50), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return "<BinarnaIzjema {}>".format(self.formula)
+
 
 class BazniElement(db.Model):
     """Element, ki lahko gradi baze"""
     id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), unique=True, nullable=False)
-    ime = db.Column(db.String(20), unique=True, nullable=False)
+    simbol = db.Column(db.String(3), nullable=False)
+    ime = db.Column(db.String(20), nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
         return "<BazniElement {}>".format(self.simbol)
 
     
-class KisliElement(db.Model):
-    """Element, ki lahko gradi kisline"""
+class BaznaIzjema(db.Model):
+    """Baza, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), unique=True, nullable=False)
-    ime = db.Column(db.String(20), unique=True, nullable=False)
-    naboj = db.Column(db.Integer)
+    ime = db.Column(db.String(50), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
-        return "<KisliElement {}>".format(self.simbol)
+        return "<BaznaIzjema {}>".format(self.formula)
+
+    
+class Kislina(db.Model):
+    """Spojina kislina"""
+    id = db.Column(db.Integer, primary_key=True)
+    ime = db.Column(db.String(50), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return "<Kislina {}>".format(self.formula)
 
     
 class SolniElement(db.Model):
     """Element, ki lahko gradi sol"""
     id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), unique=True, nullable=False)
-    ime = db.Column(db.String(20), unique=True, nullable=False)
+    simbol = db.Column(db.String(3), nullable=False)
+    ime = db.Column(db.String(20), nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
         return "<BazniElement {}>".format(self.simbol)
+
+    
+def SolnaIzjema(db.Model):
+    """Spojina, ki se je ne da zapisati z elementi"""
+    id = db.Column(db.Integer, primary_key=True)
+    ime = db.Column(db.String(50), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return "<SolnaIzjema {}>".format(self.formula)
