@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
-from navbar import nav
 from sys import argv
 import json
 
@@ -15,7 +14,6 @@ Bootstrap(app)
 db = SQLAlchemy()
 db.init_app(app)
 
-nav.init_app(app)
 try:
     with open('keys.json') as f:
         data = json.load(f)
@@ -23,6 +21,7 @@ try:
             client_id=data['fb']['id'],
             client_secret=data['fb']['key'],
             scope="email",
+            redirect_url="http://localhost:5000/razred"
         )
 except FileNotFoundError:
     print("Datoteka keys.json ni bilo mogoče najti. Si prepričan, da jo imaš?")

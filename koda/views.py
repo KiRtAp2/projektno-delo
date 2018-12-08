@@ -32,8 +32,12 @@ class MyAdminView(AdminIndexView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login'))
 
-admin = Admin(app, index_view=MyAdminView())
+admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
+admin.base_template = 'admin/base.html'
 admin.add_view(ModelView(models.User, db.session))
+admin.add_view(ModelView(models.Scores, db.session))
+admin.add_view(ModelView(models.BinarniElement, db.session))
+admin.add_view(ModelView(models.OAuth, db.session))
 
 fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
 
@@ -75,8 +79,6 @@ def logged_in(blueprint, token):
         # Note that if we just created this OAuth token, then it can't
         # have an associated local account yet.
         login_user(oauth.user)
-        flash("Successfully signed in with Facebook.")
-
     else:
         # If this OAuth token doesn't have an associated local account,
         # create a new local user account for this user. We can log
@@ -90,7 +92,8 @@ def logged_in(blueprint, token):
             email=email,
             username=info["name"],
             password= b64encode(urandom(190)).decode('utf-8'),
-            admin=False
+            admin=False,
+            razred=None
         )
         # Associate the new local user account with the OAuth token
         oauth.user = user
@@ -99,7 +102,6 @@ def logged_in(blueprint, token):
         db.session.commit()
         # Log in the new local user account
         login_user(user)
-        flash("Successfully signed in with Facebook.")
 
     return False
 
@@ -118,21 +120,7 @@ def fb_error(blueprint, error, error_description=None, error_uri=None):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    
-    prou = None
-    pravilni=[]
-    if request.method == 'POST':
-        odgovori = [request.form['ime1'],
-        request.form['ime2'],
-        request.form['ime3']]
-        if odgovori == pravilni:
-            prou=True
-        else:
-            prou = False
-
-    spojine=["a","bb","c"]
-    # spojine je list spojin
-    return render_template("domaca_stran.html", spojine=spojine, prou=prou)
+    return render_template("domaca_stran.html")
 
 
 @app.route("/kviz/<string:kategorija>", methods=["GET", "POST"])
@@ -175,23 +163,25 @@ def kviz(kategorija):
             ime1 = z['1']['simbol']
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
-            pravilni.append(imena(ime1, ime2, n1, n2)[0])
+            pravilni.append(imena(ime1, ime2, n1, n2))
             spojine.append(z['formula'])
 
-        if form.validate_on_submit():    
+        if form.validate_on_submit():
             for j in range(len(user_odgovori)):
                 o = user_odgovori[j].split()
-                p = pravilni[j].split()
+                p = pravilni[j]
                 ne = 0
-                if len(o) != 0:
-                    for n in range(len(o)):
-                        if o[n].casefold() == p[n].casefold():
-                            score += 5
-                        else:
-                            ne += 1
-                else:
-                    ne += 1
-                if ne > 0:
+                for d in p:
+                    e = d.split()
+                    if len(o) != 0:
+                        for n in range(len(o)):
+                            if o[n].casefold() == e[n].casefold():
+                                score += 5
+                            else:
+                                ne += 1
+                    else:
+                        ne += 2
+                if ne-2 > 0:
                     napake.append('narobe')
                 else:
                     napake.append('')
@@ -212,13 +202,11 @@ def kviz(kategorija):
 def vislice():
     form = forms.Vislice()
     score = 0
+    prej_prov = False
     try:
         session['napake']
     except:
         session['napake'] = 0
-
-    if session['napake'] > 10:
-        return render_template('vislice.html', spojina='', score=session['score'], form=form, napake='')
 
     if request.method == 'GET':
         session['score'] = 0
@@ -229,21 +217,26 @@ def vislice():
         ime1 = session['spojine']['1']['simbol']
         n2 = session['spojine']['2']['count']
         ime2 = session['spojine']['2']['simbol']
-        pravilni = imena(ime1, ime2, n1, n2)[0]
+        pravilni = imena(ime1, ime2, n1, n2)
 
         if form.validate_on_submit():
-            o = user_odgovor.split()
-            p = pravilni.split()    
-            for n in range(len(o)):
-                try:
-                    if o[n].casefold() == p[n].casefold():
-                        score += 5
-                    else:
-                        session['napake'] += 1
-                        break
-                except IndexError:
+            print(pravilni)
+            for i, prav in enumerate(pravilni):
+                if len(user_odgovor) != 0:
+                    if not prej_prov:   
+                        if user_odgovor.casefold() == prav.casefold():
+                            print('prov')
+                            score += 10
+                            prej_prov = True
+                            if i > 0:
+                                session['napake'] -= 1
+                        else:
+                            print('tuki sm')
+                            session['napake'] += 1
+                else:
+                    print('tukile si')
                     session['napake'] += 1
-                    break
+
             session['score'] += score
 
         if current_user.is_authenticated:
@@ -258,25 +251,36 @@ def vislice():
 
     moznosti = [vprasanja.dobi_binarne, 
             vprasanja.dobi_soli,
-            vprasanja.dobi_baze,
-            vprasanja.dobi_kisline,
-            vprasanja.dobi_kh
+            vprasanja.dobi_baze
+            # vprasanja.dobi_kisline,
+            # vprasanja.dobi_kh
             ]
         
-    # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodam se ostale elemente v bazo
+    # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodamo se ostale elemente v bazo
     spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
 
-    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'])
+    if session['napake']/2 >= 10:
+        return render_template('vislice.html', score=session['score'], form=form, konec=True)
+
+    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'], konec=False)
 
 
-@app.route("/lestvica", methods=["GET"])
+@app.route("/lestvica", methods=["GET", "POST"])
 def lestvica(): #lestvica se ne dela
     najboljsi = db.engine.execute(
-        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10')
+        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id ORDER BY Scores.score DESC LIMIT 10'
+        )
+    form = forms.QuerryRazred()
 
-    print(najboljsi)
-    return render_template("scores.html", najboljsi=najboljsi)
+    if request.method == 'POST':
+        razred = form.razred.data
+        topclass = db.engine.execute(
+        'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
+        )
+        return render_template("scores.html", najboljsi=topclass, form=form, razred=razred)
+
+    return render_template("scores.html", najboljsi=najboljsi, form=form)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -303,18 +307,37 @@ def register():
 
     if form.validate_on_submit():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
-        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False)
+        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False, razred=form.razred.data)
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
 
 @app.route("/logout", methods=["GET"])
+
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@login_required
+@app.route('/razred', methods=["GET", "POST"])
+def dodaj_razred():
+    form = forms.QuerryRazred()
+    print(current_user.razred)
+    if current_user.razred == None:
+        if request.method == 'POST':
+            print('tuki')
+            current_user.razred = form.razred.data
+            db.session.add(current_user)
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return render_template('razred.html', form=form)
+    else:
+        return redirect(url_for('index'))
 
 # TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
 @app.route("/static/<path:path>")

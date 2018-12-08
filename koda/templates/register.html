@@ -1,6 +1,37 @@
 {% extends "shema.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
+{% block unauthenticated %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{{url_for('index')}}">Domov</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{url_for('vislice')}}">Vislice</a></li>
+          <li class="divider"></li>
+          <li><a href="{{url_for('kviz', kategorija='binarne')}}">Binarne spojine</a></li>
+          <li><a href="{{url_for('kviz', kategorija='soli')}}">Soli</a></li>
+          <li><a href="{{url_for('kviz', kategorija='kisline')}}">Kisline</a></li>
+          <li><a href="{{url_for('kviz', kategorija='baze')}}">Baze</a></li>
+          <li><a href="{{url_for('kviz', kategorija='kh')}}">Kristalohidrati</a></li>
+        </ul>
+      </li>
+      <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
+      <li class="active"><a href="{{url_for('register')}}"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="container">
 
@@ -11,8 +42,10 @@
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.email) }}
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        {{ wtf.form_field(form.razred) }}
+    <button class="btn btn-lg btn-primary" type="submit">Sign Up</button>
   </form>
-  	<button type="submit"><a href="{{ url_for("facebook.login") }}">Register with Facebook!</a></button>
+  <br>
+  <a href="{{ url_for("facebook.login") }}"><button type="submit" class='btn btn-lg btn-fb'><i class="fa fa-facebook fa-fw"></i> Login with Facebook!</button></a>
 </div> <!-- /container -->
 {% endblock %}

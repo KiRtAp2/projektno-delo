@@ -1,5 +1,4 @@
 {% extends "shema.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block authenticated %}
 <nav class="navbar navbar-inverse">
@@ -10,7 +9,7 @@
 <ul class="nav navbar-nav">
   <li><a href="{{url_for('index')}}">Domov</a></li>
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
+    <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
     <span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><a href="{{url_for('vislice')}}">Vislice</a></li>
@@ -22,7 +21,7 @@
       <li><a href="{{url_for('kviz', kategorija='kh')}}">Kristalohidrati</a></li>
     </ul>
   </li>
-  <li class="active"><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+  <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
   <li><p class="navbar-text">{{current_user.username}}</p></li>
@@ -41,7 +40,7 @@
     <ul class="nav navbar-nav">
       <li><a href="{{url_for('index')}}">Domov</a></li>
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
+        <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="{{url_for('vislice')}}">Vislice</a></li>
@@ -53,7 +52,7 @@
           <li><a href="{{url_for('kviz', kategorija='kh')}}">Kristalohidrati</a></li>
         </ul>
       </li>
-      <li class="active"><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+      <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
@@ -63,35 +62,14 @@
 </nav>
 {% endblock %}
 
+
+
 {% block content %}
     <div class="center">
     <p>
-        <h2>Poimenuj spojine!</h2>
+        <h2>{{title}}</h2>
+        <h3>Izberi težavnost!</h3>
     </p>
-    <p>
-      {%if razred%}
-      Najboljši v razredu {{razred}}
-      {%endif%}
-    	<table class="table table-bordered">
-        <tr>
-            <td>Uporabnik</td>
-            <td>Točke</td>
-        </tr>
-        {% for username, score in najboljsi %}
-            <tr>
-                <td>{{username}}</td>
-                <td>{{score}}</td>
-            </tr>
-        {% endfor %}
-    </table>
 
-    </p>
-</div>
-<div>
-    <form class="form-answer" method="POST">
-        {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.razred) }}
-    <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
-    </form>
 </div>
 {% endblock %}
