@@ -122,9 +122,27 @@ def fb_error(blueprint, error, error_description=None, error_uri=None):
 def index():
     return render_template("domaca_stran.html")
 
+@app.route("/kviz", methods=['GET'])
+def izberi_kategorijo():
+    return render_template("kviz.html")
 
-@app.route("/kviz/<string:kategorija>", methods=["GET", "POST"])
-def kviz(kategorija):
+@app.route("/kviz/<string:kategorija>", methods=['GET'])
+def izberi_vrsto(kategorija):
+    mozni = ['ime', 'formula']
+    urls = []
+    for i in mozni:
+        urls.append(url_for('izberi_tezavnost', kategorija=kategorija, vrsta='{}'.format(i)))
+    return render_template("vrsta.html", moznosti=urls, mozni=mozni)
+
+@app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
+def izberi_tezavnost(kategorija, vrsta):
+    urls = []
+    for n in range(3):
+        urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n+1))
+    return render_template("tezavnost.html", moznosti=urls)
+
+@app.route("/kviz/<string:kategorija>/<string:vrsta>/<int:tezavnost>", methods=["GET", "POST"])
+def kviz(kategorija, vrsta, tezavnost):
     form = forms.Vprasanja()
     user_odgovori = []
     pravilni = []
