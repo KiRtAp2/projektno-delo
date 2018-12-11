@@ -76,7 +76,7 @@ class NekaSpojina(object):
     def to_dict(self):
         d = {
             "type": self.get_sp_type(),
-            "formula": self.__repr__(),
+            "html_formula": self.__repr__(),
             "1": {
                 "count": self.n1,
                 "simbol": self.el1.ime,
