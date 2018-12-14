@@ -1,0 +1,55 @@
++binarni_element
+B:borov:3
+N:nitrid:-3
+P:fosfid:-3
+O:oksid:-2
+S:sulfid:-2
+F:fluorid:-1
+Cl:klorid:-1
+Br:bromid:-1
+I:jodid:-1
++binarna_izjema
+bromov fluorid:bromov(I) fluorid:BrF
+bromov trifluorid:bromov(III) fluorid:BrF3
+bromov pentafluorid:bromov(V) fluorid:BrF5
+dibromov pentaoksid:bromov(V) oksid:Br2O5
+bromov dioksid:bromov(II) oksid:BrO2
+klorov fluorid:klorov(I) fluorid:ClF
+klorov trifluoid:klorov(III) fluorid:ClF3
+klorov pentafluorid:klorov(V) fluorid:ClF5
+diklorov oksid:klorov(I) oksid:Cl2O
+klorov dioksid:klorov(IV) oksid:ClO4
+klorov oskid:klorov(I) oksid:ClO
+diklorov heptaoksid:klorov(VII) oksid:Cl2O7
+jodov fluorid:jodov(I) fluorid:IF
+jodov trifluorid:jodov(III) florid:IF3
+jodov pentafluorid:jodov(V) fluorid:IF5
+jodov heptafluorid:jodov(VII) fluorid:IF7
+jodov bromid:jodov(I) bromid:IBr
+jodov klorid:jodov(I) klorid:ICl
+dijodov pentaoksid:jodov(V) oksid:I2O5
+didušikov oksid:dušikov(I) oksid:N2O
+dušikov oksid:dušikov(II) oksid:NO
+dušikov dioksid:dušikov(IV) oksid:NO2
+didušikov trioksid:dušikov(III) oksid:N2O3
+didušikov pentaoksid:dušikov(V) oksid:N2O5
+dušikov trifluorid:dušikov(III) fluorid:NF3
+dušikov triklorid:dušikov(III) klorid:NCl3
+dušikov tribromid:duškov(III) bromid:NBr3
+dušikov trijodid:dušikov(III) jodid:NI3
+fosforjev trijodid:fosforjev(III) jodid:PI3
+fosforjev tribromid:fosforjev(III) bromid:PBr3
+fosforjev pentabromid:fosforjev(V) bromid:PBr5
+fosforjev triklorid:fosforjev(III) klorid:PCl3
+fosforjev pentaklorid:fosforjev(V) klorid:PCl5
+žveplov dioksid:žveplov(IV) oksid:SO2
+žveplov troksid:žveplov(VI) oksid:SO3
+žveplov difluorid:žveplov(II) fluorid:SF2
+žveplov tetrafluorid:žveplov(IV) fluorid:SF4
+žveplov heksafluorid:žveplov(VI) fluorid:SF6
+žveplov diklorid:žveplov(II) klorid:SCl2
+ksenonov difluorid:ksenonov(II) fluorid:XeF2
+ksenonov tetrafluorid:ksenonov(IV) fluorid:XeF4
+ksenonov heksafluorid:ksenonov(VI) fluorid:XeF6
+ksenonov trioksid:ksenonov(VI) oksid:XeO3
+ksenonov tetraoksid:ksenonov(VIII) oksid:XeO4
