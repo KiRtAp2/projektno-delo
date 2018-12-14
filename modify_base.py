@@ -39,7 +39,7 @@ if __name__=="__main__":
                         print("Error on line {}: No table set for adding into".format(i+1))
                         quit(-1)
                     else:
-                        data = ",".join(process_array(ln.split(":")))
+                        data = ",".join([i]+process_array(ln.split(":")))
                         curs.execute("INSERT INTO {} VALUES ({})".format(table, data))
                         conn.commit()
         quit(0)
