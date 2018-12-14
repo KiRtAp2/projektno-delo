@@ -31,15 +31,17 @@ if __name__=="__main__":
     if file_open:
         with open(filename) as f:
             table = None
+            counter = 1
             for i, ln in enumerate(f):
                 if ln.startswith("+"):
                     table = ln[1:]
+                    counter = 1
                 else:
                     if table is None:
                         print("Error on line {}: No table set for adding into".format(i+1))
                         quit(-1)
                     else:
-                        data = ",".join([i]+process_array(ln.split(":")))
+                        data = ",".join([counter]+process_array(ln.split(":")))
                         curs.execute("INSERT INTO {} VALUES ({})".format(table, data))
                         conn.commit()
         quit(0)
