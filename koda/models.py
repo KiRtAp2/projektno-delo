@@ -39,7 +39,7 @@ class BinarniElement(db.Model):
 
     
 class BinarnaIzjema(db.Model):
-    """Binarna spojina, ki se je ne da zapisati z elemeneti"""
+    """Binarna spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
     ime = db.Column(db.String(50), nullable=False)
     ime_stock = db.Column(db.String(50), nullable=True)
