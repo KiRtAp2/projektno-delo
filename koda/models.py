@@ -27,16 +27,6 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user = db.relationship(User)
 
 
-class Element(db.Model):
-    """Testno, nima namena biti v končni verziji"""
-    id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), nullable=False)
-    ime = db.Column(db.String(20), nullable=False)
-
-    def __repr__(self):
-        return "<Element {}>".format(self.simbol)
-
-    
 class BinarniElement(db.Model):
     """Element, ki lahko gradi binarne spojine"""
     id = db.Column(db.Integer, primary_key=True)
