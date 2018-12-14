@@ -14,3 +14,17 @@
 {% endif %}
 {% endmacro %}
 
+{% macro pravilno(arr) %}
+{% if type(arr) == 'list'  %}
+	{% if arr[0] == arr[1] %}
+	    <i class="resitev" style="display: none;">{{arr[0]}}</i>
+	{% else %}
+		<i class="resitev" style="display: none;">{{arr[0]}}, {{arr[1]}}</i>
+	{% endif %}
+{% else %}
+		<i class="resitev" style="display: none;">{{arr|safe}}</i>
+{% endif %}
+{% endmacro %}
+
+
+

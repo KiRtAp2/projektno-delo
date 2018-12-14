@@ -9,6 +9,7 @@ from flask_dance.consumer import oauth_authorized, oauth_error
 from sqlalchemy.orm.exc import NoResultFound
 from random import choice
 from os import urandom
+import re
 from base64 import b64encode
 from sqlalchemy import desc
 
@@ -44,6 +45,12 @@ fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
 @login_manager.user_loader
 def load_user(user_id):
     return models.User.query.get(int(user_id))
+
+@app.context_processor
+def utility_processor():
+    def its_type(obj):
+        return type(obj)
+    return dict(type=its_type)
 
 @oauth_authorized.connect_via(fb)
 def logged_in(blueprint, token):
@@ -122,20 +129,41 @@ def fb_error(blueprint, error, error_description=None, error_uri=None):
 def index():
     return render_template("domaca_stran.html")
 
+@app.route("/kviz", methods=['GET'])
+def izberi_kategorijo():
+    return render_template("kviz.html")
 
-@app.route("/kviz/<string:kategorija>", methods=["GET", "POST"])
-def kviz(kategorija):
+@app.route("/kviz/<string:kategorija>", methods=['GET'])
+def izberi_vrsto(kategorija):
+    mozni = ['ime', 'formula']
+    urls = []
+    for i in mozni:
+        urls.append(url_for('izberi_tezavnost', kategorija=kategorija, vrsta='{}'.format(i)))
+    return render_template("vrsta.html", moznosti=urls, mozni=mozni)
+
+@app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
+def izberi_tezavnost(kategorija, vrsta):
+    urls = []
+    for n in range(3):
+        urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n+1))
+    return render_template("tezavnost.html", moznosti=urls)
+
+@app.route("/kviz/<string:kategorija>/<string:vrsta>/<int:tezavnost>", methods=["GET", "POST"])
+def kviz(kategorija, vrsta, tezavnost):
     form = forms.Vprasanja()
     user_odgovori = []
-    pravilni = []
+    pravilna_imena = []
+    pravilne_formule = []
     score = 0
     napake = []
     ne = 0
     post = False
 
+    clean = re.compile('<.*?>')
+
     if request.method == 'GET':
         a = []
-        
+        imena_sp = []
         if kategorija == 'binarne':
             spojine = vprasanja.dobi_binarne()
         elif kategorija == 'soli':
@@ -151,7 +179,15 @@ def kviz(kategorija):
         
         for i in spojine:
             a.append(i.to_dict())
+            imena_sp.append(i.get_imena(brez_stevnikov=False)[0])
         session['spojine'] = a
+        print(imena_sp)
+        if vrsta == 'ime':
+            return render_template('vprasanja.html', spojine=imena_sp, form=form, odgovori=None)
+        elif vrsta == 'formula':
+            return render_template('vprasanja.html', spojine=spojine, form=form, odgovori=None)
+        else:
+            abort(404)
 
     else:
         post = True
@@ -163,40 +199,80 @@ def kviz(kategorija):
             ime1 = z['1']['simbol']
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
-            pravilni.append(imena(ime1, ime2, n1, n2))
-            spojine.append(z['formula'])
+            if vrsta == 'formula':
+                pravilna_imena.append(imena(ime1, ime2, n1, n2))
+                spojine.append(z['html_formula'])
+            if vrsta == 'ime':
+                pravilna_imena.append(imena(ime1, ime2, n1, n2, False))
+                pravilne_formule.append(re.sub(clean, '', z['html_formula']))
+                spojine.append(z['html_formula'])
 
         if form.validate_on_submit():
-            for j in range(len(user_odgovori)):
-                o = user_odgovori[j].split()
-                p = pravilni[j]
-                ne = 0
-                for d in p:
-                    e = d.split()
-                    if len(o) != 0:
-                        for n in range(len(o)):
-                            if o[n].casefold() == e[n].casefold():
-                                score += 5
-                            else:
-                                ne += 1
+            if vrsta == 'formula':
+                for j in range(len(user_odgovori)):
+                    o = user_odgovori[j].split()
+                    p = pravilna_imena[j]
+                    ne = 0
+                    for d in p:
+                        e = d.split()
+                        if len(o) != 0:
+                            for n in range(len(o)):
+                                if o[n].casefold() == e[n].casefold():
+                                    score += 5
+                                else:
+                                    ne += 1
+                        else:
+                            ne += 2
+                    if ne-2 > 0:
+                        napake.append('narobe')
                     else:
-                        ne += 2
-                if ne-2 > 0:
-                    napake.append('narobe')
-                else:
-                    napake.append('')
+                        napake.append('')
 
-        if current_user.is_authenticated:
-            resp = models.Scores.query.filter_by(user_id=current_user.id).first()
-            if resp:
-                score += resp.score
-                resp.score = score
-            else:
-                new_score = models.Scores(score=score, user_id=current_user.id)
-                db.session.add(new_score)
-            db.session.commit()
+                    if current_user.is_authenticated:
+                        resp = models.Scores.query.filter_by(user_id=current_user.id).first()
+                        if resp:
+                            score += resp.score
+                            resp.score = score
+                        else:
+                            new_score = models.Scores(score=score, user_id=current_user.id)
+                            db.session.add(new_score)
+                        db.session.commit()
 
-    return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, post=post, odgovori=user_odgovori, pravilni=pravilni)
+                return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=pravilna_imena)
+
+            elif vrsta == 'ime':
+                print(user_odgovori, len(user_odgovori))
+                for j in range(len(user_odgovori)):
+                    o = user_odgovori[j]
+                    p = pravilne_formule[j]
+                    ne = 0
+                    print('tuki')
+                    if len(o) != 0:
+                        if o.casefold() == p.casefold():
+                            score += 10
+                        else:
+                            ne += 1
+                    else:
+                        ne += 1
+                    if ne > 0:
+                        napake.append('narobe')
+                    else:
+                        napake.append('')
+
+                    if current_user.is_authenticated:
+                        resp = models.Scores.query.filter_by(user_id=current_user.id).first()
+                        if resp:
+                            score += resp.score
+                            resp.score = score
+                        else:
+                            new_score = models.Scores(score=score, user_id=current_user.id)
+                            db.session.add(new_score)
+                        db.session.commit()
+
+                print(napake)
+                print(spojine)
+
+                return render_template('vprasanja.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine)
 
 @app.route("/vislice", methods=["GET", "POST"])
 def vislice():
