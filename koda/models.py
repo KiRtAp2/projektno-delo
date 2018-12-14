@@ -99,7 +99,7 @@ class SolniElement(db.Model):
         return "<BazniElement {}>".format(self.simbol)
 
     
-def SolnaIzjema(db.Model):
+class SolnaIzjema(db.Model):
     """Spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
     ime = db.Column(db.String(50), nullable=False)
@@ -107,3 +107,4 @@ def SolnaIzjema(db.Model):
 
     def __repr__(self):
         return "<SolnaIzjema {}>".format(self.formula)
+
