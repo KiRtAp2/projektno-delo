@@ -19,7 +19,7 @@ STEVNIKI = {
 
 
 def imena(el1, el2, n1, n2, brez_stevnikov=True, stock=True):
-    return NekaSpojina(el1, n1, el2, n2).get_imena(brez_stevnikov)
+    return NekaSpojina(el1, n1, el2, n2).get_imena()
 
 
 class NekaSpojina(object):
@@ -126,17 +126,17 @@ class SpojinaIzjema(NekaSpojina):
     @property
     def formula(self):
         dela = self.formula_raw.split("!")
-        el1, n1 = dela[0].split("_")
-        if n1 == "":
+        el1, *n1 = dela[0].split("_")
+        if len(n1) == 0:
             n1 = 0
         else:
-            n1 = int(n1)
+            n1 = int(n1[0])
 
         el2, n2 = dela[1].split("_")
-        if n2 == "":
+        if len(n2) == 0:
             n2 = 0
         else:
-            n2 = int(n2)
+            n2 = int(n2[0])
 
         return el1, n1, el2, n2
 

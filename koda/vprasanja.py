@@ -6,7 +6,7 @@ import random
 from math import gcd
 
 from models import BinarniElement, BazniElement, Kislina, SolniElement, BinarnaIzjema
-from razredi import BinarnaSpojina, BaznaSpojina, SolnaSpojina
+from razredi import BinarnaSpojina, BaznaSpojina, SolnaSpojina, SpojinaIzjema
 
 
 def osnovni_seznam(tip_element, tip_spojina, n=5):
@@ -43,12 +43,12 @@ def osnovni_seznam(tip_element, tip_spojina, n=5):
     return seznam
 
 
-def osnovni_seznam_izjem(tip_izjema, n=5):
-    vse_izjeme = tip_izjema.query.all()
+def osnovni_seznam_izjem(tip_element, tip_spojina, n=5):
+    vse_izjeme = tip_element.query.all()
 
     seznam = []
 
-    def ze_v_seznamu(sp):
+    def ze_v_seznamu(spojina):
         for i in seznam:
             if i == spojina: return True
         return False
@@ -56,14 +56,14 @@ def osnovni_seznam_izjem(tip_izjema, n=5):
     while len(seznam) < n:
         sp = randchoice(vse_izjeme)
         if not ze_v_seznamu(sp):
-            seznam.append(sp)
+            seznam.append(tip_spojina(sp.formula, sp.ime, sp.ime_stock))
 
     return seznam
 
 
 def dobi_binarne(n=5):
     split = random.randint(0, n)
-    return osnovni_seznam(BinarniElement, BinarnaSpojina, split) + osnovni_seznam_izjem(BinarnaIzjema, n-split)
+    return osnovni_seznam(BinarniElement, BinarnaSpojina, split) + osnovni_seznam_izjem(BinarnaIzjema, SpojinaIzjema, n-split)
 
 
 def dobi_baze(n=5):
