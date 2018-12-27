@@ -96,7 +96,7 @@ class SolnaIzjema(db.Model):
     """Spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
     ime = db.Column(db.String(50), nullable=False)
-    ime_stock = db.Column(db.String(50), nullale=True)
+    ime_stock = db.Column(db.String(50), nullable=True)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):

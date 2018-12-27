@@ -31,7 +31,6 @@ if __name__=="__main__":
     if file_open:
         with open(filename) as f:
             table = None
-            counter = 1
             for i, ln in enumerate(f):
                 if ln.startswith("+"):
                     table = ln[1:]
@@ -41,7 +40,7 @@ if __name__=="__main__":
                         print("Error on line {}: No table set for adding into".format(i+1))
                         quit(-1)
                     else:
-                        data = ",".join([counter]+process_array(ln.split(":")))
+                        data = ",".join([str(i)]+process_array(ln.strip().split(":")))
                         curs.execute("INSERT INTO {} VALUES ({})".format(table, data))
                         conn.commit()
         quit(0)

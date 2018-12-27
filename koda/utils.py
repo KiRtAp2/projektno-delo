@@ -1,5 +1,6 @@
 import string
 
+
 def stevilo_velikih(s: str):
     """Prešteje velike črke v stringu"""
     if type(s) != str:

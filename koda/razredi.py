@@ -1,4 +1,5 @@
 import json
+import string
 
 import utils
 
@@ -111,3 +112,74 @@ class SolnaSpojina(NekaSpojina):
     def get_sp_type(self):
         return "Sol"
 
+
+class SpojinaIzjema(NekaSpojina):
+
+    def __init__(self, formula: str, ime: str, ime_stock: str):
+        self.formula_raw = formula
+        self.ime = ime
+        self.ime_stock = ime_stock
+
+    def __eq__(self, other):
+        return self.formula == other.formula
+
+    @property
+    def formula(self):
+        dela = self.formula_raw.split("!")
+        el1, n1 = dela[0].split("_")
+        if n1 == "":
+            n1 = 0
+        else:
+            n1 = int(n1)
+
+        el2, n2 = dela[1].split("_")
+        if n2 == "":
+            n2 = 0
+        else:
+            n2 = int(n2)
+
+        return el1, n1, el2, n2
+
+    def get_imena(self):
+        return [self.ime, self.ime_stock]
+
+    def __repr__(self):
+        el1, n1, el2, n2 = self.formula
+        s = ""
+        if utils.stevilo_velikih(el1) > 1 and n1 > 1:
+            s += "(" + el1 + ")"
+        else:
+            s += el1
+            
+        if n1 > 1:
+            s += "<sub>{}</sub>".format(n1)
+
+        if utils.stevilo_velikih(el2) > 1 and n2 > 1:
+            s += "(" + el2 + ")"
+        else:
+            s += el2
+            
+        if n2 > 1:
+            s += "<sub>{}</sub>".format(n2)
+
+        return s
+
+    def get_sp_type(self):
+        return "izjema"
+
+    def to_dict(self):
+        el1, n1, el2, n2 = self.formula
+        d = {
+            "type": self.get_sp_type(),
+            "html_formula": self.__repr__(),
+            "1": {
+                "count": n1,
+                "simbol": el1
+            },
+            "2": {
+                "count": n2,
+                "simbol": el2
+            }
+        }
+        return d
+    

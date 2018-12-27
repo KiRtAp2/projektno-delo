@@ -2,9 +2,10 @@ u"""Datoteka vsebuje osnovne funkcije za postavljanje in preverjanje vprašanj""
 
 
 from random import choice as randchoice
+import random
 from math import gcd
 
-from models import BinarniElement, BazniElement, Kislina, SolniElement
+from models import BinarniElement, BazniElement, Kislina, SolniElement, BinarnaIzjema
 from razredi import BinarnaSpojina, BaznaSpojina, SolnaSpojina
 
 
@@ -42,8 +43,27 @@ def osnovni_seznam(tip_element, tip_spojina, n=5):
     return seznam
 
 
+def osnovni_seznam_izjem(tip_izjema, n=5):
+    vse_izjeme = tip_izjema.query.all()
+
+    seznam = []
+
+    def ze_v_seznamu(sp):
+        for i in seznam:
+            if i == spojina: return True
+        return False
+
+    while len(seznam) < n:
+        sp = randchoice(vse_izjeme)
+        if not ze_v_seznamu(sp):
+            seznam.append(sp)
+
+    return seznam
+
+
 def dobi_binarne(n=5):
-    return osnovni_seznam(BinarniElement, BinarnaSpojina, n)
+    split = random.randint(0, n)
+    return osnovni_seznam(BinarniElement, BinarnaSpojina, split) + osnovni_seznam_izjem(BinarnaIzjema, n-split)
 
 
 def dobi_baze(n=5):
