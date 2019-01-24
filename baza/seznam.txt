@@ -1,5 +1,19 @@
 +binarni_element
+H:vodikov:1
+Li:litijev:1
+Na:natrijev:1
+K:kalijev:1
+Rb:rubidijev:1
+Cs:cezijev:1
+Be:berilijev:2
+Mg:magnezijev:2
+Ca:kalcijev:2
+Sr:stroncijev:2
+Ba:barijev:2
 B:borov:3
+Al:aluminijev:3
+C:ogljikov:4
+Si:silicijev:4
 N:nitrid:-3
 P:fosfid:-3
 O:oksid:-2
@@ -53,3 +67,34 @@ ksenonov tetrafluorid:ksenonov(IV) fluorid:Xe!F_4
 ksenonov heksafluorid:ksenonov(VI) fluorid:Xe!F_6
 ksenonov trioksid:ksenonov(VI) oksid:Xe!O_3
 ksenonov tetraoksid:ksenonov(VIII) oksid:Xe!O_4
++bazni_element
+OH:hidroksid:-1
+Na:natrijev:1
+Li:litijev:1
+K:kalijev:1
+Rb:rubidijev:1
+Cs:cezijev:1
+Mg:magnezijev:2
+Ca:kalcijev:2
+Sr:stroncijev:2
+Ba:barijev:2
+Al:alumminijev:3
++solni_element
+Li:litijev:1
+Na:natrijev:1
+K:kalijev:1
+Rb:rubidijev:1
+Cs:cezijev:1
+Mg:magnezijev:2
+Ca:kalcijev:2
+Sr:stroncijev:2
+Ba:barijev:2
+Al:aluminijev:3
+F:fluorid:-1
+Cl:klorid:-1
+Br:bromid:-1
+I:jodid:-1
+O:oksid:-2
+S:sulfid:-2
+N:nitrid:-3
+P:fosfid:-3

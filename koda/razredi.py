@@ -5,6 +5,7 @@ import utils
 
 
 STEVNIKI = {
+    0: "",
     1: "",
     2: "di",
     3: "tri",
@@ -19,7 +20,7 @@ STEVNIKI = {
 
 
 def imena(el1, el2, n1, n2, brez_stevnikov=True, stock=True):
-    return NekaSpojina(el1, n1, el2, n2).get_imena()
+    return NekaSpojina(el1, n1, el2, n2).get_imena(brez_stevnikov, stock)
 
 
 class NekaSpojina(object):
@@ -126,13 +127,14 @@ class SpojinaIzjema(NekaSpojina):
     @property
     def formula(self):
         dela = self.formula_raw.split("!")
+        print(self.formula_raw, dela)
         el1, *n1 = dela[0].split("_")
         if len(n1) == 0:
             n1 = 0
         else:
             n1 = int(n1[0])
 
-        el2, n2 = dela[1].split("_")
+        el2, *n2 = dela[1].split("_")
         if len(n2) == 0:
             n2 = 0
         else:
@@ -140,7 +142,7 @@ class SpojinaIzjema(NekaSpojina):
 
         return el1, n1, el2, n2
 
-    def get_imena(self):
+    def get_imena(self, brez_stevnikov=True, stock=True):
         return [self.ime, self.ime_stock]
 
     def __repr__(self):

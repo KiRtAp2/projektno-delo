@@ -176,6 +176,8 @@ def kviz(kategorija, vrsta, tezavnost):
             spojine = vprasanja.dobi_kh()
         else:
             abort(404)
+
+        print(spojine)
         
         for i in spojine:
             a.append(i.to_dict())
@@ -200,6 +202,7 @@ def kviz(kategorija, vrsta, tezavnost):
             n2 = z['2']['count']
             ime2 = z['2']['simbol']
             if vrsta == 'formula':
+                print(imena(ime1, ime2, n1, n2))
                 pravilna_imena.append(imena(ime1, ime2, n1, n2))
                 spojine.append(z['html_formula'])
             if vrsta == 'ime':
