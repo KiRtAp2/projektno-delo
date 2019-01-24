@@ -5,7 +5,6 @@ import utils
 
 
 STEVNIKI = {
-    0: "",
     1: "",
     2: "di",
     3: "tri",
@@ -18,15 +17,6 @@ STEVNIKI = {
     10: "deka"
 }
 
-
-def imena(el1, el2, n1, n2, brez_stevnikov=True, stock=True):
-    return NekaSpojina(el1, n1, el2, n2).get_imena(brez_stevnikov, stock)
-
-
-class NekaSpojina(object):
-
-    def __init__(self, el1, n1, el2, n2):
-        self.el1, self.n1, self.el2, self.n2 = el1, n1, el2, n2
 class OpisSpojine(object):
 
     tip_spojine = None
@@ -141,46 +131,6 @@ class OpisSpojine(object):
 class OpisBinarne(OpisSpojine):
     tip_spojine = "binarna"
 
-    
-class SolnaSpojina(NekaSpojina):
-    def get_sp_type(self):
-        return "Sol"
-
-class BinarnaSpojina(NekaSpojina):
-    def get_sp_type(self):
-        return "binarna"
-
-
-class SpojinaIzjema(NekaSpojina):
-
-    def __init__(self, formula: str, ime: str, ime_stock: str):
-        self.formula_raw = formula
-        self.ime = ime
-        self.ime_stock = ime_stock
-
-    def __eq__(self, other):
-        return self.formula == other.formula
-
-    @property
-    def formula(self):
-        dela = self.formula_raw.split("!")
-        print(self.formula_raw, dela)
-        el1, *n1 = dela[0].split("_")
-        if len(n1) == 0:
-            n1 = 0
-        else:
-            n1 = int(n1[0])
-
-        el2, *n2 = dela[1].split("_")
-        if len(n2) == 0:
-            n2 = 0
-        else:
-            n2 = int(n2[0])
-
-        return el1, n1, el2, n2
-
-    def get_imena(self, brez_stevnikov=True, stock=True):
-        return [self.ime, self.ime_stock]
 
 
 def konstruiraj(d: dict):
@@ -189,4 +139,3 @@ def konstruiraj(d: dict):
         return OpisBinarne(d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))
-    

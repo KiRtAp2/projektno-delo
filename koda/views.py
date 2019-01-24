@@ -16,7 +16,7 @@ from sqlalchemy import desc
 import forms
 import models
 import vprasanja
-from razredi import imena, konstruiraj
+from razredi import konstruiraj
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -197,14 +197,13 @@ def kviz(kategorija, vrsta, tezavnost):
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
         for z in session['spojine']:
+            spojina = konstruiraj(z)
+            spojine.append(spojina.html_prikaz())
             if vrsta == 'formula':
-                print(imena(ime1, ime2, n1, n2))
-                pravilna_imena.append(imena(ime1, ime2, n1, n2))
-                spojine.append(konstruiraj(z))
+                pravilna_imena.append(spojina.get_imena()[0])
             if vrsta == 'ime':
-                pravilna_imena.append(imena(ime1, ime2, n1, n2, False))
-                pravilne_formule.append(re.sub(clean, '', konstruiraj(z)))
-                spojine.append(konstruiraj(z))
+                pravilna_imena.append(spojina.get_imena())
+                pravilne_formule.append(re.sub(clean, '', spojina.html_prikaz()))
 
         if form.validate_on_submit():
             if vrsta == 'formula':
@@ -288,11 +287,8 @@ def vislice():
         session['napake'] = 0
     else:
         user_odgovor = form.o0.data
-        n1 = session['spojine']['1']['count']
-        ime1 = session['spojine']['1']['simbol']
-        n2 = session['spojine']['2']['count']
-        ime2 = session['spojine']['2']['simbol']
-        pravilni = imena(ime1, ime2, n1, n2)
+        spojina = konstruiraj(session['spojine'])
+        pravilni = spojina.get_imena()
 
         if form.validate_on_submit():
             print(pravilni)
