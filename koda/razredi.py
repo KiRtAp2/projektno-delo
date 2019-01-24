@@ -146,6 +146,10 @@ class SolnaSpojina(NekaSpojina):
     def get_sp_type(self):
         return "Sol"
 
+class BinarnaSpojina(NekaSpojina):
+    def get_sp_type(self):
+        return "binarna"
+
 
 class SpojinaIzjema(NekaSpojina):
 

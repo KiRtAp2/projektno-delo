@@ -16,7 +16,7 @@ from sqlalchemy import desc
 import forms
 import models
 import vprasanja
-from razredi import imena
+from razredi import imena, konstruiraj
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)
@@ -197,18 +197,14 @@ def kviz(kategorija, vrsta, tezavnost):
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
         for z in session['spojine']:
-            n1 = z['1']['count']
-            ime1 = z['1']['simbol']
-            n2 = z['2']['count']
-            ime2 = z['2']['simbol']
             if vrsta == 'formula':
                 print(imena(ime1, ime2, n1, n2))
                 pravilna_imena.append(imena(ime1, ime2, n1, n2))
-                spojine.append(z['html_formula'])
+                spojine.append(konstruiraj(z))
             if vrsta == 'ime':
                 pravilna_imena.append(imena(ime1, ime2, n1, n2, False))
-                pravilne_formule.append(re.sub(clean, '', z['html_formula']))
-                spojine.append(z['html_formula'])
+                pravilne_formule.append(re.sub(clean, '', konstruiraj(z)))
+                spojine.append(konstruiraj(z))
 
         if form.validate_on_submit():
             if vrsta == 'formula':
