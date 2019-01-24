@@ -19,7 +19,7 @@ STEVNIKI = {
 
 class OpisSpojine(object):
 
-    self.tip_spojine = None
+    tip_spojine = None
 
     def __init__(self, tip, data=None, **kwargs):
         """tip: "obicajna" / "izjema"
