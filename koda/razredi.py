@@ -129,7 +129,7 @@ class OpisSpojine(object):
 
     
 class OpisBinarne(OpisSpojine):
-    self.tip_spojine = "binarna"
+    tip_spojine = "binarna"
 
 
 
