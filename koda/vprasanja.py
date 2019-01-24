@@ -6,7 +6,7 @@ import random
 from math import gcd
 
 from models import BinarniElement, BazniElement, Kislina, SolniElement, BinarnaIzjema
-from razredi import BinarnaSpojina, BaznaSpojina, SolnaSpojina, SpojinaIzjema
+from razredi import OpisSpojine, OpisBinarne
 
 
 def osnovni_seznam(tip_element, tip_spojina, n=5):
