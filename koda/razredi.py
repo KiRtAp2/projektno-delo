@@ -27,86 +27,119 @@ class NekaSpojina(object):
 
     def __init__(self, el1, n1, el2, n2):
         self.el1, self.n1, self.el2, self.n2 = el1, n1, el2, n2
+class OpisSpojine(object):
+
+    tip_spojine = None
+
+    def __init__(self, tip, data=None, **kwargs):
+        """tip: "obicajna" / "izjema"
+           če je "obicajna", daj ime1, n1, simbol1, ime2, n2, simbol2 v kwargs
+           čene daj ime, ime_stock, formula_raw v kwargs
+           lahko tudi daš parameter data, ki je dict iz OpisSpojine.to_dict() namesto kwargs"""
+        self.tip = tip
+        
+        datadict = kwargs
+        if data is not None:
+            datadict = data
+            
+        if tip == "obicajna":
+            self.ime1 = datadict["ime1"]
+            self.n1 = int(datadict["n1"])
+            self.simbol1 = datadict["simbol1"]
+            self.ime2 = kwarg["ime2"]
+            self.n2 = int(datadict["n2"])
+            self.simbol2 = datadict["simbol2"]
+        elif tip == "izjema":
+            self.ime = datadict["ime"]
+            self.ime_stock = datadict["ime_stock"]
+            self.formula_raw = datadict["formula_raw"]
+        else:
+            raise ValueError("OpisSpojine(tip) dobil tip '{}', ki ni dovoljen, poglej help(razredi.OpisSpojine.__init__) za možne vrednosti")
 
     def __eq__(self, other):
-        return self.el1 == other.el1 and self.el2 == other.el2
+        return self.to_dict() == other.to_dict()
 
-    @property
-    def formula(self):
-        return self.el1, self.n1, self.el2, self.n2
+    def get_imena(self):
+        if self.tip == "izjema":
+            return self.ime, self.ime_stock
 
-    def get_imena(self, brez_stevnikov=True, stock=True):
-        stevnik = lambda x: STEVNIKI[x]
+        # self.tip je zdaj "obicajna"
+        st1 = STEVNIKI[self.n1]
+        st2 = STEVNIKI[self.n2]
 
-        st1 = stevnik(self.n1)
-        st2 = stevnik(self.n2)
-
-        ime1 = self.el1 if type(self.el1) == str else self.el1.ime
-        ime2 = self.el2 if type(self.el2) == str else self.el2.ime
-
+        # dodamo vsa mozna poimenovanja (trenutno s stevniki in brez)
         seznam = []
-        seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
-
-        if brez_stevnikov:
-            seznam.append("{} {}".format(ime1, ime2))
+        seznam.append("{}{} {}{}".format(st1, self.ime1, st2, self.ime2))
+        seznam.append("{} {}".format(self.ime1, self.ime2))
 
         return seznam
 
     def __repr__(self):
-        s = ""
-        if utils.stevilo_velikih(self.el1.simbol) > 1 and self.n1 > 1:
-            s += "(" + self.el1.simbol + ")"
+        return self.html_prikaz()
+
+    def html_prikaz(self):
+        if self.tip == "obicajna":
+            s = ""
+            if utils.stevilo_velikih(self.simbol1) > 1 and self.n1 > 1:
+                s += "(" + self.simbol1 + ")"
+            else:
+                s += self.simbol1
+                
+            if self.n1 > 1:
+                s += "<sub>{}</sub>".format(self.n1)
+
+            if utils.stevilo_velikih(self.simbol2) > 1 and self.n2 > 1:
+                s += "(" + self.simbol2 + ")"
+            else:
+                s += self.simbol2
+            if self.n2 > 1:
+                s += "<sub>{}</sub>".format(self.n2)
+            return s
+        
         else:
-            s += self.el1.simbol
-            
-        if self.n1 > 1:
-            s += "<sub>{}</sub>".format(int(self.n1))
+            raw1, raw2 = self.formula_raw.split("!")
+            el1, *n1 = raw1.split("_")
+            n1 = 1 if len(n1) == 0 else int(n1[0])
+            el2, *n2 = raw2.split("_")
+            n2 = 1 if len(n2) == 0 else int(n2[0])
 
-        if utils.stevilo_velikih(self.el2.simbol) > 1 and self.n2 > 1:
-            s += "(" + self.el2.simbol + ")"
-        else:
-            s += self.el2.simbol
-            
-        if self.n2 > 1:
-            s += "<sub>{}</sub>".format(int(self.n2))
+            s = ""
+            s += el1
+            if n1 > 1:
+                s += "<sub>{}</sub>".format(n1)
+            s += el2
+            if n2 > 1:
+                s += "<sub>{}</sub>".format(n2)
 
-        return s
+            return s
 
-    def get_sp_type(self):
-        return None
-    
     def to_dict(self):
-        d = {
-            "type": self.get_sp_type(),
-            "html_formula": self.__repr__(),
-            "1": {
-                "count": self.n1,
-                "simbol": self.el1.ime,
-            },
-            "2": {
-                "count": self.n2,
-                "simbol": self.el2.ime,
+        if self.tip == "obicajna":
+            d = {
+                "ime1": self.ime1,
+                "n1": self.n1,
+                "simbol1": self.simbol1,
+                "ime2": self.ime2,
+                "n2": self.n2,
+                "simbol2": self.simbol2
             }
-        }
-        return d
-    
+        else:
+            d = {
+                "ime": self.ime,
+                "ime_stock": self.ime_stock,
+                "formula_raw": self.formula_raw
+            }
+        return d.update({
+            "tip": self.tip,
+            "tip_spojine": self.tip_spojine
+        })
+
     def to_json(self):
         return json.dumps(self.to_dict())
 
     
-class BinarnaSpojina(NekaSpojina):
-    def get_sp_type(self):
-        return "BinarnaSpojina"
-
-    
-class BaznaSpojina(NekaSpojina):
-    def get_sp_type(self):
-        return "Baza"
-
-    
-class KislaSpojina(NekaSpojina):
-    def get_sp_type(self):
-        return "Kislina"
+class OpisBinarne(OpisSpojine):
+    tip_spojine = "binarna"
 
     
 class SolnaSpojina(NekaSpojina):
@@ -145,43 +178,11 @@ class SpojinaIzjema(NekaSpojina):
     def get_imena(self, brez_stevnikov=True, stock=True):
         return [self.ime, self.ime_stock]
 
-    def __repr__(self):
-        el1, n1, el2, n2 = self.formula
-        s = ""
-        if utils.stevilo_velikih(el1) > 1 and n1 > 1:
-            s += "(" + el1 + ")"
-        else:
-            s += el1
-            
-        if n1 > 1:
-            s += "<sub>{}</sub>".format(n1)
 
-        if utils.stevilo_velikih(el2) > 1 and n2 > 1:
-            s += "(" + el2 + ")"
-        else:
-            s += el2
-            
-        if n2 > 1:
-            s += "<sub>{}</sub>".format(n2)
-
-        return s
-
-    def get_sp_type(self):
-        return "izjema"
-
-    def to_dict(self):
-        el1, n1, el2, n2 = self.formula
-        d = {
-            "type": self.get_sp_type(),
-            "html_formula": self.__repr__(),
-            "1": {
-                "count": n1,
-                "simbol": el1
-            },
-            "2": {
-                "count": n2,
-                "simbol": el2
-            }
-        }
-        return d
+def konstruiraj(d: dict):
+    """Konstruiraj spojino iz dict objekta. Vrne Opis neke spojine"""
+    if d["tip_spojine"] == "binarna":
+        return OpisBinarne(d)
+    else:
+        return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))
     
