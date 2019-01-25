@@ -36,7 +36,7 @@ class OpisSpojine(object):
             self.ime1 = datadict["ime1"]
             self.n1 = int(datadict["n1"])
             self.simbol1 = datadict["simbol1"]
-            self.ime2 = kwarg["ime2"]
+            self.ime2 = datadict["ime2"]
             self.n2 = int(datadict["n2"])
             self.simbol2 = datadict["simbol2"]
         elif tip == "izjema":
