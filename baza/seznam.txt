@@ -32,7 +32,7 @@ klorov fluorid:klorov(I) fluorid:Cl!F
 klorov trifluoid:klorov(III) fluorid:Cl!F_3
 klorov pentafluorid:klorov(V) fluorid:Cl!F_5
 diklorov oksid:klorov(I) oksid:Cl_2!O
-klorov dioksid:klorov(IV) oksid:Cl!O_4
+klorov dioksid:klorov(IV) oksid:Cl!O_2
 klorov oskid:klorov(I) oksid:Cl!O
 diklorov heptaoksid:klorov(VII) oksid:Cl_2!O_7
 jodov fluorid:jodov(I) fluorid:I!F
