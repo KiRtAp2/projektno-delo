@@ -181,7 +181,7 @@ def kviz(kategorija, vrsta, tezavnost):
         
         for i in spojine:
             a.append(i.to_dict())
-            imena_sp.append(i.get_imena(brez_stevnikov=False)[0])
+            imena_sp.append(i.get_imena()[0])
         session['spojine'] = a
         print(imena_sp)
         if vrsta == 'ime':

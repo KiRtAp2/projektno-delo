@@ -119,10 +119,11 @@ class OpisSpojine(object):
                 "ime_stock": self.ime_stock,
                 "formula_raw": self.formula_raw
             }
-        return d.update({
+        d.update({
             "tip": self.tip,
             "tip_spojine": self.tip_spojine
         })
+        return d
 
     def to_json(self):
         return json.dumps(self.to_dict())
@@ -136,6 +137,6 @@ class OpisBinarne(OpisSpojine):
 def konstruiraj(d: dict):
     """Konstruiraj spojino iz dict objekta. Vrne Opis neke spojine"""
     if d["tip_spojine"] == "binarna":
-        return OpisBinarne(d)
+        return OpisBinarne(d["tip"], d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))

@@ -33,8 +33,8 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
             el1 = randchoice(elementi_1)
             el2 = randchoice(elementi_2)
             lcm = el1.naboj * el2.naboj / gcd(el1.naboj, el2.naboj)
-            n_el1 = lcm // el1.naboj
-            n_el2 = lcm // el2.naboj
+            n_el1 = abs(lcm // el1.naboj)
+            n_el2 = abs(lcm // el2.naboj)
 
             tip = "obicajna"
             data = {
