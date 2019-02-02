@@ -7,6 +7,9 @@
     <title>Kemijske spojine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Spletna aplikacija za poimenovanje kemijskih spojin">
+    <meta name="author" content="Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič">
     <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='navbar.css')}}">
@@ -39,7 +42,7 @@
 	</footer>
 
     {% block scripts %}
-    <script src="{{url_for('.static', filename='scripts.js')}}"></script>
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
     <script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>
     <script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
     {%- endblock scripts %}

@@ -27,6 +27,8 @@ class MyAdminView(AdminIndexView):
         if current_user.is_authenticated:
             if current_user.admin:
                 return True
+            else:
+                return False
         else:
             return False
 
@@ -34,7 +36,7 @@ class MyAdminView(AdminIndexView):
         return redirect(url_for('login'))
 
 admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
-admin.base_template = 'admin/base.html'
+# admin.base_template = 'admin/base.html'
 admin.add_view(ModelView(models.User, db.session))
 admin.add_view(ModelView(models.Scores, db.session))
 admin.add_view(ModelView(models.BinarniElement, db.session))
