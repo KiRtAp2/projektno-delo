@@ -7,7 +7,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
 from flask_dance.consumer import oauth_authorized, oauth_error
 from sqlalchemy.orm.exc import NoResultFound
-from random import choice
+from random import choice, getrandbits
 from os import urandom
 import re
 from base64 import b64encode
@@ -146,8 +146,8 @@ def izberi_vrsto(kategorija):
 @app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
 def izberi_tezavnost(kategorija, vrsta):
     urls = []
-    for n in range(3):
-        urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n+1))
+    for n in range(1, 4):
+        urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n))
     return render_template("tezavnost.html", moznosti=urls)
 
 @app.route("/kviz/<string:kategorija>/<string:vrsta>/<int:tezavnost>", methods=["GET", "POST"])
@@ -164,7 +164,7 @@ def kviz(kategorija, vrsta, tezavnost):
     clean = re.compile('<.*?>')
 
     if request.method == 'GET':
-        a = []
+        seznam_spojin = []
         imena_sp = []
         if kategorija == 'binarne':
             spojine = vprasanja.dobi_binarne()
@@ -179,14 +179,15 @@ def kviz(kategorija, vrsta, tezavnost):
         else:
             abort(404)
         
-        for i in spojine:
-            a.append(i.to_dict())
-            imena_sp.append(choice(i.get_imena()))
-        session['spojine'] = a
+        for spojina in spojine:
+            seznam_spojin.append(spojina.to_dict())
+            imena_sp.append(choice(spojina.get_imena()))
+        session['spojine'] = seznam_spojin
+        session['imena'] = imena_sp
         if vrsta == 'ime':
-            return render_template('vprasanja.html', spojine=imena_sp, form=form, odgovori=None)
+            return render_template('vprasanja.html', spojine=imena_sp, form=form)
         elif vrsta == 'formula':
-            return render_template('vprasanja.html', spojine=spojine, form=form, odgovori=None)
+            return render_template('vprasanja.html', spojine=spojine, form=form)
         else:
             abort(404)
 
@@ -195,105 +196,80 @@ def kviz(kategorija, vrsta, tezavnost):
 
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
-        for z in session['spojine']:
-            spojina = konstruiraj(z)
+        for sp in session['spojine']:
+            spojina = konstruiraj(sp)
             spojine.append(spojina.html_prikaz())
             pravilna_imena.append(spojina.get_imena())
             if vrsta == 'ime':
                 pravilne_formule.append(re.sub(clean, '', spojina.html_prikaz()))
 
+        if vrsta == 'ime':
+            pravilna_imena = session['imena']
+
 
         if form.validate_on_submit():
             if vrsta == 'formula':
-                for j in range(len(user_odgovori)):
-                    o = user_odgovori[j].split()
-                    p = pravilna_imena[j]
+                for idx, odgovor in enumerate(user_odgovori):
+                    pravilni = pravilna_imena[idx]
                     ne = 0
                     curr = 0
-                    for d in p:
-                        e = d.split()
-                        if len(o) != 0:
-                            for k in range(len(o)):
-                                print(o[k], e[k])
-                                if o[k].casefold() == e[k].casefold():
-                                    curr += 5
-                                else:
-                                    ne += 1
+                    for pravilen in pravilni:
+                        if len(odgovor) != 0:
+                            if odgovor.casefold() == pravilen.casefold():
+                                curr += 10
+                            else:
+                                ne += 1
                         else:
-                            print("tuki")
-                            ne += 2
-                            user_odgovori[j] = "/"
+                            ne += 1
+                            user_odgovori[idx] = "/"
                         if curr == 10:
                             break
                     score += curr
-                    print(ne)
-                    if ne-2 > 0 and len(o)>1:
-                        napake.append('narobe')
-                    elif ne>0:
+                    if ne-1 > 0:
                         napake.append('narobe')
                     else:
                         napake.append('')
-                    print(score)
 
-                if current_user.is_authenticated and score:
-                    resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija=kategorija).first()
-                    total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
-                    if resp:
-                        resp.score += score
-                    if total:
-                        total += score
-                    else:
-                        new_score = models.Scores(score=score, user_id=current_user.id, kategorija=kategorija)
-                        db.session.add(new_score)
-                    if total:
-                        total += score
-                    else:
-                        new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
-                        db.session.add(new_total)
-                    db.session.commit()
-
-                return render_template('vprasanja.html', spojine=spojine, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=pravilna_imena)
+                response = render_template('odgovori.html', spojine=spojine, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=pravilna_imena)
 
             elif vrsta == 'ime':
-                for j in range(len(user_odgovori)):
-                    o = user_odgovori[j]
-                    p = pravilne_formule[j]
+
+                for idx, odgovor in enumerate(user_odgovori):
+                    pravilen = pravilne_formule[idx]
                     ne = 0
-                    if len(o) != 0:
-                        print("here")
-                        if o.casefold() == p.casefold():
+                    if len(odgovor) != 0:
+                        if odgovor.casefold() == pravilen.casefold():
                             score += 10
                         else:
                             ne += 1
                     else:
-                        print("tuki")
-                        user_odgovori[j] = "/"
                         ne += 1
+                        user_odgovori[idx] = "/"
+
                     if ne > 0:
                         napake.append('narobe')
                     else:
                         napake.append('')
-                    print(score)
 
-                if current_user.is_authenticated and score:
-                    resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija=kategorija).first()
-                    total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
-                    if resp:
-                        resp.score += score
-                    if total:
-                        total += score
-                    else:
-                        new_score = models.Scores(score=score, user_id=current_user.id, kategorija=kategorija)
-                        db.session.add(new_score)
-                    if total:
-                        total += score
-                    else:
-                        new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
-                        db.session.add(new_total)
-                    db.session.commit()
+                response = render_template('odgovori.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine)
+        
+            if current_user.is_authenticated and score:
+                resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija=kategorija).first()
+                total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
+                if resp:
+                    resp.score += score
+                else:
+                    new_score = models.Scores(score=score, user_id=current_user.id, kategorija=kategorija)
+                    db.session.add(new_score)
 
+                if total:
+                    total.score += score
+                else:
+                    new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
+                    db.session.add(new_total)
+                db.session.commit()
 
-                return render_template('vprasanja.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine)
+            return response
 
 @app.route("/vislice", methods=["GET", "POST"])
 def vislice():
@@ -310,41 +286,37 @@ def vislice():
         session['napake'] = 0
     else:
         user_odgovor = form.o0.data
-        spojina = konstruiraj(session['spojine'])
-        pravilni = spojina.get_imena()
+        spojina = konstruiraj(sp)
+        html_formula = spojina.html_prikaz()
+        pravilna_imena = spojina.get_imena()
+        pravilna_formula = re.sub(clean, '', spojina.html_prikaz())
+
+        index = getrandbits(1)
+
+        pravilno = (pravilna_imena, pravilna_formula)[index]
 
         if form.validate_on_submit():
-            for i, prav in enumerate(pravilni):
-                if len(user_odgovor) != 0:
-                    if not prej_prov:   
-                        if user_odgovor.casefold() == prav.casefold():
-                            score += 10
-                            prej_prov = True
-                            if i > 0:
-                                session['napake'] -= 1
-                        else:
-                            session['napake'] += 1
+            if index:
+                if user_odgovor.casefold() == pravilna_formula.casefold():
+                    score += 10
                 else:
                     session['napake'] += 1
 
-            session['score'] += score
+                response = render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
 
-        if current_user.is_authenticated and score:
-            resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija="vse").first()
-            total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
-            if resp:
-                resp.score += score
-            if total:
-                total += score
             else:
-                new_score = models.Scores(score=score, user_id=current_user.id, kategorija="vse")
-                db.session.add(new_score)
-            if total:
-                total += score
-            else:
-                new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
-                db.session.add(new_total)
-            db.session.commit()
+                for i, ime in enumerate(pravilna_imena):  
+                    if user_odgovor.casefold() == ime.casefold():
+                        score += 10
+                        break
+                    else:
+                        if i < len(pravilna_imena)-1:
+                            continue
+                        else:
+                            session['napake'] += 1
+                response = render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
+
+            session['score'] += score
 
     moznosti = [vprasanja.dobi_binarne
             # vprasanja.dobi_soli,
@@ -357,10 +329,26 @@ def vislice():
     spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
 
-    if session['napake']/2 >= 10:
-        return render_template('vislice.html', score=session['score'], form=form, konec=True)
+    if session['napake'] >= 10:
+        if current_user.is_authenticated and session['score']:
+            resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija="vse").first()
+            total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
+            if resp:
+                resp.score += session['score']
+            else:
+                new_score = models.Scores(score=score, user_id=current_user.id, kategorija="vse")
+                db.session.add(new_score)
 
-    return render_template('vislice.html', spojina=spojina, score=session['score'], form=form, napake=session['napake'], konec=False)
+            if total:
+                total.score += session['score']
+            else:
+                new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
+                db.session.add(new_total)
+            db.session.commit()
+
+        return render_template('konec.html', score=session['score'], form=form)
+
+    return response
 
 
 @app.route("/lestvica", methods=["GET", "POST"])
@@ -372,9 +360,12 @@ def lestvica(): #lestvica se ne dela
 
     if request.method == 'POST':
         razred = form.razred.data
-        topclass = db.engine.execute(
-        'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
-        )
+        if razred == '---':
+            topclass = najboljsi
+        else:
+            topclass = db.engine.execute(
+            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}"  AND Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
+            )
         return render_template("scores.html", najboljsi=topclass, form=form, razred=razred)
 
     return render_template("scores.html", najboljsi=najboljsi, form=form)

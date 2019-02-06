@@ -1,6 +1,5 @@
 {% extends "shema.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% from "macros.html" import empty, pravilno with context %}
 
 {% block authenticated %}
 <nav class="navbar navbar-inverse">
@@ -64,30 +63,12 @@
 </nav>
 {% endblock %}
 
-
-
 {% block content %}
-    <div class="center">
-    <p>
-        <h2>Poimenuj spojine!</h2>
+ <p>
+        <h2>KONEC IGRE!</h2>
+        <br>
+        Dosegel si {{score}} točk!
+        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
     </p>
-    <p>
-        
-        <form class="form-answer" method="POST">
-        {{ form.hidden_tag() }}
-        {{spojine[0]|safe}}<br>
-        {{ wtf.form_field(form.o0) }}
-        {{spojine[1]|safe}}<br>
-        {{ wtf.form_field(form.o1) }}
-        {{spojine[2]|safe}}<br>
-        {{ wtf.form_field(form.o2) }}
-        {{spojine[3]|safe}}<br>
-        {{ wtf.form_field(form.o3) }}
-        {{spojine[4]|safe}}<br>
-        {{ wtf.form_field(form.o4) }}
-        <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
-        </form>
 
-    </p>
-</div>
 {% endblock %}

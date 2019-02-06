@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SelectField
 from wtforms.validators import InputRequired, Email, Length
 
 crke = ['A', 'B', 'C', 'D', 'E', 'F']
-razredi = []
+razredi = [('---', '---')]
 for i in range(1, 5):
     for c in crke:
         razredi.append(('{}{}'.format(i,c), '{}.{}'.format(i,c)))

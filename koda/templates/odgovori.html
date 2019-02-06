@@ -72,21 +72,38 @@
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
-        
-        <form class="form-answer" method="POST">
-        {{ form.hidden_tag() }}
-        {{spojine[0]|safe}}<br>
-        {{ wtf.form_field(form.o0) }}
-        {{spojine[1]|safe}}<br>
-        {{ wtf.form_field(form.o1) }}
-        {{spojine[2]|safe}}<br>
-        {{ wtf.form_field(form.o2) }}
-        {{spojine[3]|safe}}<br>
-        {{ wtf.form_field(form.o3) }}
-        {{spojine[4]|safe}}<br>
-        {{ wtf.form_field(form.o4) }}
-        <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
-        </form>
+
+        <br>
+        {{spojine[0]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[0]}}</b><br>
+        {{pravilno(pravilni[0])}}
+        {{empty(napake[0])}}
+        {{spojine[1]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[1]}}</b><br>
+        {{pravilno(pravilni[1])}}
+        {{empty(napake[1])}}
+        {{spojine[2]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[2]}}</b><br>
+        {{pravilno(pravilni[2])}}
+        {{empty(napake[2])}}
+        {{spojine[3]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[3]}}</b><br>
+        {{pravilno(pravilni[3])}}
+        {{empty(napake[3])}}
+        {{spojine[4]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[4]}}</b><br>
+        {{pravilno(pravilni[4])}}
+        {{empty(napake[4])}}
+
+        <br>
+
+        {% if score %}
+        Čestitamo, osvojil si {{score}} točk!
+        {% elif score == 50%}
+        Ja Patrik vemo da si pamtn pa nimas lajfa... (Sorry :) )
+        {% else %}
+        YOU SUCK! PEJD SE UCIT KEMO TKOJ!!!!!
+        {% endif %}
+
+        <br><br>
+
+        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
+        <button onclick="show_item()">Prikaži pravilne odgovore!</button>
 
     </p>
 </div>

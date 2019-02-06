@@ -64,7 +64,7 @@
 {% endblock %}
 
 {% block content %}
-{% if not konec%}
+
     <div class="center">
     <p>
         <h2>Poimenuj spojine!</h2>
@@ -80,11 +80,5 @@
         </form>
     </p>
 </div>
-{%else%}
-    <p>
-        <h2>KONEC IGRE!</h2>
-        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
-    </p>
 
-{%endif%}
 {% endblock %}
