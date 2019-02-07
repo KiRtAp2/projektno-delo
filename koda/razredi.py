@@ -17,6 +17,20 @@ STEVNIKI = {
     10: "deka"
 }
 
+RIMSKI = [
+    "Nekaj je šlo hudo narobe...",
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "VIII",
+    "IX",
+    "X",
+]
+
 class OpisSpojine(object):
 
     tip_spojine = None
@@ -39,6 +53,7 @@ class OpisSpojine(object):
             self.ime2 = datadict["ime2"]
             self.n2 = int(datadict["n2"])
             self.simbol2 = datadict["simbol2"]
+            self.stock_n = datadict["stock_n"]
         elif tip == "izjema":
             self.ime = datadict["ime"]
             self.ime_stock = datadict["ime_stock"]
@@ -57,10 +72,12 @@ class OpisSpojine(object):
         st1 = STEVNIKI[self.n1]
         st2 = STEVNIKI[self.n2]
 
-        # dodamo vsa mozna poimenovanja (trenutno s stevniki in brez)
+        # dodamo vsa mozna poimenovanja
         seznam = []
         seznam.append("{}{} {}{}".format(st1, self.ime1, st2, self.ime2))
         seznam.append("{} {}".format(self.ime1, self.ime2))
+        if self.stock_n != 0:  # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
+            seznam.append("{el1}({n}) {el2}".format(el1=self.ime1, el2=self.ime2, n=RIMSKI[self.stock_n]))
 
         return seznam
 
@@ -111,7 +128,8 @@ class OpisSpojine(object):
                 "simbol1": self.simbol1,
                 "ime2": self.ime2,
                 "n2": self.n2,
-                "simbol2": self.simbol2
+                "simbol2": self.simbol2,
+                "stock_n": self.stock_n,
             }
         else:
             d = {

@@ -32,9 +32,11 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
         if izbira == "element":
             el1 = randchoice(elementi_1)
             el2 = randchoice(elementi_2)
-            lcm = el1.naboj * el2.naboj / gcd(el1.naboj, el2.naboj)
+            lcm = el1.naboj * el2.naboj // gcd(el1.naboj, el2.naboj)
             n_el1 = abs(lcm // el1.naboj)
             n_el2 = abs(lcm // el2.naboj)
+
+            stock_n = abs(el2.naboj * n_el2 // n_el1)
 
             tip = "obicajna"
             data = {
@@ -44,6 +46,7 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
                 "n2": n_el2,
                 "simbol1": el1.simbol,
                 "simbol2": el2.simbol,
+                "stock_n": stock_n,
             }
         else:
             spojina = randchoice(izjeme)
