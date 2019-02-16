@@ -98,3 +98,20 @@ O:oksid:-2
 S:sulfid:-2
 N:nitrid:-3
 P:fosfid:-3
++kislina
+klorovidikova kislina:H!Cl
+fluorovodikova kislina:H!F
+bromovodikova kislina:H!Br
+jodovodikova kislina:H!I
+žveplova(VI) kislina=žveplova kislina:H_2!S!O_4
+žveplova(IV) kislina=žveplasta kislina:H_2!S!O_3
+dušikova(V) kislina=dušikova kislina:H!N!O_3
+dušikova(III) kislina=dušikasta kislina:H!N!O_2
+fosforjeva(V) kislina=fosforjeva kislina:H_3!P!O_4
+klorova(I) kislina=hipokrorasta kislina:H!Cl!O
+klorova(III) kislina=klorasta kislina:H!Cl!O_2
+klorova(V) kislina=klorova kislina:H!Cl!O_3
+klorova(VII) kislina=perklorova kislina:H!Cl!O_4
+etanojska kislina=ocetna kislina:CH_3!COOH
+metanojska kislina=mravljinčna kislina:HCOOH
+ogljikova kislina=ogljikova(IV) kislina:H_2!CO_3

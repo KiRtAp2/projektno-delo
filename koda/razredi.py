@@ -151,10 +151,44 @@ class OpisBinarne(OpisSpojine):
     tip_spojine = "binarna"
 
 
+class OpisKisline(OpisSpojine):
+    tip_spojine = "kislina"
+
+    def __init__(self, data=None, **kwargs):
+        if data is None:
+            datadict = kwargs
+        else:
+            datadict = data
+
+        self.imena = datadict["imena"].split("=")
+        self.formula_raw = datadict["formula_raw"]
+
+    def get_imena(self):
+        return self.imena
+
+    def html_prikaz(self):
+        prikaz = ""
+        for element in self.formula_raw.split("!"):
+            el, *n = element.split("_")
+            if len(n) == 0: n = "1"
+            prikaz += el
+            if n != "1":
+                prikaz += "<sub>{}</sub>".format(n[0])
+        return prikaz
+
+    def to_dict(self):
+        return {
+            "tip_spojine": self.tip_spojine,
+            "imena": "=".join(self.imena),
+            "formula_raw": self.formula_raw,
+        }
+
 
 def konstruiraj(d: dict):
     """Konstruiraj spojino iz dict objekta. Vrne Opis neke spojine"""
     if d["tip_spojine"] == "binarna":
         return OpisBinarne(d["tip"], d)
+    elif d["tip_spojine"] == "kislina":
+        return OpisKisline(d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))

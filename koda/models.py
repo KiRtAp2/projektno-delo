@@ -74,7 +74,7 @@ class BaznaIzjema(db.Model):
 class Kislina(db.Model):
     """Spojina kislina"""
     id = db.Column(db.Integer, primary_key=True)
-    ime = db.Column(db.String(50), nullable=False)
+    imena = db.Column(db.String(50), nullable=False)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):

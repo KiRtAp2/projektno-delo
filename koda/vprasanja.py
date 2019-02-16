@@ -6,7 +6,7 @@ import random
 from math import gcd
 
 from models import BinarniElement, BazniElement, Kislina, SolniElement, BinarnaIzjema
-from razredi import OpisSpojine, OpisBinarne
+from razredi import OpisSpojine, OpisBinarne, OpisKisline
 
 
 def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
@@ -65,3 +65,26 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
 
 def dobi_binarne(n=5):
     return osnovni_seznam(BinarniElement, BinarnaIzjema, OpisBinarne, n)
+
+
+def dobi_kisline(n=5):
+    seznam = []
+
+    def ze_v_seznamu(opis):
+        for i in seznam:
+            if i == opis: return True
+        return False
+
+    vse_kisline = Kislina.query.all()
+
+    while len(seznam) < n:
+        kislina = randchoice(vse_kisline)
+        op = OpisKisline({
+            "imena": kislina.imena,
+            "formula_raw": kislina.formula,
+            "tip_spojine": "kislina",
+        })
+        if not ze_v_seznamu(op):
+            seznam.append(op)
+
+    return seznam
