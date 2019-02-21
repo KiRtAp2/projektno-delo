@@ -18,6 +18,8 @@ import models
 import vprasanja
 from razredi import konstruiraj
 
+import helpers
+
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -254,21 +256,7 @@ def kviz(kategorija, vrsta, tezavnost):
 
                 response = render_template('odgovori.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine)
         
-            if current_user.is_authenticated and score:
-                resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija=kategorija).first()
-                total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
-                if resp:
-                    resp.score += score
-                else:
-                    new_score = models.Scores(score=score, user_id=current_user.id, kategorija=kategorija)
-                    db.session.add(new_score)
-
-                if total:
-                    total.score += score
-                else:
-                    new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
-                    db.session.add(new_total)
-                db.session.commit()
+            helpers.update_score(kategorija=kategorija, current_user=current_user, score=score)
 
             return response
 
@@ -276,36 +264,49 @@ def kviz(kategorija, vrsta, tezavnost):
 def vislice():
     form = forms.Vislice()
     score = 0
-    prej_prov = False
     try:
         session['napake']
     except:
         session['napake'] = 0
 
+    clean = re.compile('<.*?>')
+
+    moznosti = [vprasanja.dobi_binarne,
+            # vprasanja.dobi_soli,
+            # vprasanja.dobi_baze
+            vprasanja.dobi_kisline
+            # vprasanja.dobi_kh
+            ]
+
     if request.method == 'GET':
         session['score'] = 0
         session['napake'] = 0
+        spojina = choice(moznosti)(n=1)[0]
+        session['spojine'] = spojina.to_dict()
+        session['vrsta'] = getrandbits(1)
+
+        if session['vrsta']:
+            pravilna_imena = spojina.get_imena()
+            return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
+        else:
+            html_formula = spojina.html_prikaz()
+            return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
+    
     else:
         user_odgovor = form.o0.data
-        spojina = konstruiraj(sp)
-        html_formula = spojina.html_prikaz()
-        pravilna_imena = spojina.get_imena()
-        pravilna_formula = re.sub(clean, '', spojina.html_prikaz())
-
-        index = getrandbits(1)
-
-        pravilno = (pravilna_imena, pravilna_formula)[index]
+        spojina = konstruiraj(session['spojine'])
 
         if form.validate_on_submit():
-            if index:
+            if session['vrsta']:
+                html_formula = spojina.html_prikaz()
+                pravilna_formula = re.sub(clean, '', spojina.html_prikaz())
                 if user_odgovor.casefold() == pravilna_formula.casefold():
                     score += 10
                 else:
                     session['napake'] += 1
 
-                response = render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
-
             else:
+                pravilna_imena = spojina.get_imena()
                 for i, ime in enumerate(pravilna_imena):  
                     if user_odgovor.casefold() == ime.casefold():
                         score += 10
@@ -315,41 +316,23 @@ def vislice():
                             continue
                         else:
                             session['napake'] += 1
-                response = render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
 
             session['score'] += score
+            helpers.update_score(kategorija="vse", current_user=current_user, score=score)
+    
+    if session['napake'] >= 10:
+        return render_template('konec.html', score=session['score'], form=form)
 
-    moznosti = [vprasanja.dobi_binarne
-            # vprasanja.dobi_soli,
-            # vprasanja.dobi_baze,
-            # vprasanja.dobi_kisline,
-            # vprasanja.dobi_kh
-            ]
-        
     # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodamo se ostale elemente v bazo
     spojina = choice(moznosti)(n=1)[0]
     session['spojine'] = spojina.to_dict()
-
-    if session['napake'] >= 10:
-        if current_user.is_authenticated and session['score']:
-            resp = models.Scores.query.filter_by(user_id=current_user.id, kategorija="vse").first()
-            total = models.Scores.query.filter_by(user_id=current_user.id, kategorija="total").first()
-            if resp:
-                resp.score += session['score']
-            else:
-                new_score = models.Scores(score=score, user_id=current_user.id, kategorija="vse")
-                db.session.add(new_score)
-
-            if total:
-                total.score += session['score']
-            else:
-                new_total = models.Scores(score=score, user_id=current_user.id, kategorija="total")
-                db.session.add(new_total)
-            db.session.commit()
-
-        return render_template('konec.html', score=session['score'], form=form)
-
-    return response
+    session['vrsta'] = getrandbits(1)
+    if session['vrsta']:
+        pravilna_imena = spojina.get_imena()
+        return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
+    else:
+        html_formula = spojina.html_prikaz()
+        return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
 
 
 @app.route("/lestvica", methods=["GET", "POST"])
