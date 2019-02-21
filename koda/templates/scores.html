@@ -64,12 +64,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class="center">
     <p>
         <h2>Poimenuj spojine!</h2>
     </p>
     <p>
-      {%if razred%}
+      {%if razred and razred!="---"%}
       Najboljši v razredu {{razred}}
       {%endif%}
     	<table class="table table-bordered">
@@ -86,11 +85,10 @@
     </table>
 
     </p>
-</div>
 <div>
     <form class="form-answer" method="POST">
         {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.razred) }}
+        {{ wtf.form_field(form.izberi_razred) }}
     <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
     </form>
 </div>

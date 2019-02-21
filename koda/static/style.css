@@ -16,7 +16,14 @@ table, td, th {
     border-collapse: collapse;
 }
 p {text-align: center;}
-.center {text-align: center;}
+.center {
+  text-align: center;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.left {
+  text-align: left;
+}
 p.error {
     color: red;
     background-color: #f3babd;
@@ -32,6 +39,15 @@ p.correct {
     border: green 1px solid;
 }
 
+#izberi_razred {
+  width: 50%;
+  margin-left: 25%;
+}
+
+table {
+  margin-left: 25%;
+}
+
 i.resitev {
     display: none;
 }
@@ -41,9 +57,11 @@ div[class^="footer"] {
 
 .footer-left {
     float: left;
+    margin-left: 20px;
 }
 .footer-right {
     float: right;
+    margin-right: 20px;
 }
 footer {
     position: fixed;
@@ -112,7 +130,7 @@ input[type="button"].btn-block {
 }
 
 .form-control {
-    width: 50%;
+    width: 100%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;

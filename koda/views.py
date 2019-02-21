@@ -343,7 +343,7 @@ def lestvica(): #lestvica se ne dela
     form = forms.QuerryRazred()
 
     if request.method == 'POST':
-        razred = form.razred.data
+        razred = form.izberi_razred.data
         if razred == '---':
             topclass = najboljsi
         else:

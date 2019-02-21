@@ -33,17 +33,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="left">
 
   <form class="form-signin" method="POST" action="/register">
-    <h2 class="form-signin-heading">Sign Up</h2>
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">Registracija</h2>
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.email) }}
         {{ wtf.form_field(form.razred) }}
-    <button class="btn btn-lg btn-primary" type="submit">Sign Up</button>
+    <button class="btn btn-lg btn-primary" type="submit">Registriraj se!</button>
   </form>
   <br>
   <a href="{{ url_for("facebook.login") }}"><button type="submit" class='btn btn-lg btn-fb'><i class="fa fa-facebook fa-fw"></i> Login with Facebook!</button></a>

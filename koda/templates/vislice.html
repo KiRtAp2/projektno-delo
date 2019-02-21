@@ -64,8 +64,6 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="center">
     <p>
         <h2>Poimenuj spojine!</h2>
     </p>
@@ -76,9 +74,8 @@
     	{{ form.hidden_tag() }}
         {{spojina|safe}}<br>
         {{ wtf.form_field(form.o0) }}
-        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary" type="submit">Naslednja</button>
         </form>
     </p>
-</div>
 
 {% endblock %}
