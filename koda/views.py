@@ -222,10 +222,11 @@ def kviz(kategorija, vrsta, tezavnost):
                         else:
                             ne += 1
                             user_odgovori[idx] = "/"
+                        print(odgovor,",", pravilni, odgovor==pravilni, ne)
                         if curr == 10:
                             break
                     score += curr
-                    if ne-1 > 0:
+                    if (ne > 0 and len(pravilni)==1) or ne > 1:
                         napake.append('narobe')
                     else:
                         napake.append('')
