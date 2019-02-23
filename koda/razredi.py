@@ -151,8 +151,8 @@ class OpisBinarne(OpisSpojine):
     tip_spojine = "binarna"
 
 
-class OpisKisline(OpisSpojine):
-    tip_spojine = "kislina"
+class AbstractOpisIzjeme(OpisSpojine):
+    tip_spojine = None
 
     def __init__(self, data=None, **kwargs):
         if data is None:
@@ -162,7 +162,7 @@ class OpisKisline(OpisSpojine):
 
         self.imena = datadict["imena"].split("=")
         self.formula_raw = datadict["formula_raw"]
-
+        
     def get_imena(self):
         return self.imena
 
@@ -171,7 +171,10 @@ class OpisKisline(OpisSpojine):
         for element in self.formula_raw.split("!"):
             el, *n = element.split("_")
             if len(n) == 0: n = "1"
-            prikaz += el
+            if utils.stevilo_velikih(el) > 1 and n != "1":
+                prikaz += "({})".format(el)
+            else:
+                prikaz += el
             if n != "1":
                 prikaz += "<sub>{}</sub>".format(n[0])
         return prikaz
@@ -182,7 +185,15 @@ class OpisKisline(OpisSpojine):
             "imena": "=".join(self.imena),
             "formula_raw": self.formula_raw,
         }
+    
 
+class OpisKisline(AbstractOpisIzjeme):
+    tip_spojine = "kislina"
+
+    
+class OpisBaze(AbstractOpisIzjeme):
+    tip_spojine = "baza"
+    
 
 def konstruiraj(d: dict):
     """Konstruiraj spojino iz dict objekta. Vrne Opis neke spojine"""
@@ -190,5 +201,7 @@ def konstruiraj(d: dict):
         return OpisBinarne(d["tip"], d)
     elif d["tip_spojine"] == "kislina":
         return OpisKisline(d)
+    elif d["tip_spojine"] == "baza":
+        return OpisBaze(d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))

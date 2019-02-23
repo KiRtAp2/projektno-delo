@@ -102,3 +102,11 @@ class SolnaIzjema(db.Model):
     def __repr__(self):
         return "<SolnaIzjema {}>".format(self.formula)
 
+    
+class Baza(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    imena = db.Column(db.String(100), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return "<Baza {}>".format(self.formula)
