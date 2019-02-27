@@ -41,40 +41,17 @@ class BinarniElement(db.Model):
 class BinarnaIzjema(db.Model):
     """Binarna spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
-    ime = db.Column(db.String(50), nullable=False)
-    ime_stock = db.Column(db.String(50), nullable=True)
+    imena = db.Column(db.String(100), nullable=False)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return "<BinarnaIzjema {}>".format(self.formula)
 
 
-class BazniElement(db.Model):
-    """Element, ki lahko gradi baze"""
-    id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), nullable=False)
-    ime = db.Column(db.String(20), nullable=False)
-    naboj = db.Column(db.Integer)
-
-    def __repr__(self):
-        return "<BazniElement {}>".format(self.simbol)
-
-    
-class BaznaIzjema(db.Model):
-    """Baza, ki se je ne da zapisati z elementi"""
-    id = db.Column(db.Integer, primary_key=True)
-    ime = db.Column(db.String(50), nullable=False)
-    ime_stock = db.Column(db.String(50), nullable=True)
-    formula = db.Column(db.String(20), nullable=False)
-
-    def __repr__(self):
-        return "<BaznaIzjema {}>".format(self.formula)
-
-    
 class Kislina(db.Model):
     """Spojina kislina"""
     id = db.Column(db.Integer, primary_key=True)
-    imena = db.Column(db.String(50), nullable=False)
+    imena = db.Column(db.String(100), nullable=False)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
@@ -84,8 +61,8 @@ class Kislina(db.Model):
 class SolniElement(db.Model):
     """Element, ki lahko gradi sol"""
     id = db.Column(db.Integer, primary_key=True)
-    simbol = db.Column(db.String(3), nullable=False)
-    ime = db.Column(db.String(20), nullable=False)
+    simbol = db.Column(db.String(10), nullable=False)
+    imena = db.Column(db.String(50), nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
@@ -95,8 +72,7 @@ class SolniElement(db.Model):
 class SolnaIzjema(db.Model):
     """Spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
-    ime = db.Column(db.String(50), nullable=False)
-    ime_stock = db.Column(db.String(50), nullable=True)
+    imena = db.Column(db.String(50), nullable=False)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
@@ -110,3 +86,4 @@ class Baza(db.Model):
 
     def __repr__(self):
         return "<Baza {}>".format(self.formula)
+

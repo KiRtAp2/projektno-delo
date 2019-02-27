@@ -12,3 +12,11 @@ def stevilo_velikih(s: str):
         if ch in string.ascii_uppercase:
             count += 1
     return count
+
+
+def je_stevilo(s: str):
+    try:
+        s = int(s)
+        return True
+    except:
+        return False

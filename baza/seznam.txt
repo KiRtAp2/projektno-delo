@@ -23,63 +23,80 @@ Cl:klorid:-1
 Br:bromid:-1
 I:jodid:-1
 +binarna_izjema
-bromov fluorid:bromov(I) fluorid:Br!F
-bromov trifluorid:bromov(III) fluorid:Br!F_3
-bromov pentafluorid:bromov(V) fluorid:Br!F_5
-dibromov pentaoksid:bromov(V) oksid:Br_2!O_5
-bromov dioksid:bromov(II) oksid:Br!O_2
-klorov fluorid:klorov(I) fluorid:Cl!F
-klorov trifluoid:klorov(III) fluorid:Cl!F_3
-klorov pentafluorid:klorov(V) fluorid:Cl!F_5
-diklorov oksid:klorov(I) oksid:Cl_2!O
-klorov dioksid:klorov(IV) oksid:Cl!O_2
-klorov oskid:klorov(I) oksid:Cl!O
-diklorov heptaoksid:klorov(VII) oksid:Cl_2!O_7
-jodov fluorid:jodov(I) fluorid:I!F
-jodov trifluorid:jodov(III) florid:I!F_3
-jodov pentafluorid:jodov(V) fluorid:I!F_5
-jodov heptafluorid:jodov(VII) fluorid:I!F_7
-jodov bromid:jodov(I) bromid:I!Br
-jodov klorid:jodov(I) klorid:I!Cl
-dijodov pentaoksid:jodov(V) oksid:I_2!O_5
-didušikov oksid:dušikov(I) oksid:N_2!O
-dušikov oksid:dušikov(II) oksid:N!O
-dušikov dioksid:dušikov(IV) oksid:N!O_2
-didušikov trioksid:dušikov(III) oksid:N_2!O_3
-didušikov pentaoksid:dušikov(V) oksid:N_2!O_5
-dušikov trifluorid:dušikov(III) fluorid:N!F_3
-dušikov triklorid:dušikov(III) klorid:N!Cl_3
-dušikov tribromid:duškov(III) bromid:N!Br_3
-dušikov trijodid:dušikov(III) jodid:N!I_3
-fosforjev trijodid:fosforjev(III) jodid:P!I_3
-fosforjev tribromid:fosforjev(III) bromid:P!Br_3
-fosforjev pentabromid:fosforjev(V) bromid:P!Br_5
-fosforjev triklorid:fosforjev(III) klorid:P!Cl_3
-fosforjev pentaklorid:fosforjev(V) klorid:P!Cl_5
-žveplov dioksid:žveplov(IV) oksid:S!O_2
-žveplov troksid:žveplov(VI) oksid:S!O_3
-žveplov difluorid:žveplov(II) fluorid:S!F_2
-žveplov tetrafluorid:žveplov(IV) fluorid:S!F_4
-žveplov heksafluorid:žveplov(VI) fluorid:S!F_6
-žveplov diklorid:žveplov(II) klorid:S!Cl_2
-ksenonov difluorid:ksenonov(II) fluorid:Xe!F_2
-ksenonov tetrafluorid:ksenonov(IV) fluorid:Xe!F_4
-ksenonov heksafluorid:ksenonov(VI) fluorid:Xe!F_6
-ksenonov trioksid:ksenonov(VI) oksid:Xe!O_3
-ksenonov tetraoksid:ksenonov(VIII) oksid:Xe!O_4
-+bazni_element
-OH:hidroksid:-1
-Na:natrijev:1
-Li:litijev:1
-K:kalijev:1
-Rb:rubidijev:1
-Cs:cezijev:1
-Mg:magnezijev:2
-Ca:kalcijev:2
-Sr:stroncijev:2
-Ba:barijev:2
-Al:alumminijev:3
+bromov fluorid=bromov(I) fluorid:BrF
+bromov trifluorid=bromov(III) fluorid:BrF3
+bromov pentafluorid=bromov(V) fluorid:BrF5
+dibromov pentaoksid=bromov(V) oksid:Br2O5
+bromov dioksid=bromov(II) oksid:BrO2
+klorov fluorid=klorov(I) fluorid:ClF
+klorov trifluoid=klorov(III) fluorid:ClF3
+klorov pentafluorid=klorov(V) fluorid:ClF5
+diklorov oksid=klorov(I) oksid:Cl2O
+klorov dioksid=klorov(IV) oksid:ClO2
+klorov oskid=klorov(I) oksid:ClO
+diklorov heptaoksid=klorov(VII) oksid:Cl2O7
+jodov fluorid=jodov(I) fluorid:IF
+jodov trifluorid=jodov(III) florid:IF3
+jodov pentafluorid=jodov(V) fluorid:IF5
+jodov heptafluorid=jodov(VII) fluorid:IF7
+jodov bromid=jodov(I) bromid:IBr
+jodov klorid=jodov(I) klorid:ICl
+dijodov pentaoksid=jodov(V) oksid:I2O5
+didušikov oksid=dušikov(I) oksid:N2O
+dušikov oksid=dušikov(II) oksid:NO
+dušikov dioksid=dušikov(IV) oksid:NO2
+didušikov trioksid=dušikov(III) oksid:N2O3
+didušikov pentaoksid=dušikov(V) oksid:N2O5
+dušikov trifluorid=dušikov(III) fluorid:NF3
+dušikov triklorid=dušikov(III) klorid:NCl3
+dušikov tribromid=duškov(III) bromid:NBr3
+dušikov trijodid=dušikov(III) jodid:NI3
+fosforjev trijodid=fosforjev(III) jodid:PI3
+fosforjev tribromid=fosforjev(III) bromid:PBr3
+fosforjev pentabromid=fosforjev(V) bromid:PBr5
+fosforjev triklorid=fosforjev(III) klorid:PCl3
+fosforjev pentaklorid=fosforjev(V) klorid:PCl5
+žveplov dioksid=žveplov(IV) oksid:SO2
+žveplov troksid=žveplov(VI) oksid:SO3
+žveplov difluorid=žveplov(II) fluorid:SF2
+žveplov tetrafluorid=žveplov(IV) fluorid:SF4
+žveplov heksafluorid=žveplov(VI) fluorid:SF6
+žveplov diklorid=žveplov(II) klorid:SCl2
+ksenonov difluorid=ksenonov(II) fluorid:XeF2
+ksenonov tetrafluorid=ksenonov(IV) fluorid:XeF4
+ksenonov heksafluorid=ksenonov(VI) fluorid:XeF6
+ksenonov trioksid=ksenonov(VI) oksid:XeO3
+ksenonov tetraoksid=ksenonov(VIII) oksid:XeO4
++kislina
+klorovidikova kislina:HCl
+fluorovodikova kislina:HF
+bromovodikova kislina:HBr
+jodovodikova kislina:HI
+žveplova(VI) kislina=žveplova kislina:H2SO4
+žveplova(IV) kislina=žveplasta kislina:H2SO3
+dušikova(V) kislina=dušikova kislina:HNO3
+dušikova(III) kislina=dušikasta kislina:HNO2
+fosforjeva(V) kislina=fosforjeva kislina:H3PO4
+klorova(I) kislina=hipokrorasta kislina:HClO
+klorova(III) kislina=klorasta kislina:HClO2
+klorova(V) kislina=klorova kislina:HClO3
+klorova(VII) kislina=perklorova kislina:HClO4
+etanojska kislina=ocetna kislina:CH3COOH
+metanojska kislina=mravljinčna kislina:HCOOH
+ogljikova kislina=ogljikova(IV) kislina:H2CO3
++baza
+natrijev hidroksid=natrijev(I) hidroksid:NaOH
+litijev hidroksid=litijev(I) hidroksid:LiOH
+kalijev hidroksid=kalijev(I) hidroksid:KOH
+rubidijev hidroksid=rubidijev(I) hidroksid:RbOH
+cezijev hidroksid=cezijev(I) hidroksid:CsOH
+barijev hidroksid=barijev(II) hidroksid:Ba(OH)2
+magnezijev hidroksid=magnezijev(II) hidroksid:Mg(OH)2
+kalcijev hidroksid=kalcijev(II) hidroksid:Ca(OH)2
+stroncijev hidroksid=stroncijev(II) hidroksid:Sr(OH)2
+aluminijev hidroksid=aluminijev(III) hidroksid:Al(OH)3
 +solni_element
+NH4:amonijev:1
 Li:litijev:1
 Na:natrijev:1
 K:kalijev:1
@@ -90,39 +107,64 @@ Ca:kalcijev:2
 Sr:stroncijev:2
 Ba:barijev:2
 Al:aluminijev:3
-F:fluorid:-1
-Cl:klorid:-1
-Br:bromid:-1
-I:jodid:-1
-O:oksid:-2
-S:sulfid:-2
-N:nitrid:-3
-P:fosfid:-3
-+kislina
-klorovidikova kislina:H!Cl
-fluorovodikova kislina:H!F
-bromovodikova kislina:H!Br
-jodovodikova kislina:H!I
-žveplova(VI) kislina=žveplova kislina:H_2!S!O_4
-žveplova(IV) kislina=žveplasta kislina:H_2!S!O_3
-dušikova(V) kislina=dušikova kislina:H!N!O_3
-dušikova(III) kislina=dušikasta kislina:H!N!O_2
-fosforjeva(V) kislina=fosforjeva kislina:H_3!P!O_4
-klorova(I) kislina=hipokrorasta kislina:H!Cl!O
-klorova(III) kislina=klorasta kislina:H!Cl!O_2
-klorova(V) kislina=klorova kislina:H!Cl!O_3
-klorova(VII) kislina=perklorova kislina:H!Cl!O_4
-etanojska kislina=ocetna kislina:CH_3!COOH
-metanojska kislina=mravljinčna kislina:H!COOH
-ogljikova kislina=ogljikova(IV) kislina:H_2!C!O_3
-+baza
-natrijev hidroksid=natrijev(I) hidroksid:Na!OH
-litijev hidroksid=litijev(I) hidroksid:Li!OH
-kalijev hidroksid=kalijev(I) hidroksid:K!OH
-rubidijev hidroksid=rubidijev(I) hidroksid:Rb!OH
-cezijev hidroksid=cezijev(I) hidroksid:Cs!OH
-barijev hidroksid=barijev(II) hidroksid:Ba!OH_2
-magnezijev hidroksid=magnezijev(II) hidroksid:Mg!OH_2
-kalcijev hidroksid=kalcijev(II) hidroksid:Ca!OH_2
-stroncijev hidroksid=stroncijev(II) hidroksid:Sr!OH_2
-aluminijev hidroksid=aluminijev(III) hidroksid:Al!OH_3
+CO3:karbonat=karbonat(IV):-2
+SO4:sulfat=sulfat(VI):-2
+SO3:sulfit=sulfat(IV):-2
+PO4:fosfat=fosfat(V):-3
+ClO4:perklorat=klorat(VII):-1
+ClO3:klorat=klorat(V):-1
+ClO2:klorid=klorat(III):-1
+ClO:hipoklorid=klorat(I):-1
+NO3:nitrat=nitrat(V):-1
+NO2:nitrit=nitrat(III):-1
+HCOO:metanoat=format:-1
+CH3COO:etanoat=acetat:-1
++solna_izjema
+srebrov(I) etanoat=srebrov(I) acetat:AgCH3COO
+srebrov(I) karbonat=srebrov(I) karbonat(IV):Ag2CO3
+srebrov(I) jodat=srebov(I) jodat(V):AgIO3
+srebrov(I) nitrat=srebrov(I) nitrat(V):AgNO3
+srebrov(I) perklorat=srebrov(I) klorat(VII):AgClO4
+srebrov(I) fosfat=srebrov(I) fosfat(V):AgPO4
+srebrov(I) sulfat=srebrov(I) sulfat(VI):Ag2SO4
+srebrov(I) sulfit=srebrov(I) sulfat(IV):Ag2SO3
+barijev bromat=barijev bromat=barijev(II) bromat(V)=barijev bromat(V):Ba(BrO3)2
+barijev selenat(IV)=barijev selenit:BaSeO3
+bizmutov(III) etanoat=bizmutov(III) acetat:Bi(CH3COO)3
+bizmutov(III) fosfat=bizmutov(III) fosfat(V):BiPO4
+kadmijev(II) bromat(V)=kadmijev(II) bromat:Cd(BrO3)2
+kadmijev(II) karbonat=kadmijev(II) karbonat(IV):CdCO3
+kadmijev(II) fosfat=kadmijev(II) fosfat(V):Cd3(PO4)2
+kadmijev(II) sulfat=kadmijev(II) sulfat(VI):CdSO4
+kobaltov(II) etanoat=kobaltov(II) acetat:Co(CH3COO)2
+kobaltov(II) karbonat=kobaltov(II) karbonat(IV):CoCO3
+kobaltov(II) fosfat=kobaltov(II) fosfat(V):Co3(PO4)2
+kromov(III) sulfat=kromov(III) sulfat(VI):Cr2(SO4)3
+bakrov(II) etanoat=bakrov(II) acetat:Cu(CH3COO)2
+bakrov(II) jodat=bakrov(II) jodat(V):Cu(IO3)2
+bakrov(II) nitrat=bakrov(II) nitrat(V):Cu(NO3)2
+bakrov(II) fosfat=bakrov(II) fosfat(V):Cu3(PO4)2
+bakrov(II) sulfat=bakrov(II) sulfat(VI):CuSO4
+železov(II) etanoat=železov(II) acetat:Fe(CH3COO)2
+železov(II) perklorat=železov(II) klorat(VII):Fe(ClO4)2
+železov(III) perklorat=železov(III) klorat(VII):Fe(ClO4)2
+železov(III) sulfat=železov(III) sulfat(VI):Fe2(SO4)3
+galijev(III) nitrat=galijev(III) nitrat(V):Ga(NO3)3
+galijev(III) sulfat=galijev(III) sulfat(VI):Ga2(SO4)3
+galijev(III) perklorat=galijev(III) klorat(VII):Ga(ClO4)3
+živosrebrov(II) etanoat=živosrebrov(II) acetat:Hg(CH3COO)2
+živosrebrov(II) nitrat=živosrebrov(II) nitrat(V):Hg(NO3)2
+živosrebrov(II) sulfat=živosrebrov(II) sulfat(VI):HgSO4
+hafnijev(II) sulfat=hafnijev(II) sulfat(VI):Hf(SO4)2
+indijev(III) etanoat=indijev(III) acetat:In(CH3COO)3
+indijev(III) nitrat=indijev(III) nitrat(V):In(NO3)3
+indijev(III) fosfat=indijev(III) fosfat(V):InPO4
+indijev(III) sulfat=indijev(III) sulfat(VI):In2(SO4)3
+lantanov(III) etanoat=lantanov(III) acetat:La(CH3COO)3
+lantanov(III) karbonat=lantanov(III) karbonat(IV):La2(CO3)3
+lantanov(III) fosfat=lantanov(III) fosfat(V):LaPO4
+lantanov(III) sulfat=lantanov(III) sulfat(VI):La2(SO4)3
+manganov(II) karbonat=manganov(II) karbonat(IV):MnCO3
+manganov(II) nitrat=manganov(II) nitrat(V):Mn(NO3)2
+nikljev(II) karbonat=nikljev(II) karbonat(IV):NiCO3
+nikljev(II) klorid=nikljev diklorid:NiCl2

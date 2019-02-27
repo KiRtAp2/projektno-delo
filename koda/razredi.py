@@ -31,6 +31,17 @@ RIMSKI = [
     "X",
 ]
 
+
+def prikaz_skupine(s: str):
+    final = ""
+    for ch in s:
+        if ch in string.digits:
+            final += "<sub>{}</sub>".format(ch)
+        else:
+            final += ch
+    return final
+
+
 class OpisSpojine(object):
 
     tip_spojine = None
@@ -55,29 +66,31 @@ class OpisSpojine(object):
             self.simbol2 = datadict["simbol2"]
             self.stock_n = datadict["stock_n"]
         elif tip == "izjema":
-            self.ime = datadict["ime"]
-            self.ime_stock = datadict["ime_stock"]
+            self.imena = datadict["imena"]
             self.formula_raw = datadict["formula_raw"]
         else:
-            raise ValueError("OpisSpojine(tip) dobil tip '{}', ki ni dovoljen, poglej help(razredi.OpisSpojine.__init__) za možne vrednosti")
+            raise ValueError("OpisSpojine(tip) dobil tip '{}', ki ni dovoljen, poglej help(razredi.OpisSpojine.__init__) za možne vrednosti".format(tip))
 
     def __eq__(self, other):
         return self.to_dict() == other.to_dict()
 
     def get_imena(self):
         if self.tip == "izjema":
-            return self.ime, self.ime_stock
+            return self.imena.split("=")
 
         # self.tip je zdaj "obicajna"
         st1 = STEVNIKI[self.n1]
         st2 = STEVNIKI[self.n2]
 
-        # dodamo vsa mozna poimenovanja
         seznam = []
-        seznam.append("{}{} {}{}".format(st1, self.ime1, st2, self.ime2))
-        seznam.append("{} {}".format(self.ime1, self.ime2))
-        if self.stock_n != 0:  # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
-            seznam.append("{el1}({n}) {el2}".format(el1=self.ime1, el2=self.ime2, n=RIMSKI[self.stock_n]))
+        
+        for ime1 in self.ime1.split("="):
+            for ime2 in self.ime2.split("="):
+                # dodamo vsa mozna poimenovanja
+                seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+                seznam.append("{} {}".format(ime1, ime2))
+                if self.stock_n != 0:  # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
+                    seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
 
         return seznam
 
@@ -86,39 +99,23 @@ class OpisSpojine(object):
 
     def html_prikaz(self):
         if self.tip == "obicajna":
-            s = ""
-            if utils.stevilo_velikih(self.simbol1) > 1 and self.n1 > 1:
-                s += "(" + self.simbol1 + ")"
-            else:
-                s += self.simbol1
-                
+            s1 = prikaz_skupine(self.simbol1)
+            s2 = prikaz_skupine(self.simbol2)
+
             if self.n1 > 1:
-                s += "<sub>{}</sub>".format(self.n1)
+                if utils.stevilo_velikih(s1) > 1:
+                    s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+                else:
+                    s1 = "{}<sub>{}</sub>".format(s1, self.n1)
 
-            if utils.stevilo_velikih(self.simbol2) > 1 and self.n2 > 1:
-                s += "(" + self.simbol2 + ")"
-            else:
-                s += self.simbol2
             if self.n2 > 1:
-                s += "<sub>{}</sub>".format(self.n2)
-            return s
-        
+                if utils.stevilo_velikih(s2) > 1:
+                    s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+                else:
+                    s = "{}<sub>{}</sub>".format(s2, self.n2)
+            return s1+s2
         else:
-            raw1, raw2 = self.formula_raw.split("!")
-            el1, *n1 = raw1.split("_")
-            n1 = 1 if len(n1) == 0 else int(n1[0])
-            el2, *n2 = raw2.split("_")
-            n2 = 1 if len(n2) == 0 else int(n2[0])
-
-            s = ""
-            s += el1
-            if n1 > 1:
-                s += "<sub>{}</sub>".format(n1)
-            s += el2
-            if n2 > 1:
-                s += "<sub>{}</sub>".format(n2)
-
-            return s
+            return prikaz_skupine(self.formula_raw)
 
     def to_dict(self):
         if self.tip == "obicajna":
@@ -133,8 +130,7 @@ class OpisSpojine(object):
             }
         else:
             d = {
-                "ime": self.ime,
-                "ime_stock": self.ime_stock,
+                "imena": self.imena,
                 "formula_raw": self.formula_raw
             }
         d.update({
@@ -167,16 +163,7 @@ class AbstractOpisIzjeme(OpisSpojine):
         return self.imena
 
     def html_prikaz(self):
-        prikaz = ""
-        for element in self.formula_raw.split("!"):
-            el, *n = element.split("_")
-            if len(n) == 0: n = "1"
-            if utils.stevilo_velikih(el) > 1 and n != "1":
-                prikaz += "({})".format(el)
-            else:
-                prikaz += el
-            if n != "1":
-                prikaz += "<sub>{}</sub>".format(n[0])
+        prikaz = prikaz_skupine(self.formula_raw)
         return prikaz
 
     def to_dict(self):
@@ -193,7 +180,11 @@ class OpisKisline(AbstractOpisIzjeme):
     
 class OpisBaze(AbstractOpisIzjeme):
     tip_spojine = "baza"
+
     
+class OpisSoli(OpisSpojine):
+    tip_spojine = "sol"
+
 
 def konstruiraj(d: dict):
     """Konstruiraj spojino iz dict objekta. Vrne Opis neke spojine"""
@@ -203,5 +194,7 @@ def konstruiraj(d: dict):
         return OpisKisline(d)
     elif d["tip_spojine"] == "baza":
         return OpisBaze(d)
+    elif d["tip_spojine"] == "sol":
+        return OpisSoli(d["tip"], d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))
