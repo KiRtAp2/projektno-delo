@@ -178,6 +178,8 @@ def kviz(kategorija, vrsta, tezavnost):
             spojine = vprasanja.dobi_kisline()
         elif kategorija == 'kh':
             spojine = vprasanja.dobi_kh()
+        elif kategorija == 'hs':
+            spojine = vprasanja.dobi_hidrogensoli()
         else:
             abort(404)
         

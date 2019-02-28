@@ -87,3 +87,22 @@ class Baza(db.Model):
     def __repr__(self):
         return "<Baza {}>".format(self.formula)
 
+
+class HidrogensolniElement(db.Model):
+    """Element, ki lahko gradi hidrogensol"""
+    id = db.Column(db.Integer, primary_key=True)
+    simbol = db.Column(db.String(10), nullable=False)
+    imena = db.Column(db.String(50), nullable=False)
+    naboj = db.Column(db.Integer)
+
+    def __repr__(self):
+        return "<HidrogensolniElement {}>".format(self.simbol)
+
+
+class Kristalohidrat(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    imena = db.Column(db.String(100), nullable=False)
+    formula = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return "<Kristalohidrat {}>".format(self.formula)

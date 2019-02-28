@@ -34,11 +34,17 @@ RIMSKI = [
 
 def prikaz_skupine(s: str):
     final = ""
+    velika_cifra = False
     for ch in s:
         if ch in string.digits:
-            final += "<sub>{}</sub>".format(ch)
+            if velika_cifra: final += ch
+            else: final += "<sub>{}</sub>".format(ch)
+        elif ch == "*":
+            final += " &#x00B7 "
+            velika_cifra = True
         else:
             final += ch
+            velika_cifra = False
     return final
 
 
@@ -142,11 +148,70 @@ class OpisSpojine(object):
     def to_json(self):
         return json.dumps(self.to_dict())
 
+
+class AbstractOpisElementarne(OpisSpojine):
+    tip_spojine = None
+
+    def __init__(self, data=None, **kwargs):
+        if data is None:
+            datadict = kwargs
+        else:
+            datadict = data
+
+        self.ime1 = datadict["ime1"]
+        self.n1 = int(datadict["n1"])
+        self.simbol1 = datadict["simbol1"]
+        self.ime2 = datadict["ime2"]
+        self.n2 = int(datadict["n2"])
+        self.simbol2 = datadict["simbol2"]
+        self.stock_n = datadict["stock_n"]
+
+    def get_imena(self):
+        st1 = STEVNIKI[self.n1]
+        st2 = STEVNIKI[self.n2]
+
+        seznam = []
+
+        for ime1 in self.ime1.split("="):
+            for ime2 in self.ime2.split("="):
+                seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+                seznam.append("{} {}".format(ime1, ime2))
+                if self.stock_n != 0:
+                    seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
+                    
+        return seznam
+
+    def html_prikaz(self):
+        s1 = prikaz_skupine(self.simbol1)
+        s2 = prikaz_skupine(self.simbol2)
+
+        if self.n1 > 1:
+            if utils.stevilo_velikih(s1) > 1:
+                s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+            else:
+                s1 = "{}<sub>{}</sub>".format(s1, self.n1)
+
+        if self.n2 > 1:
+            if utils.stevilo_velikih(s2) > 1:
+                s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+            else:
+                s = "{}<sub>{}</sub>".format(s2, self.n2)
+        return s1+s2
+
+    def to_dict(self):
+        d = {
+            "ime1": self.ime1,
+            "n1": self.n1,
+            "simbol1": self.simbol1,
+            "ime2": self.ime2,
+            "n2": self.n2,
+            "simbol2": self.simbol2,
+            "stock_n": self.stock_n,
+            "tip_spojine": self.tip_spojine,
+        }
+        return d
+
     
-class OpisBinarne(OpisSpojine):
-    tip_spojine = "binarna"
-
-
 class AbstractOpisIzjeme(OpisSpojine):
     tip_spojine = None
 
@@ -174,6 +239,10 @@ class AbstractOpisIzjeme(OpisSpojine):
         }
     
 
+class OpisBinarne(OpisSpojine):
+    tip_spojine = "binarna"
+
+    
 class OpisKisline(AbstractOpisIzjeme):
     tip_spojine = "kislina"
 
@@ -184,6 +253,14 @@ class OpisBaze(AbstractOpisIzjeme):
     
 class OpisSoli(OpisSpojine):
     tip_spojine = "sol"
+
+    
+class OpisHidrogensoli(AbstractOpisElementarne):
+    tip_spojine = "hidrogensol"
+
+
+class OpisKristalohidrata(AbstractOpisIzjeme):
+    tip_spojine = "kristalohidrat"
 
 
 def konstruiraj(d: dict):
@@ -196,5 +273,9 @@ def konstruiraj(d: dict):
         return OpisBaze(d)
     elif d["tip_spojine"] == "sol":
         return OpisSoli(d["tip"], d)
+    elif d["tip_spojine"] == "hidrogensol":
+        return OpisHidrogensoli(d)
+    elif d["tip_spojine"] == "kristalohidrat":
+        return OpisKristalohidrata(d)
     else:
         return ValueError("tip_spojine ({}) ni prepoznan".format(d["tip_spojine"]))

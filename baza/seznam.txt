@@ -168,3 +168,58 @@ manganov(II) karbonat=manganov(II) karbonat(IV):MnCO3
 manganov(II) nitrat=manganov(II) nitrat(V):Mn(NO3)2
 nikljev(II) karbonat=nikljev(II) karbonat(IV):NiCO3
 nikljev(II) klorid=nikljev diklorid:NiCl2
+svinčev(IV) etanoat=svinčev(IV) acetat:Pb(CH3COO)4
+svinčev(II) karbonat=svinčev(II) karbonat(IV):PbCO3
+svinčev(II) metanoat=svinčev(II) format:Pb(NO3)2
+svinčev(II) selenat(IV)=svinčev(II) selenit:PbSeO3
+svinčev(II) sulfat(VI)=svinčev(II) sulfat:PbSO4
+paladijev(II) etanoat=paladijev(II) acetat:Pd(CH3COO)2
+paladijev(II) nitrat=paladijev(II) nitrat(V):Pd(NO3)2
+paladijev(II) sulfat=paladijev(II) sulfat(VI):PdSO4
+rodijev(III) nitrat=rodijev(III) nitrat(V):Rh(NO3)3
+rodijev(III) sulfat(VI)=rodijev(III) sulfat:Rh2(SO4)3
+skandijev(III) etanoat=skandijev(III) acetat:Sc(CH3COO)3
+skandijev(III) karbonat=skandijev(III) karbonat(IV):Sc2(CO3)3
+skandijev(III) nitrat(V)=skandijev(III) nitrat:Sc(NO3)3
+silicijev(IV) etanoat=silicijev(IV) acetat:Si(CH3COO)4
+kositrov(II) etanoat=kositrov(II) acetat:Sn(CH3COO)2
+kositrov(IV) etanoat=kositrov(IV) acetat:Sn(CH3COO)4
+stroncijev(II) jodat=stroncijev(II) jodat(V):Sr(IO3)2
+titanov(III) sulfat(VI)=titanov(III) sulfat:Ti2(SO4)3
+talijev(I) etanoat=talijev(I) acetat:TlCH3COO
+talijev(I) karbonat=talijev(I) karbonat(IV):Tl2CO3
+talijev(I) nitrat=talijev(I) nitrat(V):TlNO3
+talijev(III) nitrat(V)=talijev(III) nitrat:Tl(NO3)3
+talijev(I) sulfat=talijev(I) sulfat(VI):Tl2SO4
+itrijev(III) karbonat=itijev(III) karbonat(IV):Y2(CO3)3
+itrijev(III) fosfat=itrijev(III) fosfat(V):YPO4
+iterbijev(III) nitrat(V)=iterbijev(III) nitrat:Yb(NO3)3
+cinkov(II) etanoat=cinkov(II) acetat:Zn(CH3COO)2
+amonijev jodat=amonijev jodat(V):NH4IO3
++hidrogensolni_element
+NH4:amonijev:1
+Li:litijev:1
+Na:natrijev:1
+K:kalijev:1
+Rb:rubidijev:1
+Cs:cezijev:1
+Mg:magnezijev:2
+Ca:kalcijev:2
+Sr:stroncijev:2
+Ba:barijev:2
+Al:aluminijev:3
+HCO3:hidrogenkarbonat=hidrogenkarbonat(IV):-1
+HS:hidrogensulfid:-1
+HSO4:hidrogensulfat(VI)=hidrogensulfat:-1
+HSO3:hidrogensulfit=hidrogensulfat(IV):-1
+HPO4:hidrogenfosfat(V)=hidrogenfosfat:-2
+H2PO4:dihidrogenfosfat(V)=dihidrogenfosfat(V):-1
++kristalohidrat
+aluminijev klorid heksahidrat:AlCl3*6H20
+aluminijev fluorid trihidrat:AlF3*3H2O
+aluminijev nitrat nonahidrat=aluminijev nitrat(V) nonahidrat:Al(NO3)3*9H2O
+aluminijev perklorat nonahidrat=aluminijev klorat(VII) nonahidrat:Al(ClO4)3*9H2O
+barijev bromid dihidrat:BaBr2*2H2O
+barijev klorid dihidrat:BaCl2*2H2O
+barijev hidroksid oktahidrat:Ba(OH)2*8H2O
+barijev perklorat trihidrat=barijev klorat(VII) trihidrat:Ba(ClO4)2*3H2O
