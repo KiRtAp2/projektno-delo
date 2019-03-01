@@ -148,6 +148,8 @@ def izberi_vrsto(kategorija):
 @app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
 def izberi_tezavnost(kategorija, vrsta):
     urls = []
+    if kategorija == 'kh' or kategorija == 'baze' or kategorija == 'hs':
+        return redirect(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=1))
     for n in range(1, 4):
         urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n))
     return render_template("tezavnost.html", moznosti=urls)
@@ -274,16 +276,17 @@ def vislice():
     clean = re.compile('<.*?>')
 
     moznosti = [vprasanja.dobi_binarne,
-            # vprasanja.dobi_soli,
-            # vprasanja.dobi_baze
-            vprasanja.dobi_kisline
-            # vprasanja.dobi_kh
+            vprasanja.dobi_soli,
+            vprasanja.dobi_baze,
+            vprasanja.dobi_kisline,
+            vprasanja.dobi_kh
             ]
 
     if request.method == 'GET':
         session['score'] = 0
         session['napake'] = 0
         spojina = choice(moznosti)(n=1)[0]
+        print(spojina)
         session['spojine'] = spojina.to_dict()
         session['vrsta'] = getrandbits(1)
 
