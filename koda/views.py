@@ -148,10 +148,12 @@ def izberi_vrsto(kategorija):
 @app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
 def izberi_tezavnost(kategorija, vrsta):
     urls = []
-    if kategorija == 'kh' or kategorija == 'baze' or kategorija == 'hs':
+    if kategorija == 'binarne' or kategorija == 'soli':
+        for n in range(1, 3):
+            urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n))
+    else:
         return redirect(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=1))
-    for n in range(1, 4):
-        urls.append(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=n))
+
     return render_template("tezavnost.html", moznosti=urls)
 
 @app.route("/kviz/<string:kategorija>/<string:vrsta>/<int:tezavnost>", methods=["GET", "POST"])
@@ -171,9 +173,9 @@ def kviz(kategorija, vrsta, tezavnost):
         seznam_spojin = []
         imena_sp = []
         if kategorija == 'binarne':
-            spojine = vprasanja.dobi_binarne()
+            spojine = vprasanja.dobi_binarne(tezavnost)
         elif kategorija == 'soli':
-            spojine = vprasanja.dobi_soli()
+            spojine = vprasanja.dobi_soli(tezavnost)
         elif kategorija == 'baze':
             spojine = vprasanja.dobi_baze()
         elif kategorija == 'kisline':
