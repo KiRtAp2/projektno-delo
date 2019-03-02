@@ -1,5 +1,4 @@
 {% extends "shema.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block authenticated %}
 <nav class="navbar navbar-inverse">
@@ -8,7 +7,7 @@
   <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
 </div>
 <ul class="nav navbar-nav">
-  <li><a href="{{url_for('index')}}">Domov</a></li>
+  <li class="active"><a href="{{url_for('index')}}">Domov</a></li>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
     <span class="caret"></span></a>
@@ -23,7 +22,7 @@
           <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
     </ul>
   </li>
-  <li class="active"><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+  <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
   <li><p class="navbar-text">{{current_user.username}}</p></li>
@@ -40,7 +39,7 @@
       <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="{{url_for('index')}}">Domov</a></li>
+      <li class="active"><a href="{{url_for('index')}}">Domov</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Naloge
         <span class="caret"></span></a>
@@ -55,7 +54,7 @@
           <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
         </ul>
       </li>
-      <li class="active"><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+      <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
@@ -66,37 +65,25 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        <h2>Poimenuj spojine!</h2>
-    </p>
-    <p>
-      {%if razred and razred!="---" and kategorija and kategorija!='---'%}
-      Najboljši v razredu <b>{{razred}}</b> in kategoriji <b>{{kategorija}}</b>
-      {%elif razred and razred!="---"%}
-      Najboljši v razredu <b>{{razred}}</b>
-      {%elif kategorija and kategorija!='---'%}
-      Najboljši v kategoriji <b>{{kategorija}}</b>
-      {%endif%}
-    	<table class="table table-bordered">
-        <tr>
-            <td>Uporabnik</td>
-            <td>Točke</td>
-        </tr>
-        {% for username, score in najboljsi %}
-            <tr>
-                <td>{{username}}</td>
-                <td>{{score}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flash">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<br>
 
+    <p>
+        <h2>Ups, ta stran ne obstaja! </h2>
     </p>
-<div>
-    <form class="form-answer" method="POST">
-        {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.izberi_razred) }}
-        {{ wtf.form_field(form.izberi_kategorijo) }}
-    <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
-    </form>
+
+
+
 </div>
+{{super()}}
 {% endblock %}
+

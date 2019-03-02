@@ -26,9 +26,7 @@ RIMSKI = [
     "V",
     "VI",
     "VII",
-    "VIII",
-    "IX",
-    "X",
+    "VIII"
 ]
 
 

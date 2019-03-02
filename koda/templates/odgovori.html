@@ -4,38 +4,6 @@
 
 {% block authenticated %}
 <nav class="navbar navbar-inverse">
-<div class="container-fluid">
-<div class="navbar-header">
-  <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
-</div>
-<ul class="nav navbar-nav">
-  <li><a href="{{url_for('index')}}">Domov</a></li>
-  <li class="dropdown">
-    <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
-    <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li><a href="{{url_for('vislice')}}">Vislice</a></li>
-      <li class="divider"></li>
-      <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a></li>
-      <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli</a></li>
-      <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a></li>
-      <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a></li>
-      <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
-    </ul>
-  </li>
-  <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-  <li><p class="navbar-text">{{current_user.username}}</p></li>
-  <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-user"></span> Odjava</a></li>
-</ul>
-</div>
-</nav>
-{% endblock %}
-
-{% block unauthenticated %}
-<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
@@ -44,67 +12,107 @@
       <li><a href="{{url_for('index')}}">Domov</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="{{url_for('vislice')}}">Vislice</a></li>
-          <li class="divider"></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{url_for('vislice')}}">Vislice</a></li>
+            <li class="divider"></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli</a></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
+            <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
+          </ul>
+        </li>
+        <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">{{current_user.username}}</p></li>
+        <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-user"></span> Odjava</a></li>
+      </ul>
+    </div>
+  </nav>
+  {% endblock %}
+
+  {% block unauthenticated %}
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="{{url_for('index')}}">Domov</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{url_for('vislice')}}">Vislice</a></li>
+              <li class="divider"></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli</a></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
+              <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
+            </ul>
+          </li>
+          <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
         </ul>
-      </li>
-      <li><a href="{{url_for('lestvica')}}">Lestvica</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
-      <li><a href="{{url_for('register')}}"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
-    </ul>
-  </div>
-</nav>
-{% endblock %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
+          <li><a href="{{url_for('register')}}"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
+        </ul>
+      </div>
+    </nav>
+    {% endblock %}
 
 
 
-{% block content %}
+    {% block content %}
     <p>
-        <h2>Poimenuj spojine!</h2>
+      <h2>Poimenuj spojine!</h2>
     </p>
     <p>
 
-        <br>
-        {{spojine[0]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[0]}}</b><br>
-        {{pravilno(pravilni[0])}}
-        {{empty(napake[0])}}
-        {{spojine[1]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[1]}}</b><br>
-        {{pravilno(pravilni[1])}}
-        {{empty(napake[1])}}
-        {{spojine[2]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[2]}}</b><br>
-        {{pravilno(pravilni[2])}}
-        {{empty(napake[2])}}
-        {{spojine[3]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[3]}}</b><br>
-        {{pravilno(pravilni[3])}}
-        {{empty(napake[3])}}
-        {{spojine[4]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[4]}}</b><br>
-        {{pravilno(pravilni[4])}}
-        {{empty(napake[4])}}
+      <br>
+      {{spojine[0]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[0]}}</b><br>
+      {{pravilno(pravilni[0])}}
+      {{empty(napake[0])}}
 
-        <br>
 
-        {% if score %}
-        Čestitamo, osvojil si {{score}} točk!
-        {% elif score == 50%}
-        Ja Patrik vemo da si pamtn pa nimas lajfa... (Sorry :) )
-        {% else %}
-        YOU SUCK! PEJD SE UCIT KEMO TKOJ!!!!!
-        {% endif %}
+      {{spojine[1]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[1]}}</b><br>
+      {{pravilno(pravilni[1])}}
+      {{empty(napake[1])}}
 
-        <br><br>
 
-        <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
-        <button onclick="show_item()">Prikaži pravilne odgovore!</button>
+      {{spojine[2]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[2]}}</b><br>
+      {{pravilno(pravilni[2])}}
+      {{empty(napake[2])}}
+
+
+      {{spojine[3]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[3]}}</b><br>
+      {{pravilno(pravilni[3])}}
+      {{empty(napake[3])}}
+
+
+      {{spojine[4]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[4]}}</b><br>
+      {{pravilno(pravilni[4])}}
+      {{empty(napake[4])}}
+
+      <br>
+
+      {% if score %}
+      Čestitamo, osvojil si {{score}} točk!
+      {% elif score == 50%}
+      Ja Patrik vemo da si pamtn pa nimas lajfa... (Sorry :) )
+      {% else %}
+      YOU SUCK! PEJD SE UCIT KEMO TKOJ!!!!!
+      {% endif %}
+
+      <br><br>
+
+      <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
+      <button onclick="show_item()">Prikaži pravilne odgovore!</button>
 
     </p>
-{% endblock %}
+    {% endblock %}

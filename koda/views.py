@@ -24,25 +24,27 @@ login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-class MyAdminView(AdminIndexView):
-    def is_accessible(self):
-        if current_user.is_authenticated:
-            if current_user.admin:
-                return True
-            else:
-                return False
-        else:
-            return False
+# unncomentaj ce hoces dodat admin
+# 
+# class MyAdminView(AdminIndexView):
+#     def is_accessible(self):
+#         if current_user.is_authenticated:
+#             if current_user.admin:
+#                 return True
+#             else:
+#                 return False
+#         else:
+#             return False
 
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('login'))
+#     def inaccessible_callback(self, name, **kwargs):
+#         return redirect(url_for('login'))
 
-admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
+# admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
 # admin.base_template = 'admin/base.html'
-admin.add_view(ModelView(models.User, db.session))
-admin.add_view(ModelView(models.Scores, db.session))
-admin.add_view(ModelView(models.BinarniElement, db.session))
-admin.add_view(ModelView(models.OAuth, db.session))
+# admin.add_view(ModelView(models.User, db.session))
+# admin.add_view(ModelView(models.Scores, db.session))
+# admin.add_view(ModelView(models.BinarniElement, db.session))
+# admin.add_view(ModelView(models.OAuth, db.session))
 
 fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
 
@@ -55,6 +57,19 @@ def utility_processor():
     def its_type(obj):
         return type(obj)
     return dict(type=its_type)
+
+@app.errorhandler(403)
+def server_error(e):
+    return render_template('403.html'), 403
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
+
 
 @oauth_authorized.connect_via(fb)
 def logged_in(blueprint, token):
@@ -193,9 +208,9 @@ def kviz(kategorija, vrsta, tezavnost):
         session['spojine'] = seznam_spojin
         session['imena'] = imena_sp
         if vrsta == 'ime':
-            return render_template('vprasanja.html', spojine=imena_sp, form=form)
+            return render_template('vprasanja.html', spojine=imena_sp, form=form, vrsta=True)
         elif vrsta == 'formula':
-            return render_template('vprasanja.html', spojine=spojine, form=form)
+            return render_template('vprasanja.html', spojine=spojine, form=form, vrsta=False)
         else:
             abort(404)
 
@@ -230,7 +245,6 @@ def kviz(kategorija, vrsta, tezavnost):
                         else:
                             ne += 1
                             user_odgovori[idx] = "/"
-                        print(odgovor,",", pravilni, odgovor==pravilni, ne)
                         if curr == 10:
                             break
                     score += curr
@@ -288,7 +302,6 @@ def vislice():
         session['score'] = 0
         session['napake'] = 0
         spojina = choice(moznosti)(n=1)[0]
-        print(spojina)
         session['spojine'] = spojina.to_dict()
         session['vrsta'] = getrandbits(1)
 
@@ -343,23 +356,40 @@ def vislice():
 
 
 @app.route("/lestvica", methods=["GET", "POST"])
-def lestvica(): #lestvica se ne dela
-    najboljsi = db.engine.execute(
+def lestvica(): 
+
+    form = forms.QuerryLeader()
+
+    if request.method == 'GET':
+        najboljsi = db.engine.execute(
+            'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id WHERE Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'
+            )
+        return render_template("scores.html", najboljsi=najboljsi, form=form)
+
+    elif request.method == 'POST':
+        razred = form.izberi_razred.data
+        kategorija = form.izberi_kategorijo.data
+        if razred == '---' and kategorija == '---':
+            topclass = db.engine.execute(
         'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id WHERE Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'
         )
-    form = forms.QuerryRazred()
-
-    if request.method == 'POST':
-        razred = form.izberi_razred.data
-        if razred == '---':
-            topclass = najboljsi
-        else:
+        elif kategorija == '---':
             topclass = db.engine.execute(
             'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}"  AND Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
             )
-        return render_template("scores.html", najboljsi=topclass, form=form, razred=razred)
+        elif razred == '---':
+            topclass = db.engine.execute(
+            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE Scores.kategorija="{}" ORDER BY Scores.score DESC LIMIT 10'.format(kategorija)
+            )
+        else:
+            topclass = db.engine.execute(
+            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}"  AND Scores.kategorija="{}" ORDER BY Scores.score DESC LIMIT 10'.format(razred, kategorija)
+            )
+        razred = dict(forms.razredi)[razred]
+        kategorija = dict(forms.kategorije)[kategorija]
 
-    return render_template("scores.html", najboljsi=najboljsi, form=form)
+        return render_template("scores.html", najboljsi=topclass, form=form, razred=razred, kategorija=kategorija)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -386,7 +416,7 @@ def register():
 
     if form.validate_on_submit():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
-        new_user = models.User(username=form.username.data, password=hashpw, email=form.email.data, admin=False, razred=form.razred.data)
+        new_user = models.User(username=form.username.data, password=hashpw, admin=False, razred=form.razred.data)
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)

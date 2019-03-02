@@ -6,25 +6,25 @@
 {% endif %}
 {% endmacro %}
 
-{% macro pravilno(arr) %}
-{% if arr[0] == arr[1] %}
-    <i class="resitev" style="display: none;">{{arr[0]}}</i>
-{% else %}
-	<i class="resitev" style="display: none;">{{arr[0]}}, {{arr[1]}}</i>
-{% endif %}
-{% endmacro %}
 
 {% macro pravilno(arr) %}
-{% if type(arr) == 'list'  %}
-	{% if arr[0] == arr[1] %}
-	    <i class="resitev" style="display: none;">{{arr[0]}}</i>
-	{% else %}
-		<i class="resitev" style="display: none;">{{arr[0]}}, {{arr[1]}}</i>
-	{% endif %}
-{% else %}
-		<i class="resitev" style="display: none;">{{arr|safe}}</i>
+{% if arr is not string %}
+      {%for i in arr%}
+      {%with%}
+      {% if prev != i %}
+      {% if i == arr[-1] %}
+      <i class="resitev" style="display: none;"> {{i}} </i>
+      {% else %}
+      <i class="resitev" style="display: none;"> {{i}}, </i>
+      {% endif %}
+      {% endif %}
+      {% set prev = i %}
+      {% endwith %}
+      {%endfor%}
+
+{% else%}
+<i class="resitev" style="display: none;"> {{arr|safe}} </i>
 {% endif %}
 {% endmacro %}
-
 
 
