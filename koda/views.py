@@ -59,7 +59,7 @@ def utility_processor():
     return dict(type=its_type)
 
 @app.errorhandler(403)
-def server_error(e):
+def forbidden(e):
     return render_template('403.html'), 403
 
 @app.errorhandler(404)
