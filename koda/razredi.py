@@ -118,7 +118,7 @@ class OpisSpojine(object):
                 if utils.stevilo_velikih(s2) > 1:
                     s2 = "({})<sub>{}</sub>".format(s2, self.n2)
                 else:
-                    s = "{}<sub>{}</sub>".format(s2, self.n2)
+                    s2 = "{}<sub>{}</sub>".format(s2, self.n2)
             return s1+s2
         else:
             return prikaz_skupine(self.formula_raw)

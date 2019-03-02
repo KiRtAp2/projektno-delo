@@ -9,7 +9,7 @@ from models import BinarniElement, Kislina, SolniElement, SolnaIzjema, BinarnaIz
 from razredi import OpisSpojine, OpisBinarne, OpisKisline, OpisBaze, OpisSoli, OpisHidrogensoli, OpisKristalohidrata
 
 
-def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
+def osnovni_seznam(tip_el, tip_iz, opis_sp, n, tez):
     seznam = []
     
     def ze_v_seznamu(opis):
@@ -29,7 +29,7 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
 
     while len(seznam) < n:
         izbira = randchoice(("element", "izjema"))
-        if izbira == "element" or len(izjeme) == 0:
+        if tez==1 or izbira == "element" or len(izjeme) == 0:
             el1 = randchoice(elementi_1)
             el2 = randchoice(elementi_2)
             lcm = el1.naboj * el2.naboj // gcd(el1.naboj, el2.naboj)
@@ -62,11 +62,11 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n=5):
     return seznam
 
 
-def dobi_binarne(n=5):
-    return osnovni_seznam(BinarniElement, BinarnaIzjema, OpisBinarne, n)
+def dobi_binarne(n=5, tez=1):
+    return osnovni_seznam(BinarniElement, BinarnaIzjema, OpisBinarne, n, tez)
 
 
-def dobi_kisline(n=5):
+def dobi_kisline(n=5, tez=1):
     seznam = []
 
     def ze_v_seznamu(opis):
@@ -89,7 +89,7 @@ def dobi_kisline(n=5):
     return seznam
 
 
-def dobi_baze(n=5):
+def dobi_baze(n=5, tez=1):
     seznam = []
 
     def ze_v_seznamu(opis):
@@ -112,11 +112,11 @@ def dobi_baze(n=5):
     return seznam
 
 
-def dobi_soli(n=5):
-    return osnovni_seznam(SolniElement, SolnaIzjema, OpisSoli, n)
+def dobi_soli(n=5, tez=1):
+    return osnovni_seznam(SolniElement, SolnaIzjema, OpisSoli, n, tez)
 
 
-def dobi_hidrogensoli(n=5):
+def dobi_hidrogensoli(n=5, tez=1):
     seznam = []
 
     def ze_v_seznamu(opis):
@@ -155,7 +155,7 @@ def dobi_hidrogensoli(n=5):
     return seznam
 
 
-def dobi_kh(n=5):
+def dobi_kh(n=5, tez=1):
     seznam = []
 
     def ze_v_seznamu(opis):

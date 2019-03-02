@@ -173,17 +173,17 @@ def kviz(kategorija, vrsta, tezavnost):
         seznam_spojin = []
         imena_sp = []
         if kategorija == 'binarne':
-            spojine = vprasanja.dobi_binarne(tezavnost)
+            spojine = vprasanja.dobi_binarne(5, tezavnost)
         elif kategorija == 'soli':
-            spojine = vprasanja.dobi_soli(tezavnost)
+            spojine = vprasanja.dobi_soli(5, tezavnost)
         elif kategorija == 'baze':
-            spojine = vprasanja.dobi_baze()
+            spojine = vprasanja.dobi_baze(5)
         elif kategorija == 'kisline':
-            spojine = vprasanja.dobi_kisline()
+            spojine = vprasanja.dobi_kisline(5)
         elif kategorija == 'kh':
-            spojine = vprasanja.dobi_kh()
+            spojine = vprasanja.dobi_kh(5)
         elif kategorija == 'hs':
-            spojine = vprasanja.dobi_hidrogensoli()
+            spojine = vprasanja.dobi_hidrogensoli(5)
         else:
             abort(404)
         
