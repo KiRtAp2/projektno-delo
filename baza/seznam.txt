@@ -8,7 +8,6 @@ Mg:magnezijev:2
 Ca:kalcijev:2
 Sr:stroncijev:2
 Ba:barijev:2
-B:borov:3
 Al:aluminijev:3
 C:ogljikov:4
 Si:silicijev:4
