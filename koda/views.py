@@ -215,16 +215,14 @@ def kviz(kategorija, vrsta, tezavnost):
             abort(404)
 
     else:
-        post = True
-
         user_odgovori.extend([form.o0.data, form.o1.data, form.o2.data, form.o3.data, form.o4.data])
         spojine = []
         for sp in session['spojine']:
             spojina = konstruiraj(sp)
-            spojine.append(spojina.html_prikaz())
+            spojine.append(spojina.html_prikaz(formatiranje=True))
             pravilna_imena.append(spojina.get_imena())
             if vrsta == 'ime':
-                pravilne_formule.append(re.sub(clean, '', spojina.html_prikaz()))
+                pravilne_formule.append(spojina.html_prikaz(formatiranje=False))
 
         if vrsta == 'ime':
             pravilna_imena = session['imena']
@@ -234,6 +232,7 @@ def kviz(kategorija, vrsta, tezavnost):
             if vrsta == 'formula':
                 for idx, odgovor in enumerate(user_odgovori):
                     pravilni = pravilna_imena[idx]
+                    print(pravilni)
                     ne = 0
                     curr = 0
                     for pravilen in pravilni:
@@ -318,8 +317,8 @@ def vislice():
 
         if form.validate_on_submit():
             if session['vrsta']:
-                html_formula = spojina.html_prikaz()
-                pravilna_formula = re.sub(clean, '', spojina.html_prikaz())
+                html_formula = spojina.html_prikaz(True)
+                pravilna_formula = spojina.html_prikaz(False)
                 if user_odgovor.casefold() == pravilna_formula.casefold():
                     score += 10
                 else:
@@ -351,7 +350,7 @@ def vislice():
         pravilna_imena = spojina.get_imena()
         return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
     else:
-        html_formula = spojina.html_prikaz()
+        html_formula = spojina.html_prikaz(True)
         return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
 
 
