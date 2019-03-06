@@ -7,6 +7,15 @@ razredi = [('---', '---')]
 for i in range(1, 5):
     for c in crke:
         razredi.append(('{}{}'.format(i,c), '{}.{}'.format(i,c)))
+kategorije=[('---', '---'),
+    ('binarne','Binarne spojine'),
+    ('soli','Soli'),
+    ('baze','Baze'),
+    ('kisline','Kisline'),
+    ('kh','Kristalohidrati'),
+    ('hs','Hidrogensoli'),
+    ('vislice','Vislice')
+]
 
 class LoginForm(FlaskForm):
     username = StringField('uporabniško ime', validators=[InputRequired(), Length(min=4, max=15)])
@@ -16,18 +25,20 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     username = StringField('uporabniško ime', validators=[InputRequired(),Length(min=4, max=20)])
     password = PasswordField('geslo', validators=[InputRequired(),Length(min=8, max=80)])
-    email = StringField('email', validators=[Email(),Length(max=80),InputRequired()])
     razred = SelectField('razred', choices=razredi)
 
 class Vprasanja(FlaskForm):
-	o0 = StringField('ime spojine')
-	o1 = StringField('ime spojine')
-	o2 = StringField('ime spojine')
-	o3 = StringField('ime spojine')
-	o4 = StringField('ime spojine')
+	o0 = StringField('')
+	o1 = StringField('')
+	o2 = StringField('')
+	o3 = StringField('')
+	o4 = StringField('')
 
 class Vislice(FlaskForm):
     o0 = StringField('ime spojine')
 
-class QuerryRazred(FlaskForm):
+class QuerryLeader(FlaskForm):
     izberi_razred = SelectField('Razred', choices=razredi)
+    izberi_kategorijo = SelectField('Kategorija', choices=kategorije)
+
+

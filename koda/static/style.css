@@ -39,7 +39,7 @@ p.correct {
     border: green 1px solid;
 }
 
-#izberi_razred {
+#izberi_razred, #izberi_kategorijo {
   width: 50%;
   margin-left: 25%;
 }

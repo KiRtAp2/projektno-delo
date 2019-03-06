@@ -70,7 +70,11 @@
 
 {% block content %}
     <p>
+      {%if vrsta%}
+      <h2>Vpiši formule!</h2>
+      {%else%}
         <h2>Poimenuj spojine!</h2>
+      {%endif%}
     </p>
     <p>
         
