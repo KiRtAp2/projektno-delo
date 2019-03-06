@@ -30,16 +30,18 @@ RIMSKI = [
 ]
 
 
-def prikaz_skupine(s: str):
+def prikaz_skupine(s: str, formatiraj=True):
     final = ""
     velika_cifra = False
     for ch in s:
         if ch in string.digits:
-            if velika_cifra: final += ch
+            if velika_cifra or not formatiraj: final += ch
             else: final += "<sub>{}</sub>".format(ch)
         elif ch == "*":
-            final += " &#x00B7 "
-            velika_cifra = True
+            if not formatiraj: final += "*"
+            else:
+                final += " &#x00B7 "
+                velika_cifra = True
         else:
             final += ch
             velika_cifra = False
@@ -101,25 +103,37 @@ class OpisSpojine(object):
     def __repr__(self):
         return self.html_prikaz()
 
-    def html_prikaz(self):
+    def html_prikaz(self, formatiranje=True):
         if self.tip == "obicajna":
-            s1 = prikaz_skupine(self.simbol1)
-            s2 = prikaz_skupine(self.simbol2)
+            s1 = prikaz_skupine(self.simbol1, formatiranje)
+            s2 = prikaz_skupine(self.simbol2, formatiranje)
 
             if self.n1 > 1:
                 if utils.stevilo_velikih(s1) > 1:
-                    s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+                    if formatiranje:
+                        s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+                    else:
+                        s1 = "({}){}".format(s1, self.n1)
                 else:
-                    s1 = "{}<sub>{}</sub>".format(s1, self.n1)
+                    if formatiranje:
+                        s1 = "{}<sub>{}</sub>".format(s1, self.n1)
+                    else:
+                        s1 = "{}{}".format(s1, self.n1)
 
             if self.n2 > 1:
                 if utils.stevilo_velikih(s2) > 1:
-                    s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+                    if formatiranje:
+                        s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+                    else:
+                        s2 = "({}){}".format(s2, self.n2)
                 else:
-                    s2 = "{}<sub>{}</sub>".format(s2, self.n2)
+                    if formatiranje:
+                        s2 = "{}<sub>{}</sub>".format(s2, self.n2)
+                    else:
+                        s2 = "{}{}".format(s2, self.n2)
             return s1+s2
         else:
-            return prikaz_skupine(self.formula_raw)
+            return prikaz_skupine(self.formula_raw, formatiranje)
 
     def to_dict(self):
         if self.tip == "obicajna":
@@ -179,21 +193,33 @@ class AbstractOpisElementarne(OpisSpojine):
                     
         return seznam
 
-    def html_prikaz(self):
-        s1 = prikaz_skupine(self.simbol1)
-        s2 = prikaz_skupine(self.simbol2)
+    def html_prikaz(self, formatiranje=True):
+        s1 = prikaz_skupine(self.simbol1, formatiranje)
+        s2 = prikaz_skupine(self.simbol2, formatiranje)
 
         if self.n1 > 1:
             if utils.stevilo_velikih(s1) > 1:
-                s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+                if formatiranje:
+                    s1 = "({})<sub>{}</sub>".format(s1, self.n1)
+                else:
+                    s1 = "({}){}".format(s1, self.n1)
             else:
-                s1 = "{}<sub>{}</sub>".format(s1, self.n1)
+                if formatiranje:
+                    s1 = "{}<sub>{}</sub>".format(s1, self.n1)
+                else:
+                    s1 = "{}{}".format(s1, self.n1)
 
         if self.n2 > 1:
             if utils.stevilo_velikih(s2) > 1:
-                s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+                if formatiranje:
+                    s2 = "({})<sub>{}</sub>".format(s2, self.n2)
+                else:
+                    s2 = "({}){}".format(s2, self.n2)
             else:
-                s = "{}<sub>{}</sub>".format(s2, self.n2)
+                if formatiranje:
+                    s2 = "{}<sub>{}</sub>".format(s2, self.n2)
+                else:
+                    s2 = "{}{}".format(s2, self.n2)
         return s1+s2
 
     def to_dict(self):
@@ -225,8 +251,8 @@ class AbstractOpisIzjeme(OpisSpojine):
     def get_imena(self):
         return self.imena
 
-    def html_prikaz(self):
-        prikaz = prikaz_skupine(self.formula_raw)
+    def html_prikaz(self, formatiranje):
+        prikaz = prikaz_skupine(self.formula_raw, formatiranje)
         return prikaz
 
     def to_dict(self):
