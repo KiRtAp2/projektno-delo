@@ -208,9 +208,9 @@ def kviz(kategorija, vrsta, tezavnost):
         session['spojine'] = seznam_spojin
         session['imena'] = imena_sp
         if vrsta == 'ime':
-            return render_template('vprasanja.html', spojine=imena_sp, form=form, vrsta=True)
+            return render_template('vprasanja.html', spojine=imena_sp, form=form, vrsta=True, kat=kategorija)
         elif vrsta == 'formula':
-            return render_template('vprasanja.html', spojine=spojine, form=form, vrsta=False)
+            return render_template('vprasanja.html', spojine=spojine, form=form, vrsta=False, kat=kategorija)
         else:
             abort(404)
 

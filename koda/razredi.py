@@ -101,7 +101,7 @@ class OpisSpojine(object):
         return seznam
 
     def __repr__(self):
-        return self.html_prikaz()
+        return self.html_prikaz(True)
 
     def html_prikaz(self, formatiranje=True):
         if self.tip == "obicajna":

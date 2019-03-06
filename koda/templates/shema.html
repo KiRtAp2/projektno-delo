@@ -20,13 +20,48 @@
     {% block body -%}
 
     {% block navbar %}
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
+      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+  <div id="navbarCollapse" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="{{url_for('index')}}" data-toggle="collapse" data-target="#navbarCollapse">Domov</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{url_for('vislice')}}" data-toggle="collapse" data-target="#navbarCollapse">Vislice</a></li>
+          <li class="divider"></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}" data-toggle="collapse" data-target="#navbarCollapse">Binarne spojine</a></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}" data-toggle="collapse" data-target="#navbarCollapse">Soli</a></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}" data-toggle="collapse" data-target="#navbarCollapse">Kisline</a></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}" data-toggle="collapse" data-target="#navbarCollapse">Baze</a></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}" data-toggle="collapse" data-target="#navbarCollapse">Kristalohidrati</a></li>
+          <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}" data-toggle="collapse" data-target="#navbarCollapse">Hidrogensoli</a></li>
+        </ul>
+      </li>
+      <li><a href="{{url_for('lestvica')}}" data-toggle="collapse" data-target="#navbarCollapse">Lestvica</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
     {% if current_user.is_authenticated %}
-		{% block authenticated %}
-		{% endblock %}
+    <li><p class="navbar-text">{{current_user.username}}</p></li>
+  <li><a href="{{url_for('logout')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-user"></span> Odjava</a></li>
 	{% else %}
-		{% block unauthenticated %}
-		{% endblock %}
+    <li><a href="{{url_for('login')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
+      <li><a href="{{url_for('register')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
 	{% endif %}
+    </ul>
+  </div>
+  </div>
+</nav>
     {%- endblock navbar %}
 
     <div class="center">

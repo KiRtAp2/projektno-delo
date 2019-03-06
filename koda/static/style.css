@@ -95,12 +95,15 @@ footer {
 
 }
 
+.btn-primary {
+  border-radius: 6px;
+}
+
 .btn-lg,
 .btn-group-lg > .btn {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
-  border-radius: 6px;
 }
 .btn-sm,
 .btn-group-sm > .btn {
@@ -165,4 +168,22 @@ select.form-control {
     5px 5px,
     1px 1.5em;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .center {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  div[class^="footer"] {
+    display: block;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: none;
+  }
+  .btn-primary {
+  margin-bottom: 6vh;
+}
+
 }
