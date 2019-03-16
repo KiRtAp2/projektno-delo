@@ -7,6 +7,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
 from flask_dance.consumer import oauth_authorized, oauth_error
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import IntegrityError
 from random import choice, getrandbits
 from os import urandom
 import re
@@ -23,6 +24,8 @@ import helpers
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+login_manager.login_message = u"Za dostop do te strani se morate prijaviti!"
+login_manager.login_message_category = "error"
 
 # unncomentaj ce hoces dodat admin
 # 
@@ -115,7 +118,6 @@ def logged_in(blueprint, token):
             email = None
 
         user = models.User(
-            email=email,
             username=info["name"],
             password= b64encode(urandom(190)).decode('utf-8'),
             admin=False,
@@ -232,7 +234,6 @@ def kviz(kategorija, vrsta, tezavnost):
             if vrsta == 'formula':
                 for idx, odgovor in enumerate(user_odgovori):
                     pravilni = pravilna_imena[idx]
-                    print(pravilni)
                     ne = 0
                     curr = 0
                     for pravilen in pravilni:
@@ -398,12 +399,12 @@ def login():
             user = models.User.query.filter_by(username=form.username.data).first()
             if user:
                 if check_password_hash(user.password, form.password.data):
-                    login_user(user, remember=form.remember.data)
+                    login_user(user, remember=form.remember.data) 
                     return redirect(url_for('index'))
                 else:
-                    return 'invalid password'
+                    return render_template('login.html', errors='Napačno geslo!', form=form)
             else:
-                return 'invalid username'
+                return render_template('login.html', errors='Napačno uporabniško ime!', form=form)
     else:
         return redirect(url_for('index'))
 
@@ -417,7 +418,10 @@ def register():
         hashpw = generate_password_hash(form.password.data, method='sha256', salt_length=42)
         new_user = models.User(username=form.username.data, password=hashpw, admin=False, razred=form.razred.data)
         db.session.add(new_user)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError:
+            return render_template('register.html', errors='To uporabniško ime je že zasedeno!', form=form)
         login_user(new_user)
         return redirect(url_for('index'))
 

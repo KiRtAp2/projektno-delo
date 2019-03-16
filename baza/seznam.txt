@@ -30,10 +30,10 @@ klorov trifluoid=klorov(III) fluorid:ClF3
 klorov pentafluorid=klorov(V) fluorid:ClF5
 diklorov oksid=klorov(I) oksid:Cl2O
 klorov dioksid=klorov(IV) oksid:ClO2
-klorov oskid=klorov(I) oksid:ClO
+klorov oksid=klorov(I) oksid:ClO
 diklorov heptaoksid=klorov(VII) oksid:Cl2O7
 jodov fluorid=jodov(I) fluorid:IF
-jodov trifluorid=jodov(III) florid:IF3
+jodov trifluorid=jodov(III) fluorid:IF3
 jodov pentafluorid=jodov(V) fluorid:IF5
 jodov heptafluorid=jodov(VII) fluorid:IF7
 jodov bromid=jodov(I) bromid:IBr
@@ -54,7 +54,7 @@ fosforjev pentabromid=fosforjev(V) bromid:PBr5
 fosforjev triklorid=fosforjev(III) klorid:PCl3
 fosforjev pentaklorid=fosforjev(V) klorid:PCl5
 žveplov dioksid=žveplov(IV) oksid:SO2
-žveplov troksid=žveplov(VI) oksid:SO3
+žveplov trioksid=žveplov(VI) oksid:SO3
 žveplov difluorid=žveplov(II) fluorid:SF2
 žveplov tetrafluorid=žveplov(IV) fluorid:SF4
 žveplov heksafluorid=žveplov(VI) fluorid:SF6
@@ -65,7 +65,7 @@ ksenonov heksafluorid=ksenonov(VI) fluorid:XeF6
 ksenonov trioksid=ksenonov(VI) oksid:XeO3
 ksenonov tetraoksid=ksenonov(VIII) oksid:XeO4
 +kislina
-klorovidikova kislina:HCl
+klorovodikova kislina:HCl
 fluorovodikova kislina:HF
 bromovodikova kislina:HBr
 jodovodikova kislina:HI
@@ -74,7 +74,7 @@ jodovodikova kislina:HI
 dušikova(V) kislina=dušikova kislina:HNO3
 dušikova(III) kislina=dušikasta kislina:HNO2
 fosforjeva(V) kislina=fosforjeva kislina:H3PO4
-klorova(I) kislina=hipokrorasta kislina:HClO
+klorova(I) kislina=hipoklorasta kislina:HClO
 klorova(III) kislina=klorasta kislina:HClO2
 klorova(V) kislina=klorova kislina:HClO3
 klorova(VII) kislina=perklorova kislina:HClO4
@@ -110,8 +110,8 @@ SO3:sulfit=sulfat(IV):-2
 PO4:fosfat=fosfat(V):-3
 ClO4:perklorat=klorat(VII):-1
 ClO3:klorat=klorat(V):-1
-ClO2:klorid=klorat(III):-1
-ClO:hipoklorid=klorat(I):-1
+ClO2:klorit=klorat(III):-1
+ClO:hipoklorit=klorat(I):-1
 NO3:nitrat=nitrat(V):-1
 NO2:nitrit=nitrat(III):-1
 HCOO:metanoat=format:-1
@@ -308,7 +308,7 @@ itrijev(III) etanoat tetrahidrat=itrijev(III) acetat tetrahidrat:Y(CH3COO)3*4H2O
 iterbijev(III) klorat(VII) heksahidrat=iterbijev(III) perklorat heksahidrat:Yb(ClO4)3*6H2O
 iterbijev(III) sulfat oktahidrat=iterbijev(III) sulfat(VI) oktahidrat:Yb2(SO4)3*8H2O
 cirkonijev(IV) sulfat tetrahidrat=cirkonijev(IV) sulfat(VI) tetrahidrat:Zr(SO4)2*4H2O
-železov(II) klird tertahidrat:FeCl2*4H2O
+železov(II) klird tetrahidrat:FeCl2*4H2O
 železov(III) klorid heksahidrat:FeCl3*6H2O
 železov(III) fluorid trihidrat:FeF3*3H2O
 železov(III) nitrat nonahidrat=železov(III) nitrat(V) nonahidrat:Fe(NO3)3*9H2O

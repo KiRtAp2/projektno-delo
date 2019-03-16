@@ -1,8 +1,14 @@
 {% macro empty(string) %}
-{% if string != '' %}
+{% if string != '' and string%}
     <p class='error'>{{string}}</p>
 {% else %}
 	<p class="correct">Pravilno!</p>
+{% endif %}
+{% endmacro %}
+
+{% macro check(string) %}
+{% if string%}
+    <p class='error'>{{string}}</p>
 {% endif %}
 {% endmacro %}
 

@@ -37,6 +37,9 @@ class Vprasanja(FlaskForm):
 class Vislice(FlaskForm):
     o0 = StringField('ime spojine')
 
+class QuerryRazred(FlaskForm):
+    razred = SelectField('Razred', choices=razredi)
+
 class QuerryLeader(FlaskForm):
     izberi_razred = SelectField('Razred', choices=razredi)
     izberi_kategorijo = SelectField('Kategorija', choices=kategorije)

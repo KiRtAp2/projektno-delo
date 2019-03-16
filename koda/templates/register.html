@@ -1,5 +1,6 @@
 {% extends "shema.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% from "macros.html" import check with context %}
 
 {% block content %}
 <div class="left">
@@ -10,6 +11,7 @@
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.razred) }}
+        {{check(errors)}}
     <button class="btn btn-lg btn-primary" type="submit">Registriraj se!</button>
   </form>
   <br>

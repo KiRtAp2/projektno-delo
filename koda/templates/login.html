@@ -1,5 +1,6 @@
 {% extends "shema.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% from "macros.html" import check with context %}
 
 {% block content %}
 
@@ -21,6 +22,7 @@
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
         {{ wtf.form_field(form.remember) }}
+        {{check(errors)}}
         <button class="btn btn-lg btn-primary" type="submit">Prijavi se!</button>
       </form>
       <br>
