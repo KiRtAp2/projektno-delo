@@ -321,5 +321,5 @@ cinkov(II) fluorid tetrahidrat:ZnF2*4H2O
 cinkov(II) metanoat dihidrat=cinkov(II) format dihidrat:Zn(HCOO)2*2H2O
 cinkov(II) nitrat heksahidrat=cinkov(II) nitrat(V) heksahidrat:Zn(NO3)2*6H2O
 cinkov(II) klorat(VII) heksahidrat=cinkov(II) perklorat heksahidrat:Zn(ClO4)2*6H2O
-cinkov(II) sulfit dihidrat=cinkov(II) sulfat(III) dihidrat:ZnSO3*2H2O
+cinkov(II) sulfit dihidrat=cinkov(II) sulfat(IV) dihidrat:ZnSO3*2H2O
 cinkov(IV) sulfat heptahidrat=cinkov(IV) sulfat(VI) heptahidrat:Zn(SO4)2*7H2O

@@ -1,91 +1,87 @@
 {% block doc -%}
-<!DOCTYPE html>
-<html lang='sl'>
-{%- block html %}
-  <head>
-    {%- block head %}
-    <title>Kemijske spojine</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Spletna aplikacija za poimenovanje kemijskih spojin">
-    <meta name="author" content="Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič">
-    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='style.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='navbar.css')}}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {%- endblock head %}
-  </head>
-  <body{% block body_attribs %}{% endblock body_attribs %}>
-    {% block body -%}
+	<!DOCTYPE html>
+	<html lang='sl'>
+	{%- block html %}
+	  <head>
+		{%- block head %}
+		 	<title>Kemijske spojine</title>
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <meta charset="utf-8">
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		  <meta name="description" content="Spletna aplikacija za poimenovanje kemijskih spojin">
+		  <meta name="author" content="Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič">
+		  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		  <link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='style.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='navbar.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='nav.css')}}">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		{%- endblock head %}
+		</head>
+		<body{% block body_attribs %}{% endblock body_attribs %}>
+		{% block body -%}
 
-    {% block navbar %}
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{url_for('index')}}">Kemijske Spojine</a>
-      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-  <div id="navbarCollapse" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="{{url_for('index')}}" data-toggle="collapse" data-target="#navbarCollapse">Domov</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Naloge
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="{{url_for('vislice')}}" data-toggle="collapse" data-target="#navbarCollapse">Vislice</a></li>
-          <li class="divider"></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}" data-toggle="collapse" data-target="#navbarCollapse">Binarne spojine</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='soli')}}" data-toggle="collapse" data-target="#navbarCollapse">Soli</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}" data-toggle="collapse" data-target="#navbarCollapse">Kisline</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='baze')}}" data-toggle="collapse" data-target="#navbarCollapse">Baze</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='kh')}}" data-toggle="collapse" data-target="#navbarCollapse">Kristalohidrati</a></li>
-          <li><a href="{{url_for('izberi_vrsto', kategorija='hs')}}" data-toggle="collapse" data-target="#navbarCollapse">Hidrogensoli</a></li>
-        </ul>
-      </li>
-      <li><a href="{{url_for('lestvica')}}" data-toggle="collapse" data-target="#navbarCollapse">Lestvica</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-    {% if current_user.is_authenticated %}
-    <li><p class="navbar-text">{{current_user.username}}</p></li>
-  <li><a href="{{url_for('logout')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-user"></span> Odjava</a></li>
-	{% else %}
-    <li><a href="{{url_for('login')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-log-in"></span> Prijava</a></li>
-      <li><a href="{{url_for('register')}}" data-toggle="collapse" data-target="#navbarCollapse"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
-	{% endif %}
-    </ul>
-  </div>
-  </div>
-</nav>
-    {%- endblock navbar %}
+			{% block navbar %}
+				<nav class="navbar navbar-expand-lg navbar-dark">
+				  <a class="navbar-brand" href="{{url_for('index')}}">Imena in formule anorganskih spojin</a>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
 
-    <div class="center">
-        {% block content -%}
-        {%- endblock content %}
-    </div>
+				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				    <div class="navbar-nav">
+				      <a class="nav-item nav-link" href="{{url_for('index')}}"> Domov <span class="sr-only">(current)</span></a>
+				      <div class="nav-item dropdown">
+					      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      Naloge
+					      </a>
+					      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					      	<a class="dropdown-item" href="{{url_for('vislice')}}">Vislice</a>
+				          <div class="dropdown-divider"></div>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli oksokislin</a>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a>
+				          <a class="dropdown-item" href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a>
+					      </div>
+				  	  </div>
+				     <a class="nav-item nav-link" href="{{url_for('lestvica')}}">Lestvica</a>
+				    </div>
+				    <div class='navbar-nav ml-auto'>
+				    	{% if current_user.is_authenticated %}
+				    		<span class="navbar-text">{{current_user.username}}</span>
+				  			<a class="nav-item nav-link" href="{{url_for('logout')}}"><i class="fas fa-user"></i> Odjava</a>
+							{% else %}
+				    		<a class="nav-item nav-link" href="{{url_for('login')}}"><i class="fas fa-door-open"></i> Prijava</a>
+				      	<a class="nav-item nav-link" href="{{url_for('register')}}"><i class="fas fa-user"></i> Registracija</a>
+							{% endif %}
+				    </div>
+					</div>
+				</nav>
+			{%- endblock navbar %}
 
-    <footer>
-		<div class="footer-left">
-			&copy; Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič
-		</div>
-		<div class="footer-right">
-			Gimnazija Vič 2018/2019
-		</div>
-	</footer>
+			<div class="center">
+			  {% block content -%}
+			  {%- endblock content %}
+			</div>
 
-    {% block scripts %}
-    <script src="{{url_for('static', filename='scripts.js')}}"></script>
-    <script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>
-    <script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
-    {%- endblock scripts %}
+			<footer>
+				<div class="footer-left">
+					&copy; Tajda Černigoj, Luka Peršolja, Patrik Žnidaršič
+				</div>
+				<div class="footer-right">
+					Gimnazija Vič 2018/2019
+				</div>
+			</footer>
 
-    {%- endblock body %}
-  </body>
-{%- endblock html %}
-</html>
+			{% block scripts %}
+				<script src="{{url_for('static', filename='scripts.js')}}"></script>
+				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+			{%- endblock scripts %}
+
+			{%- endblock body %}
+		</body>
+	{%- endblock html %}
+	</html>
 {% endblock doc -%}

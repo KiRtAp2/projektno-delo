@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SelectField
-from wtforms.validators import InputRequired, Email, Length
+from wtforms.validators import InputRequired, Email, Length, EqualTo
 
 crke = ['A', 'B', 'C', 'D', 'E', 'F']
 razredi = [('---', '---')]
@@ -18,13 +18,13 @@ kategorije=[('---', '---'),
 ]
 
 class LoginForm(FlaskForm):
-    username = StringField('uporabniško ime', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('geslo', validators=[InputRequired(), Length(min=8, max=80)])
+    username = StringField('uporabniško ime', validators=[InputRequired(message='To polje ne sme biti prazno!'), Length(min=4, max=20, message='Uporabniško ime mora biti dolgo med 4 in 20 znaki!')])
+    password = PasswordField('geslo', validators=[InputRequired(message='To polje ne sme biti prazno!'), Length(min=8, max=80, message='Geslo mora biti dolgo vsaj 8 znakov!')])
     remember = BooleanField('zapomni si me')
 
 class RegisterForm(FlaskForm):
-    username = StringField('uporabniško ime', validators=[InputRequired(),Length(min=4, max=20)])
-    password = PasswordField('geslo', validators=[InputRequired(),Length(min=8, max=80)])
+    username = StringField('uporabniško ime', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=4, max=20, message='Uporabniško ime mora biti dolgo med 4 in 20 znaki!')])
+    password = PasswordField('geslo', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=8, max=80, message='Geslo mora biti dolgo vsaj 8 znakov!'), EqualTo('potrdi geslo', message='Gesli se ne ujemata!')])
     razred = SelectField('razred', choices=razredi)
 
 class Vprasanja(FlaskForm):
@@ -35,7 +35,7 @@ class Vprasanja(FlaskForm):
 	o4 = StringField('')
 
 class Vislice(FlaskForm):
-    o0 = StringField('ime spojine')
+    o0 = StringField('')
 
 class QuerryRazred(FlaskForm):
     razred = SelectField('Razred', choices=razredi)

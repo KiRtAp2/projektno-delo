@@ -5,8 +5,8 @@ from flask_dance.consumer.backend.sqla import OAuthConsumerMixin
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(256), unique=True, nullable=False)
-    password = db.Column(db.String(256), nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
     razred = db.Column(db.String(2))
 
@@ -15,7 +15,7 @@ class Scores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    kategorija = db.Column(db.String(256), nullable=False)
+    kategorija = db.Column(db.String(10), nullable=False)
     user = db.relationship('User',
         backref=db.backref('user', lazy=True))
     

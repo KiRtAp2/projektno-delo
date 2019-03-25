@@ -19,9 +19,9 @@
       {%with%}
       {% if prev != i %}
       {% if i == arr[-1] %}
-      <i class="resitev" style="display: none;"> {{i}} </i>
+      <span class="resitev" style="display: none;"> {{i}} </span>
       {% else %}
-      <i class="resitev" style="display: none;"> {{i}}, </i>
+      <span class="resitev" style="display: none;"> {{i}}, </span>
       {% endif %}
       {% endif %}
       {% set prev = i %}
@@ -29,7 +29,7 @@
       {%endfor%}
 
 {% else%}
-<i class="resitev" style="display: none;"> {{arr|safe}} </i>
+<span class="resitev" style="display: none;"> {{arr|safe}} </span>
 {% endif %}
 {% endmacro %}
 

@@ -1,5 +1,5 @@
 {% extends "shema.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "wtf.html" as wtf %}
 {% from "macros.html" import check with context %}
 
 {% block content %}
@@ -15,6 +15,6 @@
     <button class="btn btn-lg btn-primary" type="submit">Registriraj se!</button>
   </form>
   <br>
-  <a href="{{ url_for("facebook.login") }}"><button type="submit" class='btn btn-lg btn-fb'><i class="fa fa-facebook fa-fw"></i> Login with Facebook!</button></a>
+  <a href="{{ url_for("facebook.login") }}"><button type="submit" class='btn btn-lg btn-fb'><i class="fab fa-facebook"></i> Login with Facebook!</button></a>
 </div> <!-- /container -->
 {% endblock %}
