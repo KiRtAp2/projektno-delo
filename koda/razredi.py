@@ -4,6 +4,10 @@ import string
 import utils
 
 
+PREPOVEDANI_STOCK = {
+    "NH4",
+}
+
 STEVNIKI = {
     1: "",
     2: "di",
@@ -51,6 +55,7 @@ def prikaz_skupine(s: str, formatiraj=True):
 class OpisSpojine(object):
 
     tip_spojine = None
+    imenovanja = []
 
     def __init__(self, tip, data=None, **kwargs):
         """tip: "obicajna" / "izjema"
@@ -93,9 +98,10 @@ class OpisSpojine(object):
         for ime1 in self.ime1.split("="):
             for ime2 in self.ime2.split("="):
                 # dodamo vsa mozna poimenovanja
-                seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
-                seznam.append("{} {}".format(ime1, ime2))
-                if self.stock_n != 0:  # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
+                if "stevniki" in self.imenovanja: seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+                if "brez" in self.imenovanja: seznam.append("{} {}".format(ime1, ime2))
+                if self.stock_n != 0 and "stock" in self.imenovanja and self.simbol1 not in PREPOVEDANI_STOCK and self.simbol2 not in PREPOVEDANI_STOCK:
+                    # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
                     seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
 
         return seznam
@@ -145,6 +151,7 @@ class OpisSpojine(object):
                 "n2": self.n2,
                 "simbol2": self.simbol2,
                 "stock_n": self.stock_n,
+                "imenovanja": self.imenovanja,
             }
         else:
             d = {
@@ -163,6 +170,7 @@ class OpisSpojine(object):
 
 class AbstractOpisElementarne(OpisSpojine):
     tip_spojine = None
+    imenovanja = None
 
     def __init__(self, data=None, **kwargs):
         if data is None:
@@ -177,6 +185,7 @@ class AbstractOpisElementarne(OpisSpojine):
         self.n2 = int(datadict["n2"])
         self.simbol2 = datadict["simbol2"]
         self.stock_n = datadict["stock_n"]
+        self.imenovanja = datadict["imenovanja"]
 
     def get_imena(self):
         st1 = STEVNIKI[self.n1]
@@ -186,9 +195,9 @@ class AbstractOpisElementarne(OpisSpojine):
 
         for ime1 in self.ime1.split("="):
             for ime2 in self.ime2.split("="):
-                seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
-                seznam.append("{} {}".format(ime1, ime2))
-                if self.stock_n != 0:
+                if "stevniki" in self.imenovanja: seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
+                if "brez" in self.imenovanja: seznam.append("{} {}".format(ime1, ime2))
+                if self.stock_n != 0 and "stock" in self.imenovanja:
                     seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
                     
         return seznam
@@ -232,6 +241,7 @@ class AbstractOpisElementarne(OpisSpojine):
             "simbol2": self.simbol2,
             "stock_n": self.stock_n,
             "tip_spojine": self.tip_spojine,
+            "imenovanja": self.imenovanja,
         }
         return d
 
@@ -265,6 +275,7 @@ class AbstractOpisIzjeme(OpisSpojine):
 
 class OpisBinarne(OpisSpojine):
     tip_spojine = "binarna"
+    imenovanja = ["stevniki", "brez", "stock"]
 
     
 class OpisKisline(AbstractOpisIzjeme):
@@ -277,10 +288,12 @@ class OpisBaze(AbstractOpisIzjeme):
     
 class OpisSoli(OpisSpojine):
     tip_spojine = "sol"
+    imenovanja =  ["stevniki", "brez", "stock"]
 
     
 class OpisHidrogensoli(AbstractOpisElementarne):
     tip_spojine = "hidrogensol"
+    imenovanja = ["stevniki", "brez", "stock"]
 
 
 class OpisKristalohidrata(AbstractOpisIzjeme):
