@@ -311,7 +311,7 @@ class OpisBaze(AbstractOpisIzjeme):
     
 class OpisSoli(OpisSpojine):
     tip_spojine = "sol"
-    imenovanja =  ["stevniki", "brez", "stock"]
+    imenovanja =  ["brez", "stock"]
 
     
 class OpisHidrogensoli(AbstractOpisElementarne):
