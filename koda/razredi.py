@@ -19,6 +19,10 @@ PREPOVEDANI_STOCK = {
     "Al",
 }
 
+PREPOVEDANA_IMENA = {
+    "silicijev dioksid",
+}
+
 STEVNIKI = {
     1: "",
     2: "di",
@@ -115,6 +119,10 @@ class OpisSpojine(object):
                     # self.stock_n je nastavljen na 0, če se spojine ne da opisati s stockom
                     seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
 
+        for i in seznam:
+            if i in PREPOVEDANA_IMENA:
+                seznam.remove(i)
+
         return seznam
 
     def __repr__(self):
@@ -210,6 +218,10 @@ class AbstractOpisElementarne(OpisSpojine):
                 if "brez" in self.imenovanja: seznam.append("{} {}".format(ime1, ime2))
                 if self.stock_n != 0 and "stock" in self.imenovanja:
                     seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
+
+        for i in seznam:
+            if i in PREPOVEDANA_IMENA:
+                seznam.remove(i)
                     
         return seznam
 
