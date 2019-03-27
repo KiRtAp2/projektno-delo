@@ -156,9 +156,10 @@ def izberi_kategorijo():
 
 @app.route("/kviz/<string:kategorija>", methods=['GET'])
 def izberi_vrsto(kategorija):
-    mozni = ['ime', 'formula']
+    mozni = ['Dana so imena spojin. Napišite njihove formule.', 'Dane so formule spojin. Napišite njihova imena.']
+    moz = ['ime', 'formula']
     urls = []
-    for i in mozni:
+    for i in moz:
         urls.append(url_for('izberi_tezavnost', kategorija=kategorija, vrsta='{}'.format(i)))
     return render_template("vrsta.html", moznosti=urls, mozni=mozni)
 
@@ -239,13 +240,13 @@ def kviz(kategorija, vrsta, tezavnost):
                     for pravilen in pravilni:
                         if len(odgovor) != 0:
                             if odgovor.casefold() == pravilen.casefold():
-                                curr += 10
+                                curr += 1
                             else:
                                 ne += 1
                         else:
                             ne += 1
                             user_odgovori[idx] = "/"
-                        if curr == 10:
+                        if curr == 1:
                             break
                     score += curr
                     if (ne > 0 and len(pravilni)==1) or ne > 1:
@@ -253,7 +254,7 @@ def kviz(kategorija, vrsta, tezavnost):
                     else:
                         napake.append('')
 
-                response = render_template('odgovori.html', spojine=spojine, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=pravilna_imena)
+                response = render_template('odgovori.html', spojine=spojine, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=pravilna_imena, vrsta=0)
 
             elif vrsta == 'ime':
 
@@ -261,8 +262,8 @@ def kviz(kategorija, vrsta, tezavnost):
                     pravilen = pravilne_formule[idx]
                     ne = 0
                     if len(odgovor) != 0:
-                        if odgovor.casefold() == pravilen.casefold():
-                            score += 10
+                        if odgovor == pravilen:
+                            score += 1
                         else:
                             ne += 1
                     else:
@@ -274,7 +275,7 @@ def kviz(kategorija, vrsta, tezavnost):
                     else:
                         napake.append('')
 
-                response = render_template('odgovori.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine)
+                response = render_template('odgovori.html', spojine=pravilna_imena, score=score, form=form, napake=napake, odgovori=user_odgovori, pravilni=spojine, vrsta=1)
         
             helpers.update_score(kategorija=kategorija, current_user=current_user, score=score)
 
@@ -307,10 +308,10 @@ def vislice():
 
         if session['vrsta']:
             pravilna_imena = spojina.get_imena()
-            return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
+            return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'], vrsta=session['vrsta'])
         else:
-            html_formula = spojina.html_prikaz()
-            return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
+            html_formula = spojina.html_prikaz(True)
+            return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'], vrsta=session['vrsta'])
     
     else:
         user_odgovor = form.o0.data
@@ -321,14 +322,14 @@ def vislice():
                 html_formula = spojina.html_prikaz(True)
                 pravilna_formula = spojina.html_prikaz(False)
                 if user_odgovor.casefold() == pravilna_formula.casefold():
-                    score += 10
+                    score += 1
                 else:
                     session['napake'] += 1
 
             else:
                 pravilna_imena = spojina.get_imena()
                 for i, ime in enumerate(pravilna_imena):  
-                    if user_odgovor.casefold() == ime.casefold():
+                    if user_odgovor == ime:
                         score += 10
                         break
                     else:
@@ -349,10 +350,10 @@ def vislice():
     session['vrsta'] = getrandbits(1)
     if session['vrsta']:
         pravilna_imena = spojina.get_imena()
-        return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'])
+        return render_template('vislice.html', spojina=choice(pravilna_imena), score=session['score'], form=form, napake=session['napake'], vrsta=session['vrsta'])
     else:
         html_formula = spojina.html_prikaz(True)
-        return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'])
+        return render_template('vislice.html', spojina=html_formula, score=session['score'], form=form, napake=session['napake'], vrsta=session['vrsta'])
 
 
 @app.route("/lestvica", methods=["GET", "POST"])

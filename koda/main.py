@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
 from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
 from sys import argv
 import json
@@ -8,8 +7,6 @@ import json
 
 app = Flask(__name__)
 app.config.from_envvar('YOURAPPLICATION_SETTINGS')
-
-Bootstrap(app)
 
 db = SQLAlchemy()
 db.init_app(app)

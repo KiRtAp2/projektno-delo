@@ -1,5 +1,5 @@
 {% extends "shema.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "wtf.html" as wtf %}
 {% from "macros.html" import empty, pravilno with context %}
 
 {% block content %}
@@ -12,20 +12,45 @@
     </p>
     <p>
       {%if kat == 'kh' and vrsta%}
-      <b>Namig: Krat piši z zvezdico ( * )!</b>
+      <b>Navodilo: Za zapis formule kristalohidrata uporabite zvezdico (*). Formule pišite brez presledkov.</b>
       {%endif%}
         
         <form class="form-answer" method="POST">
         {{ form.hidden_tag() }}
         {{spojine[0]|safe}}<br>
+        {%if vrsta%}
+        Vpiši formulo spojine!
+        {%else%}
+        Vpiši ime spojine!
+        {%endif%}
         {{ wtf.form_field(form.o0) }}
         {{spojine[1]|safe}}<br>
+        {%if vrsta%}
+        Vpiši formulo spojine!
+        {%else%}
+        Vpiši ime spojine!
+        {%endif%}
         {{ wtf.form_field(form.o1) }}
         {{spojine[2]|safe}}<br>
+        {%if vrsta%}
+        Vpiši formulo spojine!
+        {%else%}
+        Vpiši ime spojine!
+        {%endif%}
         {{ wtf.form_field(form.o2) }}
         {{spojine[3]|safe}}<br>
+        {%if vrsta%}
+        Vpiši formulo spojine!
+        {%else%}
+        Vpiši ime spojine!
+        {%endif%}
         {{ wtf.form_field(form.o3) }}
         {{spojine[4]|safe}}<br>
+        {%if vrsta%}
+        Vpiši formulo spojine!
+        {%else%}
+        Vpiši ime spojine!
+        {%endif%}
         {{ wtf.form_field(form.o4) }}
         <button class="btn btn-lg btn-primary" type="submit">Preveri!</button>
         </form>

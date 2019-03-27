@@ -1,5 +1,5 @@
 {% extends "shema.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "wtf.html" as wtf %}
 {% from "macros.html" import empty, pravilno with context %}
 
 {% block content %}
@@ -36,11 +36,7 @@
   <br>
 
   {% if score %}
-  Čestitamo, osvojil si {{score}} točk!
-  {% elif score == 50%}
-  Ja Patrik vemo da si pamtn pa nimas lajfa... (Sorry :) )
-  {% else %}
-  YOU SUCK! PEJD SE UCIT KEMO TKOJ!!!!!
+  Število pravilnih odgovorov: {{score}}
   {% endif %}
 
   <br><br>
