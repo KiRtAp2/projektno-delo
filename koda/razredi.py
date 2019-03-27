@@ -6,6 +6,17 @@ import utils
 
 PREPOVEDANI_STOCK = {
     "NH4",
+    "Li",
+    "Be",
+    "Na",
+    "Mg",
+    "K",
+    "Ca",
+    "Rb",
+    "Sr",
+    "Cs",
+    "Ba",
+    "Al",
 }
 
 STEVNIKI = {
