@@ -204,7 +204,6 @@ class AbstractOpisElementarne(OpisSpojine):
         self.n2 = int(datadict["n2"])
         self.simbol2 = datadict["simbol2"]
         self.stock_n = datadict["stock_n"]
-        self.imenovanja = datadict["imenovanja"]
 
     def get_imena(self):
         st1 = STEVNIKI[self.n1]
