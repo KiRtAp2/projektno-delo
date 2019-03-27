@@ -210,7 +210,7 @@ HS:hidrogensulfid:-1
 HSO4:hidrogensulfat(VI)=hidrogensulfat:-1
 HSO3:hidrogensulfit=hidrogensulfat(IV):-1
 HPO4:hidrogenfosfat(V)=hidrogenfosfat:-2
-H2PO4:dihidrogenfosfat(V)=dihidrogenfosfat(V):-1
+H2PO4:dihidrogenfosfat(V)=dihidrogenfosfat:-1
 +kristalohidrat
 aluminijev klorid heksahidrat:AlCl3*6H20
 aluminijev fluorid trihidrat:AlF3*3H2O
