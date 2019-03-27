@@ -316,7 +316,7 @@ class OpisSoli(OpisSpojine):
     
 class OpisHidrogensoli(AbstractOpisElementarne):
     tip_spojine = "hidrogensol"
-    imenovanja = ["stevniki", "brez", "stock"]
+    imenovanja = ["brez", "stock"]
 
 
 class OpisKristalohidrata(AbstractOpisIzjeme):

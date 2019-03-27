@@ -91,6 +91,7 @@ magnezijev hidroksid=magnezijev(II) hidroksid:Mg(OH)2
 kalcijev hidroksid=kalcijev(II) hidroksid:Ca(OH)2
 stroncijev hidroksid=stroncijev(II) hidroksid:Sr(OH)2
 aluminijev hidroksid=aluminijev(III) hidroksid:Al(OH)3
+amoniak=amonijak:NH3
 +solni_element
 NH4:amonijev:1
 Li:litijev:1
