@@ -28,8 +28,7 @@ def osnovni_seznam(tip_el, tip_iz, opis_sp, n, tez):
     izjeme = tip_iz.query.all()
 
     while len(seznam) < n:
-        izbira = randchoice(("element", "izjema"))
-        if tez==1 or izbira == "element" or len(izjeme) == 0:
+        if tez==1 or len(izjeme) == 0:
             el1 = randchoice(elementi_1)
             el2 = randchoice(elementi_2)
             lcm = el1.naboj * el2.naboj // gcd(el1.naboj, el2.naboj)
