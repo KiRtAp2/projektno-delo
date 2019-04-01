@@ -247,9 +247,8 @@ def kviz(kategorija, vrsta, tezavnost):
                             ne += 1
                             user_odgovori[idx] = "/"
                         if curr == 1:
-                            break
-                    score += curr
-                    if (ne > 0 and len(pravilni)==1) or ne > 1:
+                            score += curr
+                    if (ne > 0 and len(pravilni)==1) or ne ==len(pravilni):
                         napake.append('narobe')
                     else:
                         napake.append('')
@@ -330,7 +329,7 @@ def vislice():
                 pravilna_imena = spojina.get_imena()
                 for i, ime in enumerate(pravilna_imena):  
                     if user_odgovor == ime:
-                        score += 10
+                        score += 1
                         break
                     else:
                         if i < len(pravilna_imena)-1:

@@ -24,7 +24,8 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     username = StringField('uporabniško ime', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=4, max=20, message='Uporabniško ime mora biti dolgo med 4 in 20 znaki!')])
-    password = PasswordField('geslo', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=8, max=80, message='Geslo mora biti dolgo vsaj 8 znakov!'), EqualTo('potrdi geslo', message='Gesli se ne ujemata!')])
+    password = PasswordField('geslo', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=8, max=80, message='Geslo mora biti dolgo vsaj 8 znakov!'), EqualTo('potrdi_geslo', message='Gesli se ne ujemata!')])
+    potrdi_geslo = PasswordField('potrdi geslo', validators=[InputRequired(message='To polje ne sme biti prazno!'),Length(min=8, max=80, message='Geslo mora biti dolgo vsaj 8 znakov!')])
     razred = SelectField('razred', choices=razredi)
 
 class Vprasanja(FlaskForm):

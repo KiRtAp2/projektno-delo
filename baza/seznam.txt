@@ -81,15 +81,15 @@ etanojska kislina=ocetna kislina:CH3COOH
 metanojska kislina=mravljinčna kislina:HCOOH
 ogljikova kislina=ogljikova(IV) kislina:H2CO3
 +baza
-natrijev hidroksid=natrijev(I) hidroksid:NaOH
-litijev hidroksid=litijev(I) hidroksid:LiOH
-kalijev hidroksid=kalijev(I) hidroksid:KOH
-rubidijev hidroksid=rubidijev(I) hidroksid:RbOH
-cezijev hidroksid=cezijev(I) hidroksid:CsOH
-barijev hidroksid=barijev(II) hidroksid:Ba(OH)2
-magnezijev hidroksid=magnezijev(II) hidroksid:Mg(OH)2
-kalcijev hidroksid=kalcijev(II) hidroksid:Ca(OH)2
-stroncijev hidroksid=stroncijev(II) hidroksid:Sr(OH)2
+natrijev hidroksid:NaOH
+litijev hidroksid:LiOH
+kalijev hidroksid:KOH
+rubidijev hidroksid:RbOH
+cezijev hidroksid:CsOH
+barijev hidroksid:Ba(OH)2
+magnezijev hidroksid:Mg(OH)2
+kalcijev hidroksid:Ca(OH)2
+stroncijev hidroksid:Sr(OH)2
 aluminijev hidroksid=aluminijev(III) hidroksid:Al(OH)3
 amoniak=amonijak:NH3
 +solni_element

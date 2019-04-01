@@ -1,29 +1,11 @@
 .navbar-dark {
 	background-color: #2680d1;
 }
-.navbar-brand {
 
+.navbar-dark .navbar-nav .nav-link{
+	color: rgba(255, 255, 255, 0.75);
 }
 
-.navbar-toggler-icon {
-
-}
-
-.nav-link .active a{
-
-}
-
-.nav-link a{
-
-}
-
-.nav-link a:hover {
-	
-}
-
-.nav-link .active a:hover {
-
-}
-.navbar-text {
-	
+.navbar-dark .navbar-nav .nav-link:hover {
+	color: rgba(255, 255, 255, 1);
 }

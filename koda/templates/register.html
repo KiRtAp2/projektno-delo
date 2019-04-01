@@ -10,6 +10,7 @@
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.potrdi_geslo) }}
         {{ wtf.form_field(form.razred) }}
         {{check(errors)}}
     <button class="btn btn-lg btn-primary" type="submit">Registriraj se!</button>
