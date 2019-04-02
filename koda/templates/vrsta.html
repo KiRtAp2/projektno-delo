@@ -1,14 +1,61 @@
 {% extends "shema.html" %}
 
 {% block content %}
-    <p>
-        <h3>Izberi vrsto naloge!</h3>
-        <br>
-        <ul>
-          {% for moznost in moznosti %}
-          <li><a href="{{moznost}}">{{mozni[loop.index0]}}</a></li>
-          {% endfor %}
-      </ul>
-    </p>
 
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge</h3>
+<br>
+Dana so imena spojin. Napišite njihove formule.
+<br>
+{% if kategorija=='kh' %}
+Pri naslednjih nalogah so dana imena kristalohidratov. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br).
+{% elif kategorija=='binarne' %}
+Pri naslednjih nalogah so dana imena anorganskih spojin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+{% elif kategorija=='soli' %}
+Pri naslednjih nalogah so dana imena soli oksokislin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+{% elif kategorija=='kisline' %}
+Pri naslednjih nalogah so dana imena kislin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis elementov simbolov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+{% elif kategorija=='baze' %}
+Pri naslednjih nalogah so dana imena baz. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis elementov simbolov pravilen: npr. kalcij naj bo zapisan kot <b>Ca</b> in NE kor CA ali ca)
+{% else %}
+Pri naslednjih nalogah so dana imena hidrogensoli. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br). 
+{% endif %}
+<br>
+<a href="{{urls[0]}}">
+	<button class="btn btn-primary bottom"> Igraj!</button>
+</a>
+<br>
+Dane so formule spojin. Napišite njihova imena.
+<br>
+{% if kategorija=='kh' %}
+Pri naslednjih nalogah so napisane formule kristalohidratov. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% elif kategorija=='binarne' %}
+Pri naslednjih nalogah so napisane formule anorganskih spojin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% elif kategorija=='soli' %}
+Pri naslednjih nalogah so napisane formule soli oksokislin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% elif kategorija=='kisline' %}
+Pri naslednjih nalogah so napisane formule kislin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% elif kategorija=='baze' %}
+Pri naslednjih nalogah so napisane formule baz. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ter pri aluminiju ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% else %}
+Pri naslednjih nalogah so napisane formule hidrogensoli. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+{% endif %}
+<br>
+<a href="{{urls[1]}}">
+	<button class="btn btn-primary bottom"> Igraj!</button>
+</a>
+<br>
+<h3>Primer</h3>
+{% if kategorija=='kh' %}
+<b>Al(ClO4)3·<span style="color: red">9</span>H2O</b> – spojino lahko poimenujemo <b>aluminijev klorat(VII) <span style="color: red">nona</span>hidrat</b> ali <b>aluminijev perklorat <span style="color: red">nona</span>hidrat</b> (po stari nomenklaturi)
+{% elif kategorija=='binarne' %}
+<b>CaF<span style="color: red"><sub>2</sub></span></b> - spojino poimenujemo <b>kalcijev <span style="color: red">di</span>fluorid</b> ali <b>kalcijev fluorid</b> (števnik lahko izpustimo)
+{% elif kategorija=='soli' %}
+<b>Ca(<span style="color: red">Cl</span>O<sub>4</sub>)<sub>2</sub></b> - spojino poimenujemo <b>kalcijev klorat(<span style="color: red">VII</span>)</b> (rimska sedem zato, ker ClO4<sup>-</sup> izhaja iz klorove(VII) kisline, kjer ima klor oksidacijsko število +7) ali <b>kalcijev perklorat</b> (po stari nomenklaturi)
+{% elif kategorija=='kisline' %}
+<b>HNO<span style="color: red"><sub>2</sub></span></b> – spojino poimenujemo <b>dušikova(III) kislina</b> ali <b>dušikasta kislina</b> (po stari nomenklaturi)
+{% elif kategorija=='baze' %}
+<b>Ca(OH)<sub>2</sub></b> - spojino poimenujemo kalcijev hidroksid
+{% else %}
+<b>Rb<sub>2</sub>(<span style="color: red">H</span>SO<sub>3</sub>)<sub>2</sub></b> – spojino poimenujemo <b>rubidijev <span style="color: red">hidrogen</span>sulfat(IV)</b> ali <b>rubidijev <span style="color: red">hidrogen</span>sulfit</b> (po stari nomenklaturi)
+{% endif %}
 {% endblock %}

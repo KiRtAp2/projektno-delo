@@ -2,6 +2,10 @@ h1, h2 {
     color: #2680d1;
 }
 
+.bottom {
+  margin-bottom: 2vh;
+}
+
 table, td, th {
     border: 1px solid grey;
     border-collapse: collapse;
@@ -72,6 +76,7 @@ footer {
     border: 0;
     border-radius: 5px;
     background-color: #2680d1;
+    margin-top: 2vh;
 }
 .btn-fb {
     background-color: #3B5998;
@@ -92,10 +97,15 @@ footer {
   margin-top: 1vh;
 }
 
+.besedilo {
+  font-size: 1.1rem;
+}
+
 @media (max-width: 767px) {
   .center {
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 6vh;
   }
   .footer-left {
     display: block;
@@ -107,7 +117,7 @@ footer {
   .footer-right{
     display:none;
   }
-  .btn-primary {
+  .bottom {
   margin-bottom: 6vh;
   }
   .navbar-brand {
@@ -118,5 +128,9 @@ footer {
     display: inline-block;
     padding: .2rem .5rem;
   }
+
+  .besedilo {
+  font-size: 1rem;
+}
 
 }

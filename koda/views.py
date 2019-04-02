@@ -156,12 +156,11 @@ def izberi_kategorijo():
 
 @app.route("/kviz/<string:kategorija>", methods=['GET'])
 def izberi_vrsto(kategorija):
-    mozni = ['Dana so imena spojin. Napišite njihove formule.', 'Dane so formule spojin. Napišite njihova imena.']
     moz = ['ime', 'formula']
     urls = []
     for i in moz:
         urls.append(url_for('izberi_tezavnost', kategorija=kategorija, vrsta='{}'.format(i)))
-    return render_template("vrsta.html", moznosti=urls, mozni=mozni)
+    return render_template("vrsta.html", urls=urls, kategorija=kategorija)
 
 @app.route("/kviz/<string:kategorija>/<string:vrsta>", methods=['GET'])
 def izberi_tezavnost(kategorija, vrsta):
