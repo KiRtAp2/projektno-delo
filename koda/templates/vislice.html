@@ -2,10 +2,16 @@
 {% import "wtf.html" as wtf %}
 
 {% block content %}
-    Najverjetneje že poznaš standardno igro vislice. Tukaj smo naredili nekaj podobnega, le da namesto črk v prazno polje vpisuješ formule in imena anorganskih spojin, odvisno od tega kar je podano. Za vsak pravilen odgovor dobiš eno točko, za vsak napačen odgovor pa se na zaslonu nariše dodatna črta. Izgubiš v primeru, če je napačnih toliko odgovorov, da je figurica 'obešena'.<br>
+<h3>Vislice</h3>
+{% if not session['napake'] + session['score']%}
+<div class="besedilo">
+    Najverjetneje že poznaš standardno igro vislice. Tukaj smo naredili nekaj podobnega, le da namesto črk v prazno polje vpisuješ formule in imena anorganskih spojin, odvisno od tega kar je podano. Za vsak pravilen odgovor dobiš eno točko, za vsak napačen odgovor pa se na zaslonu nariše dodatna črta. Izgubiš v primeru, če je napačnih 9 odgovorov in je figurica 'obešena'.
+</div>
+<br>
+{% endif %}
     Pravilni odgovori: {{score}}<br>
     Napačni odgovori: {{session['napake']}}
-    <p>
+    <br>
     	<form class="form-answer" method="POST">
     	{{ form.hidden_tag() }}
         {{spojina|safe}}<br>
@@ -17,6 +23,8 @@
         {{ wtf.form_field(form.o0) }}
         <button class="btn btn-lg btn-primary" type="submit">Naslednja</button>
         </form>
-    </p>
+{% if session['napake']%}
+<img src="/static/vislice{{session['napake']}}.png" style="width: 75%; margin-top: 2vh; margin-bottom: 3vh;">
+{% endif %}
 
 {% endblock %}

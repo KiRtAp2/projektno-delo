@@ -15,7 +15,9 @@ table, td, th {
   text-align: center;
   margin-left: 25%;
   margin-right: 25%;
+  margin-top: 1vh;
 }
+
 .left {
   text-align: left;
 }
@@ -103,9 +105,10 @@ footer {
 
 @media (max-width: 767px) {
   .center {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5vw;
+    margin-right: 5vw;
     margin-bottom: 6vh;
+    text-align: justify;
   }
   .footer-left {
     display: block;
