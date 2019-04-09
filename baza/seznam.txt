@@ -63,6 +63,302 @@ ksenonov tetrafluorid=ksenonov(IV) fluorid:XeF4
 ksenonov heksafluorid=ksenonov(VI) fluorid:XeF6
 ksenonov trioksid=ksenonov(VI) oksid:XeO3
 ksenonov tetraoksid=ksenonov(VIII) oksid:XeO4
+srebrov(I) jodid:AgI
+srebrov(I) bromid:AgBr
+srebrov(I) klorid:AgCl
+srebrov(I) cianid:AgCN
+srebrov oksid=srebrov(I) oksid:Ag2O
+srebrov sulfid=srebrov(I) sulfid:Ag2S
+arzenov dijodid=arzenov(III) jodid:AsI3
+arzenov diklorid=arzenov(III) klorid:AsCl3
+diarzenov trioksid=arzenov(III) oksid:As2O3
+diarzenov trisulfid=arzenov(III) sulfid:As2S3
+diarzenov tritelurid=arzenov(III) telurid:As2Te3
+zlatov(I) jodid:AuI
+bizmutov dijodid=bizmutov(III) jodid:BiI3
+bizmutov dibromid=bizmutov(III) bromid:BiBr3
+bizmutov diklorid=bizmutov(III) klorid:BiCl3
+bizmutov difluorid=bizmutov(III) fluorid:BiF3
+dibizmutov trioksid=bizmutov(III) oksid:Bi2O3
+dibizmutov triselenid=bizmutov(III) selenid:Bi2Se3
+dibizmutov trisulfid=bizmutov(III) sulfid:Bi2S3
+dibizmutov tritelurid=bizmutov(III) telurid:Bi2Te3
+kadmijev dibromid=kadmijev(II) bromid:CdBr2
+kadmijev diklorid=kadmijev(II) klorid:CdCl2
+kadmijev difluorid=kadmijev(II) fluorid:CdF2
+kadmijev dijodid=kadmijev(II) jodid:CdI2
+kadmijev(II) oksid:CdO
+trikadmijev difosfid=kadmijev(II) fosfid:Cd3P2
+kadmijev(II) selenid:CdSe
+kadmijev(II) sulfid:CdS
+kadmijev(II) telurid:CdTe
+kobaltov dijodid=kobaltov(II) jodid:CoI2
+kobaltov dibromid=kobaltov(II) bromid:CoBr2
+kobaltov diklorid=kobaltov(II) klorid:CoCl2
+kobaltov difluorid=kobaltov(II) fluorid:CoF2
+kobaltov(II) oksid:CoO
+kobaltov(II) selenid:CoSe
+kobaltov(II) sulfid:CoS
+kromov dijodid=kromov(III) jodid:CrI3
+kromov diklorid=kromov(III) klorid:CrCl3
+kromov difluorid=kromov(III) fluorid:CrF3
+dikromov trioksid=kromov(III) oksid:Cr2O3
+dikromov trisulfid=kromov(III) sulfid:Cr2S3
+dikromov tritelurid=kromov(III) telurid:Cr2Te3
+bakrov(I) bromid:CuBr
+bakrov(I) klorid:CuCl
+bakrov(I) cianid:CuCN
+bakrov(I) jodid:CuI
+bakrov nitrid=bakrov(I) nitrid:Cu3N
+bakrov oksid=bakrov(I) oksid:Cu2O
+bakrov selenid=bakrov(I) selenid:Cu2Se
+bakrov sulfid=bakrov(I) sulfid:Cu2S
+bakrov telurid=bakrov(I) telurid:Cu2Te
+železov dijodid=železov(II) jodid:FeI2
+železov dibromid=železov(II) bromid:FeBr2
+železov diklorid=železov(II) klorid:FeCl2
+železov difluorid=železov(II) fluorid:FeF2
+železov(II) oksid:FeO
+železov(II) selenid:FeSe
+železov(II) sulfid:FeS
+galijev dibromid=galijev(III) bromid:GaBr3
+galijev diklorid=galijev(III) klorid:GaCl3
+galijev difluorid=galijev(III) fluorid:GaF3
+galijev(III) nitrid:GaN
+digalijev trioksid=galijev(III) oksid:Ga2O3
+digalijev trisulfid=galijev(III) sulfid:Ga2S3
+germanijev dijodid=germanijev jodid=germanijev(IV) jodid=germanijev jodid:GeI4
+germanijev diklorid=germanijev klorid=germanijev(IV) klorid=germanijev klorid:GeCl4
+germanijev dioksid=germanijev oksid=germanijev(IV) oksid=germanijev oksid:GeO2
+hafnijev dijodid=hafnijev(IV) jodid:HfI4
+hafnijev dibromid=hafnijev(IV) bromid:HfBr4
+hafnijev diklorid=hafnijev(IV) klorid:HfCl4
+hafnijev difluorid=hafnijev(IV) fluorid:HfF4
+hafnijev dioksid=hafnijev(IV) oksid:HfO2
+živosrebrov dijodid=živosrebrov(II) jodid:HgI2
+živosrebrov dibromid=živosrebrov(II) bromid:HgBr2
+živosrebrov diklorid=živosrebrov(II) klorid:HgCl2
+živosrebrov difluorid=živosrebrov(II) fluorid:HgF2
+živosrebrov(II) oksid:HgO
+živosrebrov(II) selenid:HgSe
+živosrebrov(II) telurid:HgTe
+živosrebrov(II) sulfid:HgS
+indijev dijodid=indijev(III) jodid:InI3
+indijev dibromid=indijev(III) bromid:InBr3
+indijev diklorid=indijev(III) klorid:InCl3
+indijev difluorid=indijev(III) fluorid:InF3
+indijev(III) fosfid:InP
+diindijev triselenid=indijev(III) selenid:In2Se3
+diindijev trisulfid=indijev(III) sulfid:In2S3
+diindijev trioksid=indijev(III) oksid:In2O3
+iridijev dibromid=iridijev(IV) bromid:IrBr4
+iridijev diklorid=iridijev(IV) klorid:IrCl4
+iridijev dijodid=iridijev(IV) jodid:IrI4
+iridijev dioksid=iridijev(IV) oksid:IrO2
+lantanov dibromid=lantanov(III) bromid:LaBr3
+lantanov diklorid=lantanov(III) klorid:LaCl3
+lantanov difluorid=lantanov(III) fluorid:LaF3
+lantanov dijodid=lantanov(III) jodid:LaI3
+lantanov(III) nitrid:LaN
+dilantanov trioksid=lantanov(III) oksid:La2O3
+manganov dijodid=manganov(II) jodid:MnI2
+manganov dibromid=manganov(II) bromid:MnBr2
+manganov diklorid=manganov(II) klorid:MnCl2
+manganov difluorid=manganov(II) fluorid:MnF2
+manganov(II) oksid:MnO
+manganov(II) selenid:MnSe
+manganov(II) sulfid:MnS
+molibdenov dioksid=molibdenov(IV) oksid:MoO2
+molibdenov difluorid=molibdenov(IV) fluorid:MoF4
+molibdenov diselenid=molibdenov(IV) selenid:MoSe2
+molibdenov disulfid=molibdenov(IV) sulfid:MoS2
+niobijev dijodid=niobijev(V) jodid:NbI5
+niobijev diklorid=niobijev(V) klorid:NbCl5
+niobijev difluorid=niobijev(V) fluorid:NbF5
+diniobijev pentaoksid=niobijev(V) oksid:Nb2O5
+nikljev dijodid=nikljev(II) jodid:NiI2
+nikljev dibromid=nikljev(II) bromid:NiBr2
+nikljev(II) sulfid:NiS
+nikljev(II) telurid:NiTe
+osmijev dioksid=osmijev(IV) oksid:OsO2
+svinčev dijodid=svinčev(II) jodid:PbI2
+svinčev dibromid=svinčev(II) bromid:PbBr2
+svinčev diklorid=svinčev(II) klorid:PbCl2
+svinčev difluorid=svinčev(II) fluorid:PbF2
+svinčev(II) oksid:PbO
+svinčev(II) selenid:PbSe
+svinčev(II) telurid:PbTe
+paladijev dibromid=paladijev(II) bromid:PdBr2
+paladijev diklorid=paladijev(II) klorid:PdCl2
+paladijev dicianid=paladijev(II) cianid:Pd(CN)2
+paladijev dijodid=paladijev(II) jodid:PdI2
+paladijev(II) oksid:PdO
+paladijev(II) sulfid:PdS
+platinov dibromid=platinov(IV) bromid:PtBr4
+platinov diklorid=platinov(IV) klorid:PtCl4
+platinov dijodid=platinov(IV) jodid:PtI4
+platinov dioksid=platinov(IV) oksid:PtO2
+platinov disulfid=platinov(IV) sulfid:PtS2
+rodijev diklorid=rodijev(III) klorid:RhCl3
+rodijev dijodid=rodijev(III) jodid:RhI3
+rutenijev dibromid=rutenijev(III) bromid:RuBr3
+rutenijev diklorid=rutenijev(III) klorid:RuCl3
+rutenijev dijodid=rutenijev(III) jodid:RuI3
+antimonov dijodid=antimonov(III) jodid:SbI3
+antimonov dibromid=antimonov(III) bromid:SbBr3
+antimonov diklorid=antimonov(III) klorid:SbCl3
+antimonov difluorid=antimonov(III) fluorid:SbF3
+diantimonov trioksid=antimonov(III) oksid:Sb2O3
+diantimonov triselenid=antimonov(III) selenid:Sb2Se3
+diantimonov trisulfid=antimonov(III) sulfid:Sb2S3
+diantimonov tritelurid=antimonov(III) telurid:Sb2Te3
+skandijev diklorid=skandijev(III) klorid:ScCl3
+skandijev difluorid=skandijev(III) fluorid:ScF3
+skandijev dijodid=skandijev(III) jodid:ScI3
+diskandijev trioksid=skandijev(III) oksid:Sc2O3
+samarijev dijodid=samarijev(II) jodid:SmI2
+kositrov dijodid=kositrov(II) jodid:SnI2
+kositrov dibromid=kositrov(II) bromid:SnBr2
+kositrov diklorid=kositrov(II) klorid:SnCl2
+kositrov(II) oksid:SnO
+kositrov difluorid=kositrov(II) fluorid:SnF2
+kositrov(II) sulfid:SnS
+kositrov(II) telurid:SnTe
+talijev dijodid=talijev(V) jodid:TaI5
+talijev dibromid=talijev(V) bromid:TaBr5
+talijev diklorid=talijev(V) klorid:TaCl5
+talijev difluorid=talijev(V) fluorid:TaF5
+ditalijev pentaoksid=talijev(V) oksid:Ta2O5
+terbijev dijodid=terbijev(III) jodid:TbI3
+torijev dijodid=torijev(IV) jodid:ThI4
+talijev(I) bromid:TlBr
+talijev(I) klorid:TlCl
+talijev(I) fluorid:TlF
+talijev(I) jodid:TlI
+talijev selenid=talijev(I) selenid:Tl2Se
+talijev telurid=talijev(I) telurid:Tl2Te
+titanov dijodid=titanov(IV) jodid:TiI4
+titanov dibromid=titanov(IV) bromid:TiBr4
+titanov dioksid=titanov(IV) oksid:TiO2
+titanov difluorid=titanov(IV) fluorid:TiF4
+titanov disulfid=titanov(IV) sulfid:TiS2
+uranov dijodid=uranov(III) jodid:UI3
+vanadijev dijodid=vanadijev(III) jodid:VI3
+vanadijev dibromid=vanadijev(III) bromid:VBr3
+vanadijev diklorid=vanadijev(III) klorid:VCl3
+vanadijev difluorid=vanadijev(III) fluorid:VF3
+divanadijev trioksid=vanadijev(III) oksid:V2O3
+volframov diklorid=volframov(VI) klorid:WCl6
+volframov dioksid=volframov(VI) oksid:WO3
+itrijev dibromid=itrijev(III) bromid:YBr3
+itrijev diklorid=itrijev(III) klorid:YCl3
+itrijev difluorid=itrijev(III) fluorid:YF3
+itrijev dijodid=itrijev(III) jodid:YI3
+diitrijev trioksid=itrijev(III) oksid:Y2O3
+diitrijev trisulfid=itrijev(III) sulfid:Y2S3
+iterbijev dibromid=iterbijev(III) bromid:YbBr3
+iterbijev diklorid=iterbijev(III) klorid:YbCl3
+iterbijev difluorid=iterbijev(III) fluorid:YbF3
+diitrijev trioksid=itrijev(III) oksid:Y2O3
+cinkov dibromid=cinkov(II) bromid:ZnBr2
+cinkov diklorid=cinkov(II) klorid:ZnCl2
+cinkov dicianid=cinkov(II) cianid:Zn(CN)2
+cinkov difluorid=cinkov(II) fluorid:ZnF2
+cinkov dijodid=cinkov(II) jodid:ZnI2
+tricinkov dinitrid=cinkov(II) nitrid:Zn3N2
+cinkov(II) oksid:ZnO
+tricinkov difosfid=cinkov(II) fosfid:Zn3P2
+cinkov(II) selenid:ZnSe
+cinkov(II) telurid:ZnTe
+cirkonijev dijodid=cirkonijev(IV) jodid:ZrI4
+cirkonijev dibromid=cirkonijev(IV) bromid:ZrBr4
+cirkonijev diklorid=cirkonijev(IV) klorid:ZrCl4
+cirkonijev dioksid=cirkonijev(IV) oksid:ZrO2
+cirkonijev difluorid=cirkonijev(IV) fluorid:ZrF4
+cirkonijev ditelurid=cirkonijev(IV) telurid:ZrTe2
+srebrov difluorid=srebrov(II) fluorid:AgF2
+srebrov(II) oksid:AgO
+diarzenov pentaoksid=arzenov(V) oksid:As2O5
+diarzenov triselenid=arzenov(III) selenid:As2Se3
+kobaltov difluorid=kobaltov(III) fluorid:CoF3
+kobaltov disulfid=kobaltov(IV) sulfid:CoS2
+kromov diklorid=kromov(II) klorid:CrCl2
+kromov difluorid=kromov(II) fluorid:CrF2
+kromov dioksid=kromov(VI) oksid:CrO3
+bakrov dibromid=bakrov(II) bromid:CuBr2
+bakrov diklorid=bakrov(II) klorid:CuCl2
+bakrov difluorid=bakrov(II) fluorid:CuF2
+bakrov(II) oksid:CuO
+bakrov(II) selenid:CuSe
+bakrov(II) sulfid:CuS
+železov diklorid=železov(III) klorid:FeCl3
+železov difluorid=železov(III) fluorid:FeF3
+diželezov trioksid=železov(III) oksid:Fe2O3
+galijev(II) telurid:GaTe
+germnijev dijodid=germnijev(II) jodid:GeI2
+germnijev(II) telurid:GeTe
+hafnijev ditelurid=hafnijev(VIII) telurid:HfTe4
+indijev(I) jodid:InI
+indijev(I) klorid:InCl
+indijev(I) bromid:InBr
+iridijev dibromid=iridijev(III) bromid:IrBr3
+iridijev diklorid=iridijev(III) klorid:IrCl3
+manganov dioksid=manganov(IV) oksid:MnO2
+manganov difluorid=manganov(III) fluorid:MnF3
+manganov ditelurid=manganov(IV) telurid:MnTe2
+molibdenov diklorid=molibdenov(III) klorid:MoCl3
+molibdenov diklorid=molibdenov(V) klorid:MoCl5
+molibdenov dioksid=molibdenov(VI) oksid:MoO3
+niobijev(II) oksid:NbO
+niobijev dioksid=niobijev(IV) oksid:NbO2
+niobijev diselenid=niobijev(IV) selenid:NbSe2
+osmijev dioksid=osmijev(VIII) oksid:OsO4
+svinčev difluorid=svinčev(IV) fluorid:PbF4
+svinčev dioksid=svinčev(IV) oksid:PbO2
+platinov dibromid=platinov(II) bromid:PtBr2
+platinov diklorid=platinov(II) klorid:PtCl2
+platinov dicianid=platinov(II) cianid:Pt(CN)2
+platinov dijodid=platinov(II) jodid:PtI2
+renijev diklorid=renijev(III) klorid:ReCl3
+renijev diklorid=renijev(V) klorid:ReCl5
+renijev dioksid=renijev(VI) oksid:ReO3
+direnijev heptaoksid=renijev(VII) oksid:Re2O7
+renijev disulfid=renijev(IV) sulfid:ReS2
+direnijev heptasulfid=renijev(VII) sulfid:Re2S7
+rutenijv dioksid=rutenijv(IV) oksid:RuO2
+antimonov diklorid=antimonov(V) klorid:SbCl5
+antimonov difluorid=antimonov(V) fluorid:SbF5
+diantimonov pentaoksid=antimonov(V) oksid:Sb2O5
+diantimonov pentasulfid=antimonov(V) sulfid:Sb2S5
+selenov dibromid=selenov(IV) bromid:SeBr4
+selenov diklorid=selenov(IV) klorid:SeCl4
+selenov dioksid=selenov(IV) oksid:SeO2
+kositrov dijodid=kositrov(IV) jodid:SnI4
+kositrov dibromid=kositrov(IV) bromid:SnBr4
+kositrov diklorid=kositrov(IV) klorid:SnCl4
+kositrov dioksid=kositrov(IV) oksid:SnO2
+kositrov difluorid=kositrov(IV) fluorid:SnF4
+telurjev dijodid=telurjev(IV) jodid:TeI4
+telurjev dibromid=telurjev(IV) bromid:TeBr4
+telurjev diklorid=telurjev(IV) klorid:TeCl4
+telurjev dioksid=telurjev(IV) oksid:TeO2
+talijev diklorid=talijev(III) klorid:TlCl3
+ditalijev trioksid=talijev(III) oksid:Tl2O3
+titanov diklorid=titanov(III) klorid:TiCl3
+titanov(II) oksid:TiO
+dititanov trioksid=titanov(III) oksid:Ti2O3
+titanov difluorid=titanov(III) fluorid:TiF3
+titanov dihidrid=titanov(II) hidrid:TiH2
+titanov disulfid=titanov(VI) sulfid:TiS3
+uranov dijodid=uranov(IV) jodid:UI4
+vanadijev diklorid=vanadijev(IV) klorid:VCl4
+vanadijev difluorid=vanadijev(IV) fluorid:VF4
+vanadijev(II) oksid:VO
+vanadijev dioksid=vanadijev(IV) oksid:VO2
+divanadijev pentaoksid=vanadijev(V) oksid:V2O5
+volframov dioksid=volframov(IV) oksid:WO2
+volframov diselenid=volframov(IV) selenid:WSe2
+volframov disulfid=volframov(IV) sulfid:WS2
 +kislina
 klorovodikova kislina:HCl
 fluorovodikova kislina:HF
