@@ -1,3 +1,4 @@
+
 {% extends "shema.html" %}
 
 {% block content %}
@@ -7,11 +8,11 @@
     <p>
       <ul class="list-group">
       <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='binarne')}}">Binarne spojine</a></li>
-      <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli</a></li>
       <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='baze')}}">Baze</a></li>
       <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='kisline')}}">Kisline</a></li>
-      <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
+      <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='soli')}}">Soli oksokislin</a></li>
       <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='hs')}}">Hidrogensoli</a></li>
+      <li class="list-group-item"><a href="{{url_for('izberi_vrsto', kategorija='kh')}}">Kristalohidrati</a></li>
       </ul>
     </p>
 {% endblock %}

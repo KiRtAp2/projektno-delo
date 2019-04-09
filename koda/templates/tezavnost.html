@@ -1,13 +1,13 @@
 {% extends "shema.html" %}
 
 {% block content %}
-    <p>
-        <h2>{{title}}</h2>
-        <h3>Izberi težavnost!</h3>
-        <ul>
-          {% for moznost in moznosti %}
-          <li><a href="{{moznost}}">{{loop.index}}</a></li>
-          {% endfor %}
-        </ul>
-    </p>
+	{% if kategorija=='binarne' %}
+	<h3>Izberite težavnost — binarne spojine</h3>
+	{% else %}
+	<h3>Izberite težavnost — soli oksokislin</h3>
+	{% endif %}
+    <ul>
+      <li><a href="{{moznosti[0]}}">Preprosti primeri</a></li>
+      <li><a href="{{moznosti[1]}}">Zahtevnejši primeri</a></li>
+    </ul>
 {% endblock %}

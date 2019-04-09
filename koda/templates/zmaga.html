@@ -1,12 +1,13 @@
 {% extends "shema.html" %}
 
 {% block content %}
-        <h3>KONEC IGRE!</h3>
+        <h3>Čestitamo, rešil si kemika!</h3>
         <br>
-        <img src="/static/vislice10.png" style="width: 100%; margin-bottom: 2vh; ">
+        <img src="/static/konec.png" alt="tukaj bo slika" style="width: 100%; margin-bottom: 2vh; ">
         <br>
+        Pravilni odgovori: {{score}}<br>
+        Napačni odgovori: {{session['napake']}}<br>
         Dosegel si {{score}} točk!
         <br>
         <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Začni znova!</button>
-
 {% endblock %}

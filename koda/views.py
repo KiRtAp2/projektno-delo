@@ -171,7 +171,7 @@ def izberi_tezavnost(kategorija, vrsta):
     else:
         return redirect(url_for('kviz', kategorija=kategorija, vrsta=vrsta, tezavnost=1))
 
-    return render_template("tezavnost.html", moznosti=urls)
+    return render_template("tezavnost.html", moznosti=urls, kategorija=kategorija)
 
 @app.route("/kviz/<string:kategorija>/<string:vrsta>/<int:tezavnost>", methods=["GET", "POST"])
 def kviz(kategorija, vrsta, tezavnost):
@@ -338,9 +338,11 @@ def vislice():
 
             session['score'] += score
             helpers.update_score(kategorija="vse", current_user=current_user, score=score)
-    
+            
+    if score >= 30:
+        return render_template('zmaga.html', score=session['score'])
     if session['napake'] >= 10:
-        return render_template('konec.html', score=session['score'], form=form)
+        return render_template('konec.html', score=session['score'])
 
     # spojina = choice(moznosti)(n=1)[0] ----> to bo pol k dodamo se ostale elemente v bazo
     spojina = choice(moznosti)(n=1)[0]

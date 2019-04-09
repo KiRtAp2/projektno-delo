@@ -1,43 +1,47 @@
 {% extends "shema.html" %}
 
 {% block content %}
-
-<h3 style="margin-top: 1.5vh">Izberite vrsto naloge</h3>
-<br>
-Dana so imena spojin. Napišite njihove formule.
-<br>
 {% if kategorija=='kh' %}
-Pri naslednjih nalogah so dana imena kristalohidratov. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br).
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — kristalohidrati</h3>
+<br>
+Pri naslednjih nalogah so dana imena kristalohidratov. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. brom naj bo zapisan kot <b>Br</b> in NE kot BR ali br).
 {% elif kategorija=='binarne' %}
-Pri naslednjih nalogah so dana imena anorganskih spojin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — binarne spojine</h3>
+<br>
+Pri naslednjih nalogah so dana imena binarnih spojin. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. brom naj bo zapisan kot <b>Br</b> in NE kot BR ali br).
 {% elif kategorija=='soli' %}
-Pri naslednjih nalogah so dana imena soli oksokislin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — soli oksokislin</h3>
+<br>
+Pri naslednjih nalogah so dana imena soli oksokislin ter imena soli mravljinčne in ocetne kisline. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. brom naj bo zapisan kot <b>Br</b> in NE kot BR ali br).
 {% elif kategorija=='kisline' %}
-Pri naslednjih nalogah so dana imena kislin. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis elementov simbolov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br)
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — kisline</h3>
+<br>
+Pri naslednjih nalogah so dana imena kislin. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. brom naj bo zapisan kot <b>Br</b> in NE kot BR ali br).
 {% elif kategorija=='baze' %}
-Pri naslednjih nalogah so dana imena baz. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis elementov simbolov pravilen: npr. kalcij naj bo zapisan kot <b>Ca</b> in NE kor CA ali ca)
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — baze</h3>
+Pri naslednjih nalogah so dana imena baz. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. kalcij naj bo zapisan kot <b>Ca</b> in NE kot CA ali ca).
 {% else %}
-Pri naslednjih nalogah so dana imena hidrogensoli. Tvoja naloga je, da napišeš kemijske formule (pazi na to, da je zapis simbolov elementov pravilen: npr. brom naj bo zapisan kot <b>Br</b> in NE kor BR ali br). 
+<h3 style="margin-top: 1.5vh">Izberite vrsto naloge — hidrogensoli</h3>
+<br>
+Pri naslednjih nalogah so dana imena hidrogensoli. Napiši njihove kemijske formule. Pazi na pravilnost zapisa simbolov elementov (npr. brom naj bo zapisan kot <b>Br</b> in NE kot BR ali br).
 {% endif %}
 <br>
 <a href="{{urls[0]}}">
 	<button class="btn btn-primary bottom"> Igraj!</button>
 </a>
 <br>
-Dane so formule spojin. Napišite njihova imena.
-<br>
 {% if kategorija=='kh' %}
-Pri naslednjih nalogah so napisane formule kristalohidratov. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule kristalohidratov. Napiši njihova imena. Pri soleh oksokislin lahko napišeš ime po Stockovem sistemu ali sprejemljiva običajna imena. V imenih spojin kovin prve in druge skupine ter aluminijevih spojin ne piši oksidacijskega števila kovine. Pri imenovanju po Stockovem sistemu piši oksidacijsko število z rimsko številko (velike črke) v oklepaju takoj za imenom prvega elementa (stično, brez presledka).
 {% elif kategorija=='binarne' %}
-Pri naslednjih nalogah so napisane formule anorganskih spojin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule binarnih spojin. Napiši njihova imena po Stockovem sistemu ali s števniki. V imenih spojin kovin prve in druge skupine ter aluminijevih spojin ne piši oksidacijskega števila kovine. Pri imenovanju po Stockovem sistemu piši oksidacijsko število z rimsko številko (velike črke) v oklepaju takoj za imenom prvega elementa (stično, brez presledka).
 {% elif kategorija=='soli' %}
-Pri naslednjih nalogah so napisane formule soli oksokislin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule soli oksokislin ter formule soli mravljinčne in ocetne kisline. Napiši njihova imena po Stockovem sistemu ali sprejemljiva običajna imena. V imenih spojin kovin prve in druge skupine ter aluminijevih spojin ne piši oksidacijskega števila kovine. Pri imenovanju po Stockovem sistemu piši oksidacijsko število z rimsko številko (velike črke) v oklepaju takoj za imenom prvega elementa (stično, brez presledka).
 {% elif kategorija=='kisline' %}
-Pri naslednjih nalogah so napisane formule kislin. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule kislin. Napiši njihova imena. Pri oksokislinah lahko napišeš ime po Stockovem sistemu ali sprejemljiva običajna imena. Pri imenovanju po Stockovem sistemu piši oksidacijsko število z rimsko številko (velike črke) v oklepaju takoj za imenom prvega elementa (stično, brez presledka).
 {% elif kategorija=='baze' %}
-Pri naslednjih nalogah so napisane formule baz. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ter pri aluminiju ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule baz. Napiši njihova imena.
 {% else %}
-Pri naslednjih nalogah so napisane formule hidrogensoli. Tvoja naloga je, da pod vsako napišeš njeno ime po Stokovem sistemu ali s števniki. Pri kovinah prve in druge skupine ne pišemo oksidacijskega števila. Bodi pozoren, da pri poimenovanju po Stockovem sistemu oksidacijsko število pišeš z rimsko številko v oklepaju takoj po imenu, brez presledka in z velikimi črkami!
+Pri naslednjih nalogah so dane formule hidrogensoli. Napiši njihova imena. V imenih spojin kovin prve in druge skupine ter aluminijevih spojin ne piši oksidacijskega števila kovine. Pri imenovanju po Stockovem sistemu piši oksidacijsko število z rimsko številko (velike črke) v oklepaju takoj za imenom prvega elementa (stično, brez presledka).
 {% endif %}
 <br>
 <a href="{{urls[1]}}">
@@ -46,16 +50,16 @@ Pri naslednjih nalogah so napisane formule hidrogensoli. Tvoja naloga je, da pod
 <br>
 <h3>Primer</h3>
 {% if kategorija=='kh' %}
-<b>Al(ClO4)3·<span style="color: red">9</span>H2O</b> – spojino lahko poimenujemo <b>aluminijev klorat(VII) <span style="color: red">nona</span>hidrat</b> ali <b>aluminijev perklorat <span style="color: red">nona</span>hidrat</b> (po stari nomenklaturi)
+<b>Al(ClO4)3·<span style="color: red">9</span>H2O</b> – spojina ima ime <b>aluminijev klorat(VII) <span style="color: red">nona</span>hidrat</b> ali <b>aluminijev perklorat <span style="color: red">nona</span>hidrat</b> (sprejemljivo običajno ime)
 {% elif kategorija=='binarne' %}
-<b>CaF<span style="color: red"><sub>2</sub></span></b> - spojino poimenujemo <b>kalcijev <span style="color: red">di</span>fluorid</b> ali <b>kalcijev fluorid</b> (števnik lahko izpustimo)
+<b>CaF<span style="color: red"><sub>2</sub></span></b> - spojine ima ime <b>kalcijev <span style="color: red">di</span>fluorid</b> ali <b>kalcijev fluorid</b> (števnik lahko izpustimo)
 {% elif kategorija=='soli' %}
-<b>Ca(<span style="color: red">Cl</span>O<sub>4</sub>)<sub>2</sub></b> - spojino poimenujemo <b>kalcijev klorat(<span style="color: red">VII</span>)</b> (rimska sedem zato, ker ClO4<sup>-</sup> izhaja iz klorove(VII) kisline, kjer ima klor oksidacijsko število +7) ali <b>kalcijev perklorat</b> (po stari nomenklaturi)
+<b>Ca(<span style="color: red">Cl</span>O<sub>4</sub>)<sub>2</sub></b> - spojina ima ime <b>kalcijev klorat(<span style="color: red">VII</span>)</b> (rimska sedem zato, ker ClO4<sup>-</sup> »(Stockov sistem imenovanja z navedbo oksidacijskega števila) ali <b>kalcijev perklorat</b> (sprejemljivo običajno ime)
 {% elif kategorija=='kisline' %}
-<b>HNO<span style="color: red"><sub>2</sub></span></b> – spojino poimenujemo <b>dušikova(III) kislina</b> ali <b>dušikasta kislina</b> (po stari nomenklaturi)
+<b>HNO<span style="color: red"><sub>2</sub></span></b> – spojina ima ime <b>dušikova(III) kislina</b> (Stockov sistem imenovanja z navedbo oksidacijskega števila) ali <b>dušikasta kislina</b> (sprejemljivo običajno ime)
 {% elif kategorija=='baze' %}
-<b>Ca(OH)<sub>2</sub></b> - spojino poimenujemo kalcijev hidroksid
+<b>Ca(OH)<sub>2</sub></b> - spojina ima ime kalcijev hidroksid
 {% else %}
-<b>Rb<span style="color: red">H</span>SO<sub>3</sub></b> – spojino poimenujemo <b>rubidijev <span style="color: red">hidrogen</span>sulfat(IV)</b> ali <b>rubidijev <span style="color: red">hidrogen</span>sulfit</b> (po stari nomenklaturi)
+<b>Rb<span style="color: red">H</span>SO<sub>3</sub></b> – spojina ima ime <b>rubidijev <span style="color: red">hidrogen</span>sulfat(IV)</b> »(Stockov sistem imenovanja z navedbo oksidacijskega števila) ali <b>rubidijev <span style="color: red">hidrogen</span>sulfit</b> (sprejemljivo običajno ime)
 {% endif %}
 {% endblock %}
