@@ -215,7 +215,7 @@ class AbstractOpisElementarne(OpisSpojine):
             for ime2 in self.ime2.split("="):
                 if "stevniki" in self.imenovanja: seznam.append("{}{} {}{}".format(st1, ime1, st2, ime2))
                 if "brez" in self.imenovanja: seznam.append("{} {}".format(ime1, ime2))
-                if self.stock_n != 0 and "stock" in self.imenovanja:
+                if self.stock_n != 0 and "stock" in self.imenovanja and self.simbol1 not in PREPOVEDANI_STOCK and self.simbol2 not in PREPOVEDANI_STOCK:
                     seznam.append("{el1}({n}) {el2}".format(el1=ime1, el2=ime2, n=RIMSKI[self.stock_n]))
 
         for i in seznam:
