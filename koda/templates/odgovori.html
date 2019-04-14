@@ -3,10 +3,7 @@
 {% from "macros.html" import empty, pravilno with context %}
 
 {% block content %}
-<p>
   <h2>Poimenuj spojine!</h2>
-</p>
-<p>
 
   <br>
   {{spojine[0]|safe}}&nbsp; -> &nbsp;<b>{{odgovori[0]}}</b><br>
@@ -38,10 +35,9 @@
   {% if score %}
   Število pravilnih odgovorov: {{score}}
   {% endif %}
-
-
-  <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
+  <br>
   <button class="btn btn-primary" onclick="show_item()">Prikaži pravilne odgovore!</button>
+  <br>
+  <button class="btn btn-lg btn-primary" type="submit" onClick="window.location.replace(location.pathname);"> Nove spojine</button>
 
-</p>
 {% endblock %}

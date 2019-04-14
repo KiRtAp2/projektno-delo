@@ -77,8 +77,8 @@ def server_error(e):
 @oauth_authorized.connect_via(fb)
 def logged_in(blueprint, token):
     if not token:
-            flash("Failed to log in with Facebook.", category="error")
-            return False
+        flash("Failed to log in with Facebook.", category="error")
+        return False
 
     resp = blueprint.session.get("me")
     if not resp.ok:
@@ -339,7 +339,7 @@ def vislice():
             session['score'] += score
             helpers.update_score(kategorija="vse", current_user=current_user, score=score)
             
-    if score >= 30:
+    if session['score'] >= 30:
         return render_template('zmaga.html', score=session['score'])
     if session['napake'] >= 10:
         return render_template('konec.html', score=session['score'])
@@ -439,7 +439,12 @@ def logout():
 @app.route('/razred', methods=["GET", "POST"])
 def dodaj_razred():
     form = forms.QuerryRazred()
-    if current_user.razred == None:
+    try:
+    	razred = current_user.razred
+    except AttributeError:
+    	return render_template('failed.html')
+    	
+    if razred == None:
         if request.method == 'POST':
             current_user.razred = form.razred.data
             db.session.add(current_user)
