@@ -6,7 +6,7 @@ from flask_dance.consumer.backend.sqla import OAuthConsumerMixin
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
     razred = db.Column(db.String(2))
 
@@ -21,7 +21,7 @@ class Scores(db.Model):
     
 
 class OAuth(OAuthConsumerMixin, db.Model):
-    provider_user_id = db.Column(db.Integer, unique=True)
+    provider_user_id = db.Column(db.BigInteger, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship(User)
 
@@ -30,7 +30,7 @@ class BinarniElement(db.Model):
     """Element, ki lahko gradi binarne spojine"""
     id = db.Column(db.Integer, primary_key=True)
     simbol = db.Column(db.String(3), unique=True, nullable=False)
-    imena = db.Column(db.String(20), unique=True, nullable=False)
+    imena = db.Column(db.String(100), unique=True, nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
@@ -61,7 +61,7 @@ class SolniElement(db.Model):
     """Element, ki lahko gradi sol"""
     id = db.Column(db.Integer, primary_key=True)
     simbol = db.Column(db.String(10), nullable=False)
-    imena = db.Column(db.String(50), nullable=False)
+    imena = db.Column(db.String(100), nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
@@ -71,7 +71,7 @@ class SolniElement(db.Model):
 class SolnaIzjema(db.Model):
     """Spojina, ki se je ne da zapisati z elementi"""
     id = db.Column(db.Integer, primary_key=True)
-    imena = db.Column(db.String(50), nullable=False)
+    imena = db.Column(db.String(100), nullable=False)
     formula = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
@@ -91,7 +91,7 @@ class HidrogensolniElement(db.Model):
     """Element, ki lahko gradi hidrogensol"""
     id = db.Column(db.Integer, primary_key=True)
     simbol = db.Column(db.String(10), nullable=False)
-    imena = db.Column(db.String(50), nullable=False)
+    imena = db.Column(db.String(100), nullable=False)
     naboj = db.Column(db.Integer)
 
     def __repr__(self):
