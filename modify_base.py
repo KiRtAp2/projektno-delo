@@ -1,9 +1,12 @@
 u"""Datoteka se uporablja za urejanje baze podatkov, če strežnik ni vključen"""
 
-import sqlite3
+import pymysql
+
+conn = pymysql.connect('localhost', 'luka', 
+    'kemspoj', 'kemspoj')
 from sys import argv
 
-conn = sqlite3.connect("data.db")
+
 curs = conn.cursor()
 
 
