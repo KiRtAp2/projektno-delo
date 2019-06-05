@@ -448,7 +448,7 @@ galijev(III) perklorat=galijev(III) klorat(VII):Ga(ClO4)3
 živosrebrov(II) etanoat=živosrebrov(II) acetat:Hg(CH3COO)2
 živosrebrov(II) nitrat=živosrebrov(II) nitrat(V):Hg(NO3)2
 živosrebrov(II) sulfat=živosrebrov(II) sulfat(VI):HgSO4
-hafnijev(II) sulfat=hafnijev(II) sulfat(VI):Hf(SO4)2
+hafnijev(IV) sulfat=hafnijev(IV) sulfat(VI):Hf(SO4)2
 indijev(III) etanoat=indijev(III) acetat:In(CH3COO)3
 indijev(III) nitrat=indijev(III) nitrat(V):In(NO3)3
 indijev(III) fosfat=indijev(III) fosfat(V):InPO4
@@ -516,7 +516,7 @@ barijev klorid dihidrat:BaCl2*2H2O
 barijev hidroksid oktahidrat:Ba(OH)2*8H2O
 barijev perklorat trihidrat=barijev klorat(VII) trihidrat:Ba(ClO4)2*3H2O
 bizmutov(III) nitrat(V) pentahidrat=bizmutov(III) nitrat pentahidrat:Bi(NO3)3*5H2O
-kalcijev klorid dihidrat:CaCl2*2H2O
+kalcijev diklorid dihidrat=kalcijev klorid dihidrat:CaCl2*2H2O
 kalcijev hidrogenfosfat dihidrat=kalcijev hidrogenfosfat(V) dihidrat:CaHPO4*2H2O
 kalcijev nitrat tetrahidrat=kalcijev nitrat(V) tetrahidrat:Ca(NO3)2*4H2O
 kalcijev sulfat dihidrat=kalcijev sulfat(VI) dihidrat:CaSO4*2H2O
@@ -552,8 +552,8 @@ lantanov(III) klorat(VII) heksahidrat=lantanov(III) perklorat heksahidrat:La(ClO
 litijev acetat dihidrat=litijev etanoat dihidrat:LiCH3COO*2H2O
 litijev jodat(VII) dihidrat=litijev perjodat dihidrat:LiIO4*2H2O
 magnezijev acetat tetrahidrat=magnezijev etanoat tetrahidrat:Mg(CH3COO)2*4H2O
-magnezijev bromid heksahidrat:MgBr2*6H2O
-magnezijev klorid heksahidrat:MgCl2*6H2O
+magnezijev dibromid heksahidrat=magnezijev bromid heksahidrat:MgBr2*6H2O
+magnezijev diklorid heksahidrat=magnezijev klorid heksahidrat:MgCl2*6H2O
 magnezijev nitrat heksahidrat=magnezijev nitrat(V) heksahidrat:Mg(NO3)2*6H2O
 magnezijev klorat(VII) heksahidrat=magnezijev perklorat heksahidrat:Mg(ClO4)2*6H2O
 magnezijev fosfat pentahidrat=magnezijev fosfat(V) pentahidrat:Mg3(PO4)2*5H2O
@@ -568,13 +568,13 @@ manganov(II) klorat(VII) heksahidrat=manganov(II) perklorat heksahidrat:Mn(ClO4)
 manganov(II) sulfat tetrahidrat=manganov(II) sulfat(VI) tetrahidrat:MnSO4*4H2O
 molibdenov(IV) sulfid dihidrat:MoS2*2H2O
 natrijev acetat trihidrat=natrijev etanoat trihidrat:NaCH3COO*3H2O
-natrijev karbonat dekahidrat:Na2CO3*10H2O
+natrijev karbonat(IV) dekahidrat=natrijev karbonat dekahidrat:Na2CO3*10H2O
 natrijev dihidrogenfosfat dihidrat=natrijev dihidrogenfosfat(V) dihidrat:NaH2PO4*2H2O
 natrijev hidrogenfosfat heptahidrat=natrijev hidrogenfosfat(V) heptahidrat:Na2HPO4*7H2O
 natrijev fosfat dodekahidrat=natrijev fosfat(V) dodekahidrat:Na3PO4*12H2O
-natrijev selenat(VI) dekahidrat:Na2SeO4*10H2O
+natrijev selenat dekahidrat=natrijev selenat(VI) dekahidrat:Na2SeO4*10H2O
 natrijev sulfat dekahidrat=natrijev sulfat(VI) dekahidrat:Na2SO4*10H2O
-natrijev sulfid nonahidrat:Na2S*9H2O
+dinatrijev sulfid nonahidrat=natrijev sulfid nonahidrat:Na2S*9H2O
 nikljev(II) acetat tetrahidrat=nikljev(II) etanoat tetrahidrat:Ni(CH3COO)2*4H2O
 nikljev(II) bromid trihidrat=nikljev dibromid trihidrat:NiBr2*3H2O
 nikljev(II) klorid heksahidrat=nikljev diklorid heksahidrat:NiCl2*6H2O
@@ -591,8 +591,8 @@ skandijev(III) klorid heksahidrat=skandijev triklorid heksahidrat:ScCl3*6H2O
 skandijev(III) klorat(VII) heksahidrat=skandijev(III) perklorat heksahidrat:Sc(ClO4)3*6H2O
 skandijev(III) sulfat heksahidrat=skandijev(III) sulfat(VI) heksahidrat:Sc2(SO4)3*6H2O
 kositrov(II) klorid dihidrat=kositrov diklorid dihidrat:SnCl2*2H2O
-stroncijev bromid heksahidrat:SrBr2*6H2O
-stroncijev klorid heksahidrat:SrCl2*6H2O
+stroncijev dibromid heksahidrat=stroncijev bromid heksahidrat:SrBr2*6H2O
+stroncijev diklorid heksahidrat=stroncijev klorid heksahidrat:SrCl2*6H2O
 stroncijev hidroksid oktahidrat:Sr(OH)2*8H2O
 stroncijev klorat(VII) heksahidrat=stroncijev perklorat heksahidrat:Sr(ClO4)2*6H2O
 talijev(III) nitrat(V) trihidrat=talijev(III) nitrat trihidrat:Tl(NO3)3*3H2O
