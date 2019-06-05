@@ -29,7 +29,7 @@ klorov trifluorid=klorov(III) fluorid:ClF3
 klorov pentafluorid=klorov(V) fluorid:ClF5
 diklorov oksid=klorov(I) oksid:Cl2O
 klorov dioksid=klorov(IV) oksid:ClO2
-klorov(II) oksid:ClO
+klorov oksid=klorov(II) oksid:ClO
 diklorov heptaoksid=klorov(VII) oksid:Cl2O7
 jodov fluorid=jodov(I) fluorid:IF
 jodov trifluorid=jodov(III) fluorid:IF3
@@ -63,18 +63,18 @@ ksenonov tetrafluorid=ksenonov(IV) fluorid:XeF4
 ksenonov heksafluorid=ksenonov(VI) fluorid:XeF6
 ksenonov trioksid=ksenonov(VI) oksid:XeO3
 ksenonov tetraoksid=ksenonov(VIII) oksid:XeO4
-srebrov(I) jodid:AgI
-srebrov(I) bromid:AgBr
-srebrov(I) klorid:AgCl
-srebrov(I) cianid:AgCN
-srebrov(I) oksid:Ag2O
-srebrov(I) sulfid:Ag2S
+srebrov(I) jodid=srebrov jodid:AgI
+srebrov(I) bromid=srebrov bromid:AgBr
+srebrov(I) klorid=srebrov klorid:AgCl
+srebrov(I) cianid=srebrov cianid:AgCN
+srebrov(I) oksid=disrebrov oksid:Ag2O
+srebrov(I) sulfid=disrebrov sulfid:Ag2S
 arzenov trijodid=arzenov(III) jodid:AsI3
 arzenov triklorid=arzenov(III) klorid:AsCl3
 diarzenov trioksid=arzenov(III) oksid:As2O3
 diarzenov trisulfid=arzenov(III) sulfid:As2S3
 diarzenov tritelurid=arzenov(III) telurid:As2Te3
-zlatov(I) jodid:AuI
+zlatov jodid=zlatov(I) jodid:AuI
 bizmutov trijodid=bizmutov(III) jodid:BiI3
 bizmutov tribromid=bizmutov(III) bromid:BiBr3
 bizmutov triklorid=bizmutov(III) klorid:BiCl3
@@ -87,44 +87,44 @@ kadmijev dibromid=kadmijev(II) bromid:CdBr2
 kadmijev diklorid=kadmijev(II) klorid:CdCl2
 kadmijev difluorid=kadmijev(II) fluorid:CdF2
 kadmijev dijodid=kadmijev(II) jodid:CdI2
-kadmijev(II) oksid:CdO
+kadmijev(II) oksid=kadmijev oksid:CdO
 trikadmijev difosfid=kadmijev(II) fosfid:Cd3P2
-kadmijev(II) selenid:CdSe
-kadmijev(II) sulfid:CdS
-kadmijev(II) telurid:CdTe
+kadmijev(II) selenid=kadmijev selenid:CdSe
+kadmijev(II) sulfid=kadmijev sulfid:CdS
+kadmijev(II) telurid=kadmijev telurid:CdTe
 kobaltov dijodid=kobaltov(II) jodid:CoI2
 kobaltov dibromid=kobaltov(II) bromid:CoBr2
 kobaltov diklorid=kobaltov(II) klorid:CoCl2
 kobaltov difluorid=kobaltov(II) fluorid:CoF2
-kobaltov(II) oksid:CoO
-kobaltov(II) selenid:CoSe
-kobaltov(II) sulfid:CoS
+kobaltov(II) oksid=kobaltov oksid:CoO
+kobaltov(II) selenid=kobaltov selenid:CoSe
+kobaltov(II) sulfid=kobaltov sulfid:CoS
 kromov trijodid=kromov(III) jodid:CrI3
 kromov triklorid=kromov(III) klorid:CrCl3
 kromov trifluorid=kromov(III) fluorid:CrF3
 dikromov trioksid=kromov(III) oksid:Cr2O3
 dikromov trisulfid=kromov(III) sulfid:Cr2S3
 dikromov tritelurid=kromov(III) telurid:Cr2Te3
-bakrov(I) bromid:CuBr
-bakrov(I) klorid:CuCl
-bakrov(I) cianid:CuCN
-bakrov(I) jodid:CuI
-bakrov nitrid=bakrov(I) nitrid:Cu3N
-bakrov oksid=bakrov(I) oksid:Cu2O
-bakrov selenid=bakrov(I) selenid:Cu2Se
-bakrov sulfid=bakrov(I) sulfid:Cu2S
-bakrov telurid=bakrov(I) telurid:Cu2Te
+bakrov(I) bromid=bakrov bromid:CuBr
+bakrov(I) klorid=bakrov klorid:CuCl
+bakrov(I) cianid=bakrov cianid:CuCN
+bakrov(I) jodid=bakrov jodid:CuI
+tribakrov nitrid=bakrov(I) nitrid:Cu3N
+dibakrov oksid=bakrov(I) oksid:Cu2O
+dibakrov selenid=bakrov(I) selenid:Cu2Se
+dibakrov sulfid=bakrov(I) sulfid:Cu2S
+dibakrov telurid=bakrov(I) telurid:Cu2Te
 železov dijodid=železov(II) jodid:FeI2
 železov dibromid=železov(II) bromid:FeBr2
 železov diklorid=železov(II) klorid:FeCl2
 železov difluorid=železov(II) fluorid:FeF2
-železov(II) oksid:FeO
-železov(II) selenid:FeSe
-železov(II) sulfid:FeS
+železov(II) oksid=železov oksid:FeO
+železov(II) selenid=železov selenid:FeSe
+železov(II) sulfid=železov sulfid:FeS
 galijev tribromid=galijev(III) bromid:GaBr3
 galijev triklorid=galijev(III) klorid:GaCl3
 galijev trifluorid=galijev(III) fluorid:GaF3
-galijev(III) nitrid:GaN
+galijev nitrid=galijev(III) nitrid:GaN
 digalijev trioksid=galijev(III) oksid:Ga2O3
 digalijev trisulfid=galijev(III) sulfid:Ga2S3
 germanijev tetrajodid=germanijev(IV) jodid:GeI4
@@ -220,15 +220,15 @@ samarijev dijodid=samarijev(II) jodid:SmI2
 kositrov dijodid=kositrov(II) jodid:SnI2
 kositrov dibromid=kositrov(II) bromid:SnBr2
 kositrov diklorid=kositrov(II) klorid:SnCl2
-kositrov(II) oksid:SnO
+kositrov oksid=kositrov(II) oksid:SnO
 kositrov difluorid=kositrov(II) fluorid:SnF2
-kositrov(II) sulfid:SnS
-kositrov(II) telurid:SnTe
-talijev pentajodid=talijev(V) jodid:TaI5
-talijev pentabromid=talijev(V) bromid:TaBr5
-talijev pentaklorid=talijev(V) klorid:TaCl5
-talijev pentafluorid=talijev(V) fluorid:TaF5
-ditalijev pentaoksid=talijev(V) oksid:Ta2O5
+kositrov sulfid=kositrov(II) sulfid:SnS
+kositrov telurid=kositrov(II) telurid:SnTe
+tantalov pentajodid=tantalov(V) jodid:TaI5
+tantalov pentabromid=tantalov(V) bromid:TaBr5
+tantalov pentaklorid=tantalov(V) klorid:TaCl5
+tantalov pentafluorid=tantalov(V) fluorid:TaF5
+ditantalov pentaoksid=tantalov(V) oksid:Ta2O5
 terbijev trijodid=terbijev(III) jodid:TbI3
 torijev tetrajodid=torijev(IV) jodid:ThI4
 talijev bromid=talijev(I) bromid:TlBr
@@ -266,7 +266,7 @@ cinkov dicianid=cinkov(II) cianid:Zn(CN)2
 cinkov difluorid=cinkov(II) fluorid:ZnF2
 cinkov dijodid=cinkov(II) jodid:ZnI2
 tricinkov dinitrid=cinkov(II) nitrid:Zn3N2
-cinkov(II) oksid:ZnO
+cinkov oksid=cinkov(II) oksid:ZnO
 tricinkov difosfid=cinkov(II) fosfid:Zn3P2
 cinkov selenid=cinkov(II) selenid:ZnSe
 cinkov telurid=cinkov(II) telurid:ZnTe
@@ -288,15 +288,15 @@ kromov trioksid=kromov(VI) oksid:CrO3
 bakrov dibromid=bakrov(II) bromid:CuBr2
 bakrov diklorid=bakrov(II) klorid:CuCl2
 bakrov difluorid=bakrov(II) fluorid:CuF2
-bakrov(II) oksid:CuO
-bakrov(II) selenid:CuSe
-bakrov(II) sulfid:CuS
+bakrov(II) oksid=bakrov oksid:CuO
+bakrov(II) selenid=bakrov selenid:CuSe
+bakrov(II) sulfid=bakrov sulfid:CuS
 železov triklorid=železov(III) klorid:FeCl3
 železov trifluorid=železov(III) fluorid:FeF3
 diželezov trioksid=železov(III) oksid:Fe2O3
 galijev telurid=galijev(II) telurid:GaTe
 germanijev dijodid=germnijev(II) jodid:GeI2
-germanijev telurod=germanijev(II) telurid:GeTe
+germanijev telurid=germanijev(II) telurid:GeTe
 hafnijev tetratelurid=hafnijev(VIII) telurid:HfTe4
 indijev jodid=indijev(I) jodid:InI
 indijev klorid=indijev(I) klorid:InCl
@@ -309,7 +309,7 @@ manganov ditelurid=manganov(IV) telurid:MnTe2
 molibdenov triklorid=molibdenov(III) klorid:MoCl3
 molibdenov pentaklorid=molibdenov(V) klorid:MoCl5
 molibdenov trioksid=molibdenov(VI) oksid:MoO3
-niobijev(II) oksid:NbO
+niobijev oksid=niobijev(II) oksid:NbO
 niobijev dioksid=niobijev(IV) oksid:NbO2
 niobijev diselenid=niobijev(IV) selenid:NbSe2
 osmijev tetraoksid=osmijev(VIII) oksid:OsO4
