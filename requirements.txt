@@ -2,9 +2,9 @@ Flask
 flask-login
 flask-sqlalchemy
 flask-wtf
-flask-admin
 flask-bootstrap
 flask-dance
 sqlalchemy_utils 
 blinker
+pymysql
 

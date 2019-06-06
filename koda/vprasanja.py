@@ -2,7 +2,6 @@ u"""Datoteka vsebuje osnovne funkcije za postavljanje in preverjanje vprašanj""
 
 
 from random import choice as randchoice
-import random
 from math import gcd
 
 from models import BinarniElement, Kislina, SolniElement, SolnaIzjema, BinarnaIzjema, Baza, HidrogensolniElement, Kristalohidrat

@@ -2,7 +2,6 @@ from main import app, db, fb
 from flask import render_template, request, send_from_directory, redirect, url_for, session, abort, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
 from flask_dance.consumer import oauth_authorized, oauth_error
@@ -25,28 +24,6 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = u"Za dostop do te strani se morate prijaviti!"
 login_manager.login_message_category = "error"
-
-# unncomentaj ce hoces dodat admin
-# 
-# class MyAdminView(AdminIndexView):
-#     def is_accessible(self):
-#         if current_user.is_authenticated:
-#             if current_user.admin:
-#                 return True
-#             else:
-#                 return False
-#         else:
-#             return False
-
-#     def inaccessible_callback(self, name, **kwargs):
-#         return redirect(url_for('login'))
-
-# admin = Admin(app, index_view=MyAdminView(), template_mode='bootstrap3')
-# admin.base_template = 'admin/base.html'
-# admin.add_view(ModelView(models.User, db.session))
-# admin.add_view(ModelView(models.Scores, db.session))
-# admin.add_view(ModelView(models.BinarniElement, db.session))
-# admin.add_view(ModelView(models.OAuth, db.session))
 
 fb.backend = SQLAlchemyBackend(models.OAuth, db.session, user=current_user)
 
@@ -76,12 +53,12 @@ def server_error(e):
 @oauth_authorized.connect_via(fb)
 def logged_in(blueprint, token):
     if not token:
-        flash("Failed to log in with Facebook.", category="error")
+        flash("Prijava v Facebook ni bila uspešna!", category="error")
         return False
 
     resp = blueprint.session.get("me")
     if not resp.ok:
-        msg = "Failed to fetch user info from Facebook."
+        msg = "Ni nam uspelo pridobiti podatkov od Facebooka!"
         flash(msg, category="error")
         return False
     info = resp.json()
@@ -450,7 +427,3 @@ def dodaj_razred():
     else:
         return redirect(url_for('index'))
 
-# TEGA SE NE DELA V PRODUCTIONU - TO JE SAMO ZA DEBUG
-@app.route("/static/<path:path>")
-def send_static(path):
-    return send_from_directory('static', path)

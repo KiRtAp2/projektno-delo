@@ -1,16 +1,6 @@
 {% extends "shema.html" %}
 
 {% block content %}
-        {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul class="flash">
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-<br>
 
 <span class="besedilo"> Smo dijaki drugega letnika Gimnazije Vič in naša letošnja naloga pri projektnem delu v povezavi s kemijo je bila izdelati to spletno stran. Stran je namenjena vsem, ki bi se radi naučili ali pa le pred testom ponavljali formule in imena anorganskih spojin, ki marsikomu predstavljajo težavo. Vedno pravijo, da vaja dela mojstra, zato smo poskrbeli, da imate več kot 800 različnih spojin, razdeljenih po kategorijah in stopnjah zahtevnosti. V zgornji vrstici lahko izbirate med šestimi različnimi kategorijami: binarne spojine, soli oksokislin, kisline, baze, kristalohidrati in hidrogensoli. Pod vsako lahko izbirate med dvema vrstama nalog; lahko je podana formula spojine in je potrebno napisati ime (po Stockovem sistemu ali pa s števniki) ali pa obratno. Za večji izziv pa smo dodali še malo prirejeno igro vislice, kjer so naključno podana imena in formule. Da pa boste lahko svoje kemijsko znanje primerjali s svojimi sošolci, se lahko na stran registrirate in rezultati se vam bodo shranjevali. Najboljših 10 rezultatov si lahko ogledate na strani lestvica, lahko jih sortirate tudi po razredih in kategorijah.</span>
  
