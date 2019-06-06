@@ -28,3 +28,10 @@
 {% endif %}
 
 {% endblock %}
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+    field = document.getElementById("o0");
+    field.value = "";
+</script>
+{% endblock %}

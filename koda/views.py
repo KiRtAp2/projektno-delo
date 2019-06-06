@@ -10,7 +10,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import IntegrityError
 from random import choice, getrandbits
 from os import urandom
-import re
 from base64 import b64encode
 from sqlalchemy import desc
 
@@ -184,8 +183,6 @@ def kviz(kategorija, vrsta, tezavnost):
     ne = 0
     post = False
 
-    clean = re.compile('<.*?>')
-
     if request.method == 'GET':
         seznam_spojin = []
         imena_sp = []
@@ -287,8 +284,6 @@ def vislice():
         session['napake']
     except:
         session['napake'] = 0
-
-    clean = re.compile('<.*?>')
 
     moznosti = [vprasanja.dobi_binarne,
             vprasanja.dobi_soli,
