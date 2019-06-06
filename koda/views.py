@@ -2,7 +2,6 @@ from main import app, db, fb
 from flask import render_template, request, send_from_directory, redirect, url_for, session, abort, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_admin.contrib.sqla import ModelView
 from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
 from flask_dance.consumer import oauth_authorized, oauth_error
 from sqlalchemy.orm.exc import NoResultFound
