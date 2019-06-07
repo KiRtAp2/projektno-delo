@@ -6,13 +6,15 @@ import json
 
 
 app = Flask(__name__)
-app.config.from_envvar('YOURAPPLICATION_SETTINGS')
+app.config.from_object('config')
 
 db = SQLAlchemy()
 db.init_app(app)
 
+PATH = "/home/patrik/Documents/projektno-delo/"
+
 try:
-    with open('keys.json') as f:
+    with open(PATH+'keys.json') as f:
         data = json.load(f)
         fb = make_facebook_blueprint(
             client_id=data['fb']['id'],
