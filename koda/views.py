@@ -18,6 +18,47 @@ from razredi import konstruiraj
 
 import helpers
 
+
+VALID_CLASSES = {
+    "---",
+    "1A",
+    "1B",
+    "1C",
+    "1D",
+    "1E",
+    "1F",
+    "2A",
+    "2B",
+    "2C",
+    "2D",
+    "2E",
+    "2F",
+    "3A",
+    "3B",
+    "3C",
+    "3D",
+    "3E",
+    "3F",
+    "4A",
+    "4B",
+    "4C",
+    "4D",
+    "4E",
+    "4F",
+}
+
+VALID_CATEGORIES = {
+    '---',
+    'total',
+    'binarne',
+    'soli',
+    'baze',
+    'kisline',
+    'kh',
+    'hs',
+    'vislice',
+}
+
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -334,28 +375,31 @@ def lestvica():
 
     if request.method == 'GET':
         najboljsi = db.engine.execute(
-            'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id WHERE Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'
+            'SELECT user.username, scores.score FROM scores JOIN user ON scores.user_id=user.id WHERE scores.kategorija="total" ORDER BY scores.score DESC LIMIT 10'
             )
         return render_template("scores.html", najboljsi=najboljsi, form=form)
 
     elif request.method == 'POST':
         razred = form.izberi_razred.data
         kategorija = form.izberi_kategorijo.data
+        if razred not in VALID_CLASSES or kategorija not in VALID_CATEGORIES:
+            return render_template('nebosme.html')
+        pass
         if razred == '---' and kategorija == '---':
             topclass = db.engine.execute(
-        'SELECT User.username, Scores.score FROM Scores JOIN User ON Scores.user_id=User.id WHERE Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'
+        'SELECT user.username, scores.score FROM scores JOIN user ON scores.user_id=user.id WHERE scores.kategorija="total" ORDER BY scores.score DESC LIMIT 10'
         )
         elif kategorija == '---':
             topclass = db.engine.execute(
-            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}"  AND Scores.kategorija="total" ORDER BY Scores.score DESC LIMIT 10'.format(razred)
+            'SELECT user.username, scores.score FROM user JOIN scores ON user.id=scores.user_id WHERE user.razred="{}"  AND scores.kategorija="total" ORDER BY scores.score DESC LIMIT 10'.format(razred)
             )
         elif razred == '---':
             topclass = db.engine.execute(
-            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE Scores.kategorija="{}" ORDER BY Scores.score DESC LIMIT 10'.format(kategorija)
+            'SELECT user.username, scores.score FROM user JOIN scores ON user.id=scores.user_id WHERE scores.kategorija="{}" ORDER BY scores.score DESC LIMIT 10'.format(kategorija)
             )
         else:
             topclass = db.engine.execute(
-            'SELECT User.username, Scores.score FROM User JOIN Scores ON User.id=Scores.user_id WHERE User.razred="{}"  AND Scores.kategorija="{}" ORDER BY Scores.score DESC LIMIT 10'.format(razred, kategorija)
+            'SELECT user.username, scores.score FROM user JOIN scores ON user.id=scores.user_id WHERE user.razred="{}"  AND scores.kategorija="{}" ORDER BY scores.score DESC LIMIT 10'.format(razred, kategorija)
             )
         razred = dict(forms.razredi)[razred]
         kategorija = dict(forms.kategorije)[kategorija]
